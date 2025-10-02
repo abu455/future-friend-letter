@@ -1,0 +1,238 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Arial', sans-serif;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+}
+
+.container {
+    width: 100%;
+    max-width: 400px;
+    height: 100vh;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* 信封容器 */
+.envelope {
+    width: 300px;
+    height: 200px;
+    position: relative;
+    cursor: pointer;
+    transform-origin: center bottom;
+    transition: transform 0.3s ease;
+}
+
+/* 信封正面 */
+.envelope-front {
+    width: 100%;
+    height: 100%;
+    background: #ffffff;
+    position: absolute;
+    border-radius: 8px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+    overflow: hidden;
+    z-index: 2;
+    transform-origin: top center;
+}
+
+/* 信封封口（三角形 flaps）*/
+.envelope-flap {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 0;
+    border-left: 150px solid transparent;
+    border-right: 150px solid transparent;
+    border-top: 80px solid #f8f8f8;
+    border-bottom: none;
+    transform-origin: top center;
+}
+
+/* 信封背面（纸条容器）*/
+.envelope-back {
+    width: 100%;
+    height: 100%;
+    background: #f9f9f9;
+    position: absolute;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1;
+    transform: translateY(100%);
+    opacity: 0;
+    transition: all 0.5s ease;
+}
+
+/* 纸条样式 */
+.paper-slip {
+    width: 90%;
+    height: 90%;
+    background: #fff;
+    border-radius: 4px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    position: relative;
+    overflow: hidden;
+}
+
+.paper-slip::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(45deg,
+        transparent 40%,
+        rgba(255, 255, 255, 0.3) 50%,
+        transparent 60%);
+    transform: translateX(-100%);
+    transition: transform 0.6s ease;
+}
+
+.paper-content {
+    height: 100%;
+    overflow-y: auto;
+    line-height: 1.6;
+    color: #333;
+    font-size: 14px;
+}
+
+.paper-content p {
+    margin-bottom: 12px;
+}
+
+.paper-content p:last-child {
+    margin-bottom: 0;
+}
+
+/* 信封打开动画类 */
+.envelope.open .envelope-front {
+    transform: rotateX(-180deg);
+    z-index: 1;
+}
+
+.envelope.open .envelope-back {
+    transform: translateY(0);
+    opacity: 1;
+    z-index: 2;
+}
+
+.envelope.open .envelope-flap {
+    transform: rotateX(180deg) translateY(-10px);
+}
+
+/* 纸条进入动画 */
+.envelope.open .paper-slip::before {
+    transform: translateX(100%);
+}
+
+/* 响应式设计 */
+@media (max-width: 480px) {
+    .container {
+        max-width: 100%;
+        padding: 20px;
+    }
+
+    .envelope {
+        width: 280px;
+        height: 180px;
+    }
+
+    .envelope-flap {
+        border-left-width: 140px;
+        border-right-width: 140px;
+        border-top-width: 70px;
+    }
+
+    .paper-content {
+        font-size: 13px;
+        padding: 0 5px;
+    }
+
+    .paper-content p {
+        margin-bottom: 10px;
+    }
+}
+
+@media (min-width: 768px) {
+    .container {
+        max-width: 500px;
+    }
+
+    .envelope {
+        width: 350px;
+        height: 230px;
+    }
+
+    .envelope-flap {
+        border-left-width: 175px;
+        border-right-width: 175px;
+        border-top-width: 90px;
+    }
+
+    .paper-content {
+        font-size: 15px;
+    }
+}
+
+/* 添加一些装饰元素 */
+body::before {
+    content: '';
+    position: fixed;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: radial-gradient(circle, rgba(255, 255, 255, 0.1) 1px, transparent 1px);
+    background-size: 50px 50px;
+    animation: float 20s linear infinite;
+    pointer-events: none;
+}
+
+@keyframes float {
+    0% {
+        transform: translate(0, 0);
+    }
+    100% {
+        transform: translate(-50px, -50px);
+    }
+}
+
+/* 触摸反馈效果 */
+.envelope:active {
+    transform: scale(0.98);
+}
+
+/* 平滑滚动条样式 */
+.paper-content::-webkit-scrollbar {
+    width: 3px;
+}
+
+.paper-content::-webkit-scrollbar-track {
+    background: #f1f1f1;
+    border-radius: 2px;
+}
+
+.paper-content::-webkit-scrollbar-thumb {
+    background: #c1c1c1;
+    border-radius: 2px;
+}
+
+.paper-content::-webkit-scrollbar-thumb:hover {
+    background: #a8a8a8;
+}
