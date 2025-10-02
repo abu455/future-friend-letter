@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>信封动画</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Microsoft YaHei', Arial, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden;
+        }
+
+        .container {
+            position: relative;
+            width: 100%;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .envelope {
+            position: relative;
+            width: 300px;
+            height: 200px;
+            cursor: pointer;
+            transition: transform 0.3s ease;
+        }
+
+        .envelope:hover {
+            transform: scale(1.05);
+        }
+
+        .envelope-body {
+            position: absolute;
+            bottom: 0;
+            width: 100%;
+            height: 150px;
+            background: white;
+            border-radius: 0 0 10px 10px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+        }
+
+        .envelope-flap {
+            position: absolute;
+            top: 0;
+            width: 100%;
+            height: 150px;
+            background: white;
+            border-radius: 10px 10px 0 0;
+            transform-origin: bottom;
+            transition: transform 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+            box-shadow: 0 -5px 20px rgba(0, 0, 0, 0.2);
+            z-index: 2;
+        }
+
+        .envelope-flap::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 50px;
+            background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+            border-radius: 10px 10px 0 0;
+        }
+
+        .envelope-flap.opened {
+            transform: rotateX(-180deg);
+        }
+
+        .letter {
+            position: absolute;
+            bottom: 20px;
+            left: 20px;
+            right: 20px;
+            background: #f8f9fa;
+            border-radius: 8px;
+            padding: 20px;
+            opacity: 0;
+            transform: translateY(20px);
+            transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1) 0.3s;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            z-index: 1;
+        }
+
+        .letter.show {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .letter-content {
+            font-size: 14px;
+            line-height: 1.8;
+            color: #333;
+            text-align: left;
+        }
+
+        .letter-content p {
+            margin-bottom: 15px;
+        }
+
+        .letter-content p:last-child {
+            margin-bottom: 0;
+        }
+
+        .instruction {
+            position: absolute;
+            bottom: 50px;
+            left: 50%;
+            transform: translateX(-50%);
+            color: white;
+            font-size: 16px;
+            text-align: center;
+            opacity: 0.8;
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 0.8; }
+            50% { opacity: 1; }
+        }
+
+        .instruction.hidden {
+            opacity: 0;
+            transition: opacity 0.5s ease;
+        }
+
+        /* 响应式设计 */
+        @media (max-width: 480px) {
+            .envelope {
+                width: 250px;
+                height: 170px;
+            }
+            
+            .envelope-body {
+                height: 120px;
+            }
+            
+            .envelope-flap {
+                height: 120px;
+            }
+            
+            .letter {
+                padding: 15px;
+            }
+            
+            .letter-content {
+                font-size: 13px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="envelope" onclick="openEnvelope()">
+            <div class="envelope-body"></div>
+            <div class="envelope-flap" id="envelopeFlap"></div>
+            <div class="letter" id="letter">
+                <div class="letter-content">
+                    <p>嗨，未来的朋友：</p>
+                    <p>其实我年纪也不算大，但这过去一年多创业的经历，确实让我成长了不少。不像刚来英国的时候，还带着点毛头小子的冲劲，现在算是比较成熟了吧。说实话，这一年多几乎没什么社交，每天就是工作和学业，忙到后来甚至都忘了，社交的意义到底是什么。创业带来的压力确实挺大，有时候也会感慨，当初站在十字路口的选择，如果换个方向，会不会走到另一种人生。</p>
+                    <p>这次参加活动，我是想给自己一个机会，重新认识一位知心的朋友。希望能聊聊生活里的小事，不只是工作、项目、deadline这些东西。你好，未来的朋友，希望遇见你之后，我的生活能多点色彩，也能变得更加美好。</p>
+                </div>
+            </div>
+        </div>
+        <div class="instruction" id="instruction">点击信封打开</div>
+    </div>
+
+    <script>
+        function openEnvelope() {
+            const envelopeFlap = document.getElementById('envelopeFlap');
+            const letter = document.getElementById('letter');
+            const instruction = document.getElementById('instruction');
+            
+            // 添加打开动画类
+            envelopeFlap.classList.add('opened');
+            letter.classList.add('show');
+            instruction.classList.add('hidden');
+            
+            // 防止重复点击
+            envelopeFlap.style.pointerEvents = 'none';
+        }
+
+        // 添加触摸支持
+        let touchStartY = 0;
+        let touchEndY = 0;
+
+        document.addEventListener('touchstart', function(e) {
+            touchStartY = e.changedTouches[0].screenY;
+        });
+
+        document.addEventListener('touchend', function(e) {
+            touchEndY = e.changedTouches[0].screenY;
+            handleSwipe();
+        });
+
+        function handleSwipe() {
+            const swipeThreshold = 50;
+            const swipeDistance = touchStartY - touchEndY;
+            
+            if (swipeDistance > swipeThreshold) {
+                // 向上滑动
+                const envelopeFlap = document.getElementById('envelopeFlap');
+                const letter = document.getElementById('letter');
+                const instruction = document.getElementById('instruction');
+                
+                if (!envelopeFlap.classList.contains('opened')) {
+                    openEnvelope();
+                }
+            }
+        }
+
+        // 添加键盘支持
+        document.addEventListener('keydown', function(e) {
+            if (e.key === ' ' || e.key === 'Enter') {
+                e.preventDefault();
+                const envelopeFlap = document.getElementById('envelopeFlap');
+                if (!envelopeFlap.classList.contains('opened')) {
+                    openEnvelope();
+                }
+            }
+        });
+    </script>
+</body>
+</html>
