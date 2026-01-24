@@ -2,19 +2,31 @@
 <html lang="zh-CN">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>信封</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>EARTH EXPO 2026 - 星际殖民艺术展</title>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Rajdhani:wght@300;500;700&family=Share+Tech+Mono&display=swap" rel="stylesheet">
     <style>
+        :root {
+            --neon-cyan: #00f3ff;
+            --neon-pink: #ff00ff;
+            --neon-green: #00ff41;
+            --dark-bg: #020205;
+            --card-bg: rgba(20, 20, 35, 0.95);
+            --glass-border: rgba(255, 255, 255, 0.1);
+        }
+
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
+            touch-action: none; /* Prevent default touch scrolling */
         }
 
         body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            min-height: 100vh;
+            background-color: var(--dark-bg);
+            color: #fff;
+            font-family: 'Rajdhani', sans-serif;
+            height: 100vh;
             display: flex;
             justify-content: center;
             align-items: center;
@@ -22,260 +34,523 @@
             position: relative;
         }
 
-        .hint {
+        /* Background Stars Animation */
+        .stars {
             position: absolute;
-            top: 20%;
-            left: 50%;
-            transform: translateX(-50%);
-            color: white;
-            font-size: 18px;
-            opacity: 1;
-            transition: opacity 0.5s ease;
-            pointer-events: none;
-            text-align: center;
-            z-index: 1000;
-        }
-
-        .hint.hidden {
-            opacity: 0;
-        }
-
-        .envelope-wrapper {
-            position: relative;
-            width: 400px;
-            height: 280px;
-            cursor: grab;
-            touch-action: none;
-        }
-
-        .envelope-wrapper:active {
-            cursor: grabbing;
-        }
-
-        .envelope {
-            position: relative;
-            width: 100%;
-            height: 100%;
-            perspective: 1000px;
-        }
-
-        .envelope-back {
-            position: absolute;
-            width: 100%;
-            height: 100%;
-            background: white;
-            border-radius: 8px;
-            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
-        }
-
-        .envelope-flap {
-            position: absolute;
-            width: 0;
-            height: 0;
-            border-left: 200px solid transparent;
-            border-right: 200px solid transparent;
-            border-top: 140px solid #f5f5f5;
             top: 0;
             left: 0;
-            transform-origin: top center;
-            transition: transform 0.6s ease;
+            width: 100%;
+            height: 100%;
+            background: 
+                radial-gradient(1px 1px at 10% 10%, white, transparent),
+                radial-gradient(1px 1px at 20% 20%, white, transparent),
+                radial-gradient(2px 2px at 30% 30%, white, transparent),
+                radial-gradient(1px 1px at 40% 40%, white, transparent),
+                radial-gradient(2px 2px at 50% 50%, white, transparent),
+                radial-gradient(1px 1px at 60% 60%, white, transparent),
+                radial-gradient(2px 2px at 70% 70%, white, transparent),
+                radial-gradient(1px 1px at 80% 80%, white, transparent),
+                radial-gradient(1px 1px at 90% 90%, white, transparent);
+            background-size: 200px 200px;
+            animation: stars-move 100s linear infinite;
+            opacity: 0.5;
+            z-index: 0;
+        }
+
+        @keyframes stars-move {
+            from { transform: translateY(0); }
+            to { transform: translateY(-1000px); }
+        }
+
+        .nebula {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background: 
+                radial-gradient(circle at 50% 50%, rgba(0, 243, 255, 0.05), transparent 60%),
+                radial-gradient(circle at 80% 20%, rgba(255, 0, 255, 0.05), transparent 40%);
+            z-index: 0;
+            filter: blur(30px);
+        }
+
+        /* Check-in Area / Scanner */
+        .scanner-container {
+            position: relative;
+            width: 360px; /* Base width for mobile */
+            height: 600px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
             z-index: 10;
         }
 
-        .envelope-flap.open {
-            transform: rotateX(180deg);
+        /* The Ticket */
+        .ticket-wrapper {
+            position: absolute;
+            width: 320px;
+            height: 500px; /* Ticket Height */
+            perspective: 1000px;
+            z-index: 20;
+            transition: transform 0.1s ease-out; /* Smooth follow */
         }
 
-        .envelope-front {
-            position: absolute;
+        .ticket {
             width: 100%;
-            height: 140px;
-            background: white;
-            bottom: 0;
-            border-radius: 0 0 8px 8px;
-            border-top: 2px solid #e0e0e0;
+            height: 100%;
+            background: linear-gradient(145deg, #1a1a2e, #16213e);
+            border: 1px solid var(--glass-border);
+            border-radius: 20px;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5), 
+                        0 0 20px rgba(0, 243, 255, 0.2);
+            display: flex;
+            flex-direction: column;
         }
 
-        .letter {
+        /* Holographic sheen effect */
+        .ticket::before {
+            content: '';
             position: absolute;
-            width: 350px;
-            height: 500px;
-            background: #fffef7;
+            top: 0;
+            left: -100%;
+            width: 200%;
+            height: 100%;
+            background: linear-gradient(
+                115deg, 
+                transparent 30%, 
+                rgba(255, 255, 255, 0.05) 45%, 
+                rgba(255, 255, 255, 0.1) 50%, 
+                rgba(255, 255, 255, 0.05) 55%, 
+                transparent 70%
+            );
+            transform: skewX(-20deg);
+            pointer-events: none;
+        }
+
+        .ticket-header {
+            padding: 20px;
+            border-bottom: 1px dashed rgba(255, 255, 255, 0.2);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-family: 'Orbitron', sans-serif;
+            font-weight: 900;
+            font-size: 1.2rem;
+            color: var(--neon-cyan);
+            text-shadow: 0 0 5px var(--neon-cyan);
+            letter-spacing: 2px;
+        }
+
+        .ticket-body {
+            padding: 25px;
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-around;
+        }
+
+        .event-title {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 1.8rem;
+            line-height: 1.2;
+            text-transform: uppercase;
+            margin-bottom: 10px;
+            background: linear-gradient(to right, #fff, #aaa);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .event-subtitle {
+            font-size: 0.9rem;
+            color: var(--neon-pink);
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            margin-bottom: 20px;
+        }
+
+        .info-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+
+        .info-item label {
+            display: block;
+            font-family: 'Share Tech Mono', monospace;
+            font-size: 0.7rem;
+            color: rgba(255, 255, 255, 0.5);
+            margin-bottom: 4px;
+        }
+
+        .info-item span {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 1.1rem;
+            color: #fff;
+        }
+
+        .qr-placeholder {
+            align-self: center;
+            width: 120px;
+            height: 120px;
+            background: #fff;
+            padding: 5px;
+            border-radius: 5px;
+            image-rendering: pixelated;
+            /* Placeholder pattern for QR */
+            background-image: 
+                linear-gradient(45deg, #000 25%, transparent 25%, transparent 75%, #000 75%, #000),
+                linear-gradient(45deg, #000 25%, transparent 25%, transparent 75%, #000 75%, #000);
+            background-size: 10px 10px;
+            background-position: 0 0, 5px 5px;
+            opacity: 0.9;
+        }
+
+        .ticket-footer {
+            padding: 15px 25px;
+            background: rgba(0, 0, 0, 0.3);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-family: 'Share Tech Mono', monospace;
+            font-size: 0.8rem;
+            color: rgba(255, 255, 255, 0.6);
+        }
+
+        .ticket-footer .id {
+            color: var(--neon-cyan);
+        }
+
+        /* Interaction Guide */
+        .guide-track {
+            position: absolute;
+            top: 50%; /* Center vertically behind ticket initially */
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 320px;
+            height: 600px;
+            border: 2px dashed rgba(255, 255, 255, 0.1);
+            border-radius: 25px;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-start;
+            align-items: center;
+            pointer-events: none; /* Let clicks pass through */
+        }
+
+        .scan-zone {
+            width: 100%;
+            height: 150px;
+            margin-top: -80px; /* Position above */
+            display: flex;
+            justify-content: center;
+            align-items: flex-end;
+            padding-bottom: 20px;
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+
+        .scan-zone.active {
+            opacity: 1;
+        }
+        
+        .scan-zone-text {
+            font-family: 'Orbitron';
+            color: var(--neon-cyan);
+            font-size: 1.2rem;
+            text-shadow: 0 0 10px var(--neon-cyan);
+            animation: pulse 1s infinite alternate;
+        }
+
+        @keyframes pulse {
+            from { opacity: 0.5; }
+            to { opacity: 1; }
+        }
+
+        .arrow-up {
+            position: absolute;
+            top: -60px;
             left: 50%;
             transform: translateX(-50%);
-            top: 100%;
-            transition: top 0.8s cubic-bezier(0.68, -0.55, 0.265, 1.55);
-            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.2);
-            border-radius: 4px;
-            padding: 40px 30px;
-            z-index: 5;
-            overflow-y: auto;
+            color: rgba(255, 255, 255, 0.3);
+            font-size: 2rem;
+            animation: bounce 1.5s infinite;
         }
 
-        .letter.visible {
-            top: -220px;
+        @keyframes bounce {
+            0%, 100% { transform: translate(-50%, 0); opacity: 0.3; }
+            50% { transform: translate(-50%, -10px); opacity: 0.8; }
         }
 
-        .letter-content {
-            font-size: 16px;
-            line-height: 1.8;
-            color: #333;
-            white-space: pre-wrap;
-            font-family: 'STKaiti', 'KaiTi', '楷体', serif;
+        /* Success State */
+        .success-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.9);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            z-index: 100;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.5s;
         }
 
-        .letter-title {
-            font-size: 18px;
-            font-weight: bold;
-            margin-bottom: 20px;
-            color: #555;
+        .success-overlay.visible {
+            opacity: 1;
+            pointer-events: all;
         }
 
-        @media (max-width: 480px) {
-            .envelope-wrapper {
-                width: 90vw;
-                height: calc(90vw * 0.7);
-            }
-
-            .envelope-flap {
-                border-left: 45vw solid transparent;
-                border-right: 45vw solid transparent;
-                border-top: calc(45vw * 0.7) solid #f5f5f5;
-            }
-
-            .envelope-front {
-                height: calc(45vw * 0.7);
-            }
-
-            .letter {
-                width: 85vw;
-                height: 70vh;
-                padding: 30px 20px;
-            }
-
-            .letter.visible {
-                top: -35vh;
-            }
-
-            .letter-content {
-                font-size: 14px;
-            }
-
-            .hint {
-                font-size: 16px;
-            }
+        .success-circle {
+            width: 100px;
+            height: 100px;
+            border: 5px solid var(--neon-green);
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            box-shadow: 0 0 30px var(--neon-green);
+            margin-bottom: 30px;
+            transform: scale(0);
+            transition: transform 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
         }
 
-        /* 美化滚动条 */
-        .letter::-webkit-scrollbar {
-            width: 6px;
+        .success-overlay.visible .success-circle {
+            transform: scale(1);
         }
 
-        .letter::-webkit-scrollbar-track {
-            background: #f1f1f1;
-            border-radius: 3px;
+        .checkmark {
+            color: var(--neon-green);
+            font-size: 3rem;
         }
 
-        .letter::-webkit-scrollbar-thumb {
-            background: #888;
-            border-radius: 3px;
+        .success-text {
+            font-family: 'Orbitron';
+            font-size: 2rem;
+            color: #fff;
+            text-align: center;
+            text-transform: uppercase;
+            letter-spacing: 5px;
+            transform: translateY(20px);
+            opacity: 0;
+            transition: all 0.5s 0.2s;
         }
 
-        .letter::-webkit-scrollbar-thumb:hover {
-            background: #555;
+        .success-overlay.visible .success-text {
+            transform: translateY(0);
+            opacity: 1;
         }
+
+        /* Laser Scan Effect */
+        .laser-line {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background: var(--neon-cyan);
+            box-shadow: 0 0 15px var(--neon-cyan);
+            opacity: 0;
+            pointer-events: none;
+        }
+
+        .scanning .laser-line {
+            opacity: 1;
+            animation: scan 1.5s linear infinite;
+        }
+
+        @keyframes scan {
+            0% { top: 0; }
+            50% { top: 100%; }
+            100% { top: 0; }
+        }
+
     </style>
 </head>
 <body>
-    <div class="hint" id="hint">
-        ⬆️ 向上滑动打开信封
-    </div>
 
-    <div class="envelope-wrapper" id="envelopeWrapper">
-        <div class="envelope">
-            <div class="envelope-back"></div>
-            <div class="envelope-flap" id="flap"></div>
-            <div class="envelope-front"></div>
-            <div class="letter" id="letter">
-                <div class="letter-title">嗨，未来的朋友：</div>
-                <div class="letter-content">其实我年纪也不算大，但这过去一年多创业的经历，确实让我成长了不少。不像刚来英国的时候，还带着点毛头小子的冲劲，现在算是比较成熟了吧。说实话，这一年多几乎没什么社交，每天就是工作和学业，忙到后来甚至都忘了，社交的意义到底是什么。创业带来的压力确实挺大，有时候也会感慨，当初站在十字路口的选择，如果换个方向，会不会走到另一种人生。
+    <div class="stars"></div>
+    <div class="nebula"></div>
 
-这次参加活动，我是想给自己一个机会，重新认识一位知心的朋友。希望能聊聊生活里的小事，不只是工作、项目、deadline这些东西。你好，未来的朋友，希望遇见你之后，我的生活能多点色彩，也能变得更加美好。</div>
+    <div class="scanner-container">
+        
+        <div class="guide-track">
+            <div class="scan-zone" id="scanZone">
+                <div class="scan-zone-text">SCAN ZONE</div>
+            </div>
+            <div class="arrow-up" id="arrow">▲</div>
+        </div>
+
+        <div class="ticket-wrapper" id="ticket">
+            <div class="ticket">
+                <div class="ticket-header">
+                    <div class="logo">EARTH EXPO</div>
+                    <div class="logo" style="font-size: 0.8rem; color: #fff;">2026</div>
+                </div>
+                <div class="ticket-body">
+                    <div>
+                        <div class="event-title">ETERNAL<br>MEMORY</div>
+                        <div class="event-subtitle">Interstellar Colonization Art Exhibition</div>
+                    </div>
+                    
+                    <div class="info-grid">
+                        <div class="info-item">
+                            <label>DATE</label>
+                            <span>JAN 24</span>
+                        </div>
+                        <div class="info-item">
+                            <label>TIME</label>
+                            <span>14:00</span>
+                        </div>
+                        <div class="info-item">
+                            <label>GATE</label>
+                            <span style="color: var(--neon-cyan)">A-01</span>
+                        </div>
+                        <div class="info-item">
+                            <label>CLASS</label>
+                            <span>VIP</span>
+                        </div>
+                    </div>
+
+                    <div class="qr-placeholder" style="display: flex; justify-content: center; align-items: center; color: black; font-weight: bold; font-family: monospace;">
+                        [QR CODE]
+                    </div>
+                </div>
+                <div class="ticket-footer">
+                    <span>TICKET ID</span>
+                    <span class="id">#8X9-2026-COL</span>
+                </div>
+                <div class="laser-line" id="laser"></div>
             </div>
         </div>
+
+    </div>
+
+    <div class="success-overlay" id="successOverlay">
+        <div class="success-circle">
+            <span class="checkmark">✔</span>
+        </div>
+        <div class="success-text">ACCESS<br>GRANTED</div>
+        <p style="margin-top: 20px; font-family: 'Share Tech Mono'; color: #aaa;">Welcome to the future.</p>
     </div>
 
     <script>
-        const envelopeWrapper = document.getElementById('envelopeWrapper');
-        const flap = document.getElementById('flap');
-        const letter = document.getElementById('letter');
-        const hint = document.getElementById('hint');
-        
+        const ticket = document.getElementById('ticket');
+        const scanZone = document.getElementById('scanZone');
+        const successOverlay = document.getElementById('successOverlay');
+        const arrow = document.getElementById('arrow');
+        const laser = document.getElementById('laser');
+
         let startY = 0;
         let currentY = 0;
         let isDragging = false;
-        let isOpen = false;
+        let initialTop = 0; // Will be set on load
+        
+        // Settings
+        const SCAN_THRESHOLD = -200; // Pixel distance to move up to trigger scan
 
-        // 鼠标/触摸事件处理
-        function handleStart(e) {
-            if (isOpen) return;
+        // Initialize position
+        function init() {
+            // We want the ticket centered initially
+            ticket.style.transform = `translateY(0px)`;
+        }
+        
+        // Helper to get Y position
+        function getY(e) {
+            return e.type.includes('mouse') ? e.clientY : e.touches[0].clientY;
+        }
+
+        function onStart(e) {
+            if (successOverlay.classList.contains('visible')) return;
             isDragging = true;
-            startY = e.type.includes('mouse') ? e.clientY : e.touches[0].clientY;
-            currentY = startY;
-        }
-
-        function handleMove(e) {
-            if (!isDragging || isOpen) return;
+            startY = getY(e);
             
-            e.preventDefault();
-            currentY = e.type.includes('mouse') ? e.clientY : e.touches[0].clientY;
-            const deltaY = startY - currentY;
+            // Remove transition for direct 1:1 movement
+            ticket.style.transition = 'none';
+            ticket.style.cursor = 'grabbing';
+            arrow.style.opacity = '0';
+        }
 
-            // 隐藏提示
-            if (deltaY > 10) {
-                hint.classList.add('hidden');
-            }
+        function onMove(e) {
+            if (!isDragging) return;
+            e.preventDefault(); // Prevent scrolling
+            
+            const y = getY(e);
+            const deltaY = y - startY;
 
-            // 当向上滑动超过50px时，打开信封
-            if (deltaY > 50) {
-                openEnvelope();
+            // Constrain: Can only move UP (negative deltaY), with some resistance downwards
+            let moveY = deltaY;
+            
+            // Resistance when pulling down
+            if (moveY > 0) moveY = moveY * 0.3;
+
+            // Apply transform
+            ticket.style.transform = `translateY(${moveY}px) rotateX(${moveY * -0.05}deg)`;
+
+            // Visual feedback when approaching scan zone
+            if (moveY < -100) {
+                scanZone.classList.add('active');
+                ticket.querySelector('.ticket').style.boxShadow = `0 0 50px var(--neon-cyan)`;
+            } else {
+                scanZone.classList.remove('active');
+                ticket.querySelector('.ticket').style.boxShadow = '';
             }
         }
 
-        function handleEnd() {
+        function onEnd() {
+            if (!isDragging) return;
             isDragging = false;
-        }
-
-        function openEnvelope() {
-            if (isOpen) return;
-            isOpen = true;
+            ticket.style.cursor = 'grab';
             
-            flap.classList.add('open');
-            
-            // 延迟显示信件，让信封先打开
-            setTimeout(() => {
-                letter.classList.add('visible');
-            }, 300);
+            // Restore transition for smooth snap back/forward
+            ticket.style.transition = 'transform 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275)';
 
-            hint.classList.add('hidden');
-        }
+            // Get current transform value (roughly)
+            const style = window.getComputedStyle(ticket);
+            const matrix = new WebKitCSSMatrix(style.transform);
+            const currentTranslateY = matrix.m42;
 
-        // 添加鼠标事件
-        envelopeWrapper.addEventListener('mousedown', handleStart);
-        document.addEventListener('mousemove', handleMove);
-        document.addEventListener('mouseup', handleEnd);
-
-        // 添加触摸事件
-        envelopeWrapper.addEventListener('touchstart', handleStart, { passive: true });
-        document.addEventListener('touchmove', handleMove, { passive: false });
-        document.addEventListener('touchend', handleEnd);
-
-        // 点击信封也可以打开
-        envelopeWrapper.addEventListener('click', () => {
-            if (!isOpen && !isDragging) {
-                openEnvelope();
+            if (currentTranslateY < SCAN_THRESHOLD) {
+                // Success! Move ticket completely out of view (upwards)
+                ticket.style.transform = `translateY(-100vh) rotateX(20deg) scale(0.8)`;
+                
+                // Trigger Scan Effect
+                setTimeout(() => {
+                    success();
+                }, 300);
+            } else {
+                // Snap back
+                ticket.style.transform = `translateY(0px)`;
+                arrow.style.opacity = '';
+                scanZone.classList.remove('active');
+                ticket.querySelector('.ticket').style.boxShadow = '';
             }
-        });
+        }
+
+        function success() {
+            successOverlay.classList.add('visible');
+        }
+
+        // Event Listeners
+        ticket.addEventListener('mousedown', onStart);
+        window.addEventListener('mousemove', onMove);
+        window.addEventListener('mouseup', onEnd);
+
+        ticket.addEventListener('touchstart', onStart, { passive: false });
+        window.addEventListener('touchmove', onMove, { passive: false });
+        window.addEventListener('touchend', onEnd);
+
+        init();
+
     </script>
 </body>
 </html>
