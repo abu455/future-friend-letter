@@ -89,7 +89,7 @@
         .ticket-wrapper {
             position: absolute;
             width: 320px;
-            height: 500px; /* Ticket Height */
+            height: auto; /* Allow height to adjust to image */
             perspective: 1000px;
             z-index: 20;
             transition: transform 0.1s ease-out; /* Smooth follow */
@@ -97,9 +97,8 @@
 
         .ticket {
             width: 100%;
-            height: 100%;
-            background: linear-gradient(145deg, #1a1a2e, #16213e);
-            border: 1px solid var(--glass-border);
+            /* Removed fixed height so image aspect ratio rules */
+            background: transparent;
             border-radius: 20px;
             position: relative;
             overflow: hidden;
@@ -109,7 +108,15 @@
             flex-direction: column;
         }
 
-        /* Holographic sheen effect */
+        .ticket img {
+            width: 100%;
+            height: auto;
+            display: block;
+            border-radius: 20px;
+            border: 1px solid var(--glass-border);
+        }
+
+        /* Holographic sheen effect on image */
         .ticket::before {
             content: '';
             position: absolute;
@@ -121,109 +128,13 @@
                 115deg, 
                 transparent 30%, 
                 rgba(255, 255, 255, 0.05) 45%, 
-                rgba(255, 255, 255, 0.1) 50%, 
+                rgba(255, 255, 255, 0.2) 50%, 
                 rgba(255, 255, 255, 0.05) 55%, 
                 transparent 70%
             );
             transform: skewX(-20deg);
             pointer-events: none;
-        }
-
-        .ticket-header {
-            padding: 20px;
-            border-bottom: 1px dashed rgba(255, 255, 255, 0.2);
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        .logo {
-            font-family: 'Orbitron', sans-serif;
-            font-weight: 900;
-            font-size: 1.2rem;
-            color: var(--neon-cyan);
-            text-shadow: 0 0 5px var(--neon-cyan);
-            letter-spacing: 2px;
-        }
-
-        .ticket-body {
-            padding: 25px;
-            flex: 1;
-            display: flex;
-            flex-direction: column;
-            justify-content: space-around;
-        }
-
-        .event-title {
-            font-family: 'Orbitron', sans-serif;
-            font-size: 1.8rem;
-            line-height: 1.2;
-            text-transform: uppercase;
-            margin-bottom: 10px;
-            background: linear-gradient(to right, #fff, #aaa);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-        }
-
-        .event-subtitle {
-            font-size: 0.9rem;
-            color: var(--neon-pink);
-            letter-spacing: 1px;
-            text-transform: uppercase;
-            margin-bottom: 20px;
-        }
-
-        .info-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 15px;
-            margin-bottom: 20px;
-        }
-
-        .info-item label {
-            display: block;
-            font-family: 'Share Tech Mono', monospace;
-            font-size: 0.7rem;
-            color: rgba(255, 255, 255, 0.5);
-            margin-bottom: 4px;
-        }
-
-        .info-item span {
-            font-family: 'Orbitron', sans-serif;
-            font-size: 1.1rem;
-            color: #fff;
-        }
-
-        .qr-placeholder {
-            align-self: center;
-            width: 120px;
-            height: 120px;
-            background: #fff;
-            padding: 5px;
-            border-radius: 5px;
-            image-rendering: pixelated;
-            /* Placeholder pattern for QR */
-            background-image: 
-                linear-gradient(45deg, #000 25%, transparent 25%, transparent 75%, #000 75%, #000),
-                linear-gradient(45deg, #000 25%, transparent 25%, transparent 75%, #000 75%, #000);
-            background-size: 10px 10px;
-            background-position: 0 0, 5px 5px;
-            opacity: 0.9;
-        }
-
-        .ticket-footer {
-            padding: 15px 25px;
-            background: rgba(0, 0, 0, 0.3);
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            font-family: 'Share Tech Mono', monospace;
-            font-size: 0.8rem;
-            color: rgba(255, 255, 255, 0.6);
-        }
-
-        .ticket-footer .id {
-            color: var(--neon-cyan);
+            z-index: 2; /* Above image */
         }
 
         /* Interaction Guide */
@@ -361,6 +272,7 @@
             box-shadow: 0 0 15px var(--neon-cyan);
             opacity: 0;
             pointer-events: none;
+            z-index: 3;
         }
 
         .scanning .laser-line {
@@ -372,6 +284,20 @@
             0% { top: 0; }
             50% { top: 100%; }
             100% { top: 0; }
+        }
+        
+        /* Placeholder for missing image */
+        .ticket-placeholder {
+            width: 100%;
+            height: 500px;
+            background: linear-gradient(145deg, #1a1a2e, #16213e);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            color: #fff;
+            border-radius: 20px;
+            border: 2px dashed rgba(255,255,255,0.2);
         }
 
     </style>
@@ -392,43 +318,23 @@
 
         <div class="ticket-wrapper" id="ticket">
             <div class="ticket">
-                <div class="ticket-header">
-                    <div class="logo">EARTH EXPO</div>
-                    <div class="logo" style="font-size: 0.8rem; color: #fff;">2026</div>
+                <!-- 
+                     USER INSTRUCTION:
+                     Replace 'ticket.png' with the filename of your uploaded ticket image.
+                     Make sure the image file is in the same folder as index.html.
+                -->
+                <img src="ticket.png" alt="Exhibition Ticket" onerror="this.style.display='none'; document.getElementById('placeholder').style.display='flex';">
+                
+                <div id="placeholder" class="ticket-placeholder" style="display: none;">
+                    <div style="font-size: 3rem; margin-bottom: 20px;">🎫</div>
+                    <div style="font-family: 'Orbitron'; font-size: 1.2rem; text-align: center;">IMAGE NOT FOUND</div>
+                    <div style="font-family: 'Share Tech Mono'; color: #aaa; margin-top: 10px; font-size: 0.9rem; text-align: center; padding: 0 20px;">
+                        Please rename your image to<br>
+                        <span style="color: var(--neon-cyan)">ticket.png</span><br>
+                        and place it in this folder.
+                    </div>
                 </div>
-                <div class="ticket-body">
-                    <div>
-                        <div class="event-title">ETERNAL<br>MEMORY</div>
-                        <div class="event-subtitle">Interstellar Colonization Art Exhibition</div>
-                    </div>
-                    
-                    <div class="info-grid">
-                        <div class="info-item">
-                            <label>DATE</label>
-                            <span>JAN 24</span>
-                        </div>
-                        <div class="info-item">
-                            <label>TIME</label>
-                            <span>14:00</span>
-                        </div>
-                        <div class="info-item">
-                            <label>GATE</label>
-                            <span style="color: var(--neon-cyan)">A-01</span>
-                        </div>
-                        <div class="info-item">
-                            <label>CLASS</label>
-                            <span>VIP</span>
-                        </div>
-                    </div>
 
-                    <div class="qr-placeholder" style="display: flex; justify-content: center; align-items: center; color: black; font-weight: bold; font-family: monospace;">
-                        [QR CODE]
-                    </div>
-                </div>
-                <div class="ticket-footer">
-                    <span>TICKET ID</span>
-                    <span class="id">#8X9-2026-COL</span>
-                </div>
                 <div class="laser-line" id="laser"></div>
             </div>
         </div>
@@ -453,7 +359,6 @@
         let startY = 0;
         let currentY = 0;
         let isDragging = false;
-        let initialTop = 0; // Will be set on load
         
         // Settings
         const SCAN_THRESHOLD = -200; // Pixel distance to move up to trigger scan
