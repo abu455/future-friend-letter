@@ -467,7 +467,7 @@
             </div>
 
             <div class="active-badge">
-                已设为活动主界面音乐
+                当前背景音乐
             </div>
 
             <div class="control-panel">
@@ -505,11 +505,11 @@
         // Track Data
         const tracks = [
             { id: 1, title: '天穹裁决', locked: false },
-            { id: 2, title: '铁幕降临', locked: true },
-            { id: 3, title: '火种', locked: true },
-            { id: 4, title: '反星际殖民运动', locked: true },
-            { id: 5, title: '朝圣者的迷途', locked: true },
-            { id: 6, title: '星海英灵录', locked: true },
+            { id: 2, title: '铁幕降临', locked: false },
+            { id: 3, title: '火种', locked: false },
+            { id: 4, title: '反星际殖民运动', locked: false },
+            { id: 5, title: '朝圣者的迷途', locked: false },
+            { id: 6, title: '星海英灵录', locked: false },
         ];
 
         let currentIndex = 0;
@@ -548,17 +548,10 @@
                 const info = document.createElement('div');
                 info.className = 'track-info';
 
-                if (track.locked) {
-                    info.innerHTML = `
-                        <svg class="lock-icon" viewBox="0 0 24 24" fill="white"><path d="M18 8h-1V6c0-2.76-2.24-5-5-5S7 3.24 7 6v2H6c-1.1 0-2 .9-2 2v10c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V10c0-1.1-.9-2-2-2zm-6 9c-1.1 0-2-.9-2-2s.9-2 2-2 2 .9 2 2-.9 2-2 2zm3.1-9H8.9V6c0-1.71 1.39-3 3.1-3 1.71 0 3.1 1.29 3.1 3v2z"/></svg>
-                        <span class="track-name">${track.title}</span>
-                    `;
-                } else {
-                    info.innerHTML = `
-                        <svg class="track-icon" viewBox="0 0 24 24" fill="white"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 14.5c-2.49 0-4.5-2.01-4.5-4.5S9.51 7.5 12 7.5s4.5 2.01 4.5 4.5-2.01 4.5-4.5 4.5zm0-5.5c-.55 0-1 .45-1 1s.45 1 1 1 1-.45 1-1-.45-1-1-1z"/></svg>
-                        <span class="track-name">${track.title}</span>
-                    `;
-                }
+                // Cleaned up rendering logic since locks are gone
+                info.innerHTML = `
+                    <span class="track-name" style="margin-left: 0;">${track.title}</span>
+                `;
 
                 item.appendChild(marker);
                 item.appendChild(info);
