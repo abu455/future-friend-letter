@@ -3,29 +3,32 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>申城幻影 - AR集换式卡片文旅联动平台</title>
+    <title>申城幻影 - Shanghai Phantom</title>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
     <style>
         :root {
-            --primary: #ffd700;
-            --secondary: #1a1a2e;
-            --accent: #e94560;
-            --text: #f0f0f0;
-            --card-bg: rgba(255, 255, 255, 0.05);
-            --ssr-glow: 0 0 15px #ffd700;
+            --primary: #ffffff;
+            --secondary: #1a1a1a;
+            --accent: #2c3e50;
+            --text-main: #ffffff;
+            --text-secondary: #7f8c8d;
+            --glass-bg: rgba(255, 255, 255, 0.2);
+            --card-radius: 24px;
+            --shadow-soft: 0 10px 40px rgba(0,0,0,0.08);
+            --transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
         }
 
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
+            font-family: 'PingFang SC', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
         }
 
         body {
-            font-family: 'PingFang SC', 'Microsoft YaHei', sans-serif;
-            background-color: var(--secondary);
-            color: var(--text);
-            line-height: 1.6;
+            background-color: #f8f9fa;
+            color: #333;
+            overflow-x: hidden;
         }
 
         /* 导航栏 */
@@ -33,650 +36,911 @@
             position: fixed;
             top: 0;
             width: 100%;
-            background: rgba(26, 26, 46, 0.95);
-            backdrop-filter: blur(10px);
-            z-index: 1000;
-            border-bottom: 1px solid rgba(255, 215, 0, 0.2);
-            padding: 1rem 2rem;
+            padding: 2rem 4rem;
             display: flex;
             justify-content: space-between;
             align-items: center;
+            z-index: 1000;
+            transition: background 0.3s;
+        }
+
+        nav.scrolled {
+            background: rgba(255, 255, 255, 0.95);
+            padding: 1rem 4rem;
+            box-shadow: 0 2px 20px rgba(0,0,0,0.05);
         }
 
         .logo {
             font-size: 1.5rem;
-            font-weight: bold;
-            color: var(--primary);
-            text-transform: uppercase;
-            letter-spacing: 2px;
+            font-weight: 800;
+            color: white;
+            letter-spacing: 1px;
+            text-shadow: 0 2px 10px rgba(0,0,0,0.3);
+        }
+
+        nav.scrolled .logo {
+            color: var(--secondary);
+            text-shadow: none;
         }
 
         .nav-links {
             display: flex;
-            gap: 2rem;
+            gap: 2.5rem;
         }
 
         .nav-item {
-            cursor: pointer;
-            color: var(--text);
+            color: rgba(255,255,255,0.9);
             text-decoration: none;
-            transition: color 0.3s;
+            font-weight: 500;
+            font-size: 0.95rem;
+            transition: var(--transition);
+            cursor: pointer;
+        }
+
+        nav.scrolled .nav-item {
+            color: var(--secondary);
+        }
+
+        .nav-item:hover {
+            color: white;
+            transform: translateY(-2px);
+        }
+        
+        nav.scrolled .nav-item:hover {
+            color: #000;
+        }
+
+        .login-btn {
+            padding: 0.6rem 1.5rem;
+            background: rgba(255,255,255,0.2);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255,255,255,0.4);
+            border-radius: 30px;
+            color: white;
+            font-weight: 600;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        nav.scrolled .login-btn {
+            background: var(--secondary);
+            color: white;
+            border-color: var(--secondary);
+        }
+
+        .login-btn:hover {
+            background: white;
+            color: var(--secondary);
+        }
+
+        /* Hero Section - 模仿 trxvl. 风格 */
+        .hero {
+            position: relative;
+            height: 100vh;
+            min-height: 700px;
+            background: linear-gradient(rgba(0,0,0,0.2), rgba(0,0,0,0.4)), url('https://images.unsplash.com/photo-1474181487882-5abf3f0ba6c2?ixlib=rb-1.2.1&auto=format&fit=crop&w=1950&q=80');
+            background-size: cover;
+            background-position: center;
+            display: flex;
+            align-items: center;
+            padding: 0 4rem;
+        }
+
+        .hero-content {
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            margin-top: 5rem;
+        }
+
+        .hero-title {
+            font-size: 4.5rem;
+            line-height: 1.1;
+            font-weight: 700;
+            color: white;
+            margin-bottom: 2.5rem;
+            text-shadow: 0 10px 30px rgba(0,0,0,0.3);
+        }
+
+        /* 搜索栏样式 - 类似 trxvl. 的悬浮胶囊 */
+        .search-container {
+            background: rgba(255, 255, 255, 0.15);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            border-radius: 50px;
+            padding: 0.8rem;
+            display: inline-flex;
+            align-items: center;
+            gap: 1rem;
+            width: 100%;
+            max-width: 800px;
+        }
+
+        .search-group {
+            flex: 1;
+            display: flex;
+            align-items: center;
+            padding: 0 1.5rem;
+            border-right: 1px solid rgba(255,255,255,0.2);
+            color: white;
+        }
+
+        .search-group:last-child {
+            border-right: none;
+        }
+        
+        .search-group input {
+            background: transparent;
+            border: none;
+            color: white;
+            font-size: 1rem;
+            width: 100%;
+            margin-left: 10px;
+            outline: none;
+        }
+        
+        .search-group input::placeholder {
+            color: rgba(255,255,255,0.7);
+        }
+
+        .search-btn {
+            background: white;
+            color: var(--secondary);
+            border: none;
+            padding: 1rem 2.5rem;
+            border-radius: 40px;
+            font-weight: 700;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .search-btn:hover {
+            transform: scale(1.05);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+        }
+
+        /* 内容区块通用样式 */
+        .section {
+            padding: 4rem 4rem;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+        
+        .section-header {
+            font-size: 2rem;
+            font-weight: 700;
+            margin-bottom: 2rem;
+            color: var(--secondary);
+        }
+
+        /* 分类图标栏 */
+        .categories-scroll {
+            display: flex;
+            gap: 3rem;
+            overflow-x: auto;
+            padding-bottom: 1rem;
+            scrollbar-width: none; /* Firefox */
+        }
+        
+        .categories-scroll::-webkit-scrollbar {
+            display: none; /* Chrome/Safari */
+        }
+
+        .category-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 0.8rem;
+            opacity: 0.6;
+            transition: var(--transition);
+            cursor: pointer;
+            min-width: 80px;
+        }
+
+        .category-item:hover, .category-item.active {
+            opacity: 1;
+            transform: translateY(-5px);
+        }
+
+        .category-icon {
+            font-size: 1.5rem;
+        }
+        
+        .category-text {
+            font-size: 0.9rem;
+            font-weight: 500;
+        }
+
+        /* 热门目的地 (卡片展示) - 对应 Top Vacation Destinations */
+        .card-carousel {
+            display: flex;
+            gap: 1.5rem;
+            overflow-x: auto;
+            padding: 1rem 0 2rem 0;
+            scrollbar-width: none;
+        }
+
+        .destination-card {
+            min-width: 300px;
+            height: 400px;
+            border-radius: var(--card-radius);
+            position: relative;
+            overflow: hidden;
+            cursor: pointer;
+            transition: var(--transition);
+            box-shadow: var(--shadow-soft);
+        }
+
+        .destination-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.15);
+        }
+
+        .destination-img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+        
+        .destination-card:hover .destination-img {
+            transform: scale(1.05);
+        }
+
+        .destination-overlay {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            padding: 2rem;
+            background: linear-gradient(to top, rgba(0,0,0,0.8), transparent);
+            color: white;
+        }
+
+        .destination-title {
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+        }
+        
+        .destination-subtitle {
+            font-size: 0.9rem;
+            opacity: 0.8;
             display: flex;
             align-items: center;
             gap: 0.5rem;
         }
 
-        .nav-item:hover, .nav-item.active {
-            color: var(--primary);
-        }
-
-        .login-btn {
-            background: var(--primary);
-            color: var(--secondary);
-            padding: 0.5rem 1.5rem;
-            border-radius: 20px;
-            font-weight: bold;
-            border: none;
-            cursor: pointer;
-            transition: transform 0.2s;
-        }
-
-        .login-btn:hover {
-            transform: scale(1.05);
-        }
-
-        /* 主内容区域 */
-        main {
-            margin-top: 80px;
-            padding: 2rem;
-            min-height: calc(100vh - 80px);
-        }
-
-        .section {
-            display: none;
-            animation: fadeIn 0.5s ease;
-        }
-
-        .section.active {
-            display: block;
-        }
-
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(20px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-
-        /* 首页 Hero */
-        .hero {
-            text-align: center;
-            padding: 4rem 0;
-            background: linear-gradient(rgba(26, 26, 46, 0.8), rgba(26, 26, 46, 0.8)), url('https://images.unsplash.com/photo-1548919973-5cef591cdbc9?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80');
-            background-size: cover;
-            border-radius: 20px;
-            margin-bottom: 2rem;
-            border: 1px solid rgba(255, 215, 0, 0.3);
-        }
-
-        .hero h1 {
-            font-size: 3rem;
-            margin-bottom: 1rem;
-            color: var(--primary);
-            text-shadow: 0 0 20px rgba(255, 215, 0, 0.5);
-        }
-
-        /* 卡片收藏夹 */
-        .filters {
-            display: flex;
-            gap: 1rem;
-            margin-bottom: 2rem;
-            justify-content: center;
-        }
-
-        .filter-btn {
-            background: rgba(255, 255, 255, 0.1);
-            border: 1px solid rgba(255, 255, 255, 0.2);
-            color: var(--text);
-            padding: 0.5rem 1.5rem;
-            border-radius: 20px;
-            cursor: pointer;
-            transition: all 0.3s;
-        }
-
-        .filter-btn.active, .filter-btn:hover {
-            background: var(--primary);
-            color: var(--secondary);
-            border-color: var(--primary);
-        }
-
-        .card-grid {
+        /* 任务/路线推荐 - 对应 All Inclusive Packages */
+        .packages-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
             gap: 2rem;
         }
 
-        .ar-card {
-            background: var(--card-bg);
-            border-radius: 15px;
+        .package-card {
+            background: white;
+            border-radius: var(--card-radius);
             overflow: hidden;
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            transition: transform 0.3s, box-shadow 0.3s;
+            box-shadow: var(--shadow-soft);
+            transition: var(--transition);
+        }
+
+        .package-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 30px rgba(0,0,0,0.1);
+        }
+
+        .package-img-container {
+            height: 200px;
+            overflow: hidden;
             position: relative;
         }
 
-        .ar-card:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
-        }
-
-        .ar-card.ssr {
-            border: 1px solid var(--primary);
-            box-shadow: var(--ssr-glow);
-        }
-
-        .card-img {
-            width: 100%;
-            height: 350px;
-            background-color: #333;
-            position: relative;
-            overflow: hidden;
-        }
-        
-        .card-img img {
+        .package-img {
             width: 100%;
             height: 100%;
             object-fit: cover;
         }
 
-        .rarity-badge {
-            position: absolute;
-            top: 10px;
-            right: 10px;
-            padding: 0.2rem 0.8rem;
-            border-radius: 4px;
-            font-weight: bold;
-            font-size: 0.8rem;
-            background: rgba(0,0,0,0.7);
-        }
-
-        .rarity-SSR { color: #ffd700; border: 1px solid #ffd700; }
-        .rarity-SR { color: #c0c0c0; border: 1px solid #c0c0c0; }
-        .rarity-R { color: #cd7f32; border: 1px solid #cd7f32; }
-        .rarity-N { color: #fff; border: 1px solid #fff; }
-
-        .card-info {
+        .package-content {
             padding: 1.5rem;
         }
 
-        .card-title {
-            font-size: 1.2rem;
+        .package-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
             margin-bottom: 0.5rem;
-            color: var(--primary);
         }
 
-        .scan-btn {
-            width: 100%;
-            padding: 0.8rem;
-            background: transparent;
-            border: 1px solid var(--primary);
-            color: var(--primary);
-            border-radius: 8px;
-            margin-top: 1rem;
-            cursor: pointer;
-            transition: background 0.3s;
+        .package-title {
+            font-size: 1.2rem;
+            font-weight: 700;
+            color: var(--secondary);
+        }
+
+        .package-rating {
             display: flex;
             align-items: center;
-            justify-content: center;
-            gap: 0.5rem;
+            gap: 0.3rem;
+            font-weight: 600;
+            font-size: 0.9rem;
         }
 
-        .scan-btn:hover {
-            background: rgba(255, 215, 0, 0.1);
-        }
-
-        /* 导航地图 */
-        .map-container {
-            width: 100%;
-            height: 500px;
-            background: #2a2a40;
-            border-radius: 15px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: #666;
-            margin-bottom: 2rem;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .map-marker {
-            position: absolute;
-            font-size: 2rem;
-            color: var(--primary);
-            cursor: pointer;
-            animation: bounce 2s infinite;
-        }
-
-        @keyframes bounce {
-            0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(-10px); }
-        }
-
-        /* 成就系统 */
-        .achievements-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-            gap: 2rem;
-        }
-
-        .achievement-card {
-            background: var(--card-bg);
-            padding: 2rem;
-            border-radius: 15px;
-            display: flex;
-            align-items: center;
-            gap: 1.5rem;
-            border: 1px solid rgba(255, 255, 255, 0.1);
-        }
-
-        .achievement-icon {
-            font-size: 3rem;
-            color: #666;
-        }
-
-        .achievement-card.unlocked .achievement-icon {
-            color: var(--primary);
-            text-shadow: 0 0 10px rgba(255, 215, 0, 0.5);
-        }
-
-        .achievement-card.unlocked {
-            border-color: var(--primary);
-            background: rgba(255, 215, 0, 0.05);
-        }
-
-        /* 快递查询 */
-        .express-tracker {
-            max-width: 600px;
-            margin: 0 auto;
-            background: var(--card-bg);
-            padding: 2rem;
-            border-radius: 15px;
-            border: 1px solid rgba(255, 255, 255, 0.1);
-        }
-
-        .search-box {
-            display: flex;
-            gap: 1rem;
-            margin-bottom: 2rem;
-        }
-
-        .search-input {
-            flex: 1;
-            padding: 1rem;
-            background: rgba(0, 0, 0, 0.3);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            color: var(--text);
-            border-radius: 8px;
-        }
-
-        .tracking-result {
-            margin-top: 1rem;
-            border-left: 2px solid var(--primary);
-            padding-left: 2rem;
-            position: relative;
-        }
-
-        .timeline-item {
+        .package-meta {
+            color: #888;
+            font-size: 0.9rem;
             margin-bottom: 1.5rem;
-            position: relative;
         }
 
-        .timeline-item::before {
-            content: '';
-            position: absolute;
-            left: -2.4rem;
-            top: 5px;
-            width: 12px;
-            height: 12px;
-            background: var(--secondary);
-            border: 2px solid var(--primary);
-            border-radius: 50%;
+        .package-icons {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 1.5rem;
+            color: #666;
+            font-size: 0.8rem;
+            text-align: center;
+        }
+        
+        .icon-item {
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+            align-items: center;
         }
 
-        .timeline-date {
+        .package-footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-top: 1px solid #eee;
+            padding-top: 1rem;
+        }
+
+        .package-price {
+            font-size: 1.2rem;
+            font-weight: 800;
+            color: var(--secondary);
+        }
+
+        .package-unit {
             font-size: 0.8rem;
             color: #888;
-            margin-bottom: 0.3rem;
+            font-weight: normal;
         }
 
-        /* 登录模态框 */
-        .modal {
-            display: none;
+        /* 特别优惠 - 对应 Offers/Freebies */
+        .offers-section {
+            background: #fff;
+            padding-top: 4rem;
+            padding-bottom: 4rem;
+        }
+
+        /* 模态框样式 */
+        .modal-overlay {
             position: fixed;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            background: rgba(0, 0, 0, 0.8);
-            z-index: 2000;
+            background: rgba(0,0,0,0.5);
+            display: none;
             justify-content: center;
             align-items: center;
+            z-index: 2000;
+            backdrop-filter: blur(5px);
         }
-
+        
         .modal-content {
-            background: var(--secondary);
-            padding: 3rem;
+            background: white;
+            padding: 2.5rem;
             border-radius: 20px;
-            border: 1px solid var(--primary);
-            width: 400px;
-            text-align: center;
+            width: 90%;
+            max-width: 500px;
             position: relative;
+            animation: modalFadeIn 0.3s ease;
         }
 
-        .close-modal {
+        @keyframes modalFadeIn {
+            from { opacity: 0; transform: scale(0.9); }
+            to { opacity: 1; transform: scale(1); }
+        }
+
+        .close-btn {
             position: absolute;
-            top: 1rem;
-            right: 1rem;
+            top: 1.5rem;
+            right: 1.5rem;
+            border: none;
+            background: none;
+            font-size: 1.5rem;
             cursor: pointer;
-            color: #666;
+            color: #999;
         }
 
-        .form-group {
-            margin-bottom: 1.5rem;
-            text-align: left;
+        /* 快递查询 specific */
+        .express-timeline {
+            margin-top: 2rem;
+            padding-left: 1rem;
+            border-left: 2px solid #eee;
+        }
+        
+        .timeline-item {
+            position: relative;
+            padding-left: 1.5rem;
+            padding-bottom: 2rem;
+        }
+        
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            left: -6px;
+            top: 0;
+            width: 10px;
+            height: 10px;
+            background: var(--secondary);
+            border-radius: 50%;
         }
 
-        .form-group label {
-            display: block;
-            margin-bottom: 0.5rem;
-            color: var(--primary);
-        }
-
-        .form-input {
-            width: 100%;
-            padding: 0.8rem;
-            background: rgba(255, 255, 255, 0.05);
-            border: 1px solid rgba(255, 255, 255, 0.1);
+        /* 页脚 */
+        footer {
+            background: #000;
             color: white;
-            border-radius: 8px;
+            padding: 4rem 4rem;
+            margin-top: 4rem;
         }
 
-        /* 响应式 */
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 3rem;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .footer-col h4 {
+            margin-bottom: 1.5rem;
+            color: #888;
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .footer-col ul {
+            list-style: none;
+        }
+
+        .footer-col li {
+            margin-bottom: 0.8rem;
+        }
+
+        .footer-col a {
+            color: white;
+            text-decoration: none;
+            font-size: 0.9rem;
+            opacity: 0.8;
+            transition: opacity 0.2s;
+        }
+
+        .footer-col a:hover {
+            opacity: 1;
+        }
+
+        /* 响应式调整 */
         @media (max-width: 768px) {
-            .nav-links {
-                display: none; /* 移动端简化 */
+            .hero-title {
+                font-size: 2.5rem;
             }
-            .hero h1 {
-                font-size: 2rem;
+            
+            nav {
+                padding: 1.5rem;
+            }
+            
+            .nav-links {
+                display: none;
+            }
+            
+            .search-container {
+                flex-direction: column;
+                border-radius: 20px;
+                gap: 0;
+            }
+            
+            .search-group {
+                width: 100%;
+                border-right: none;
+                border-bottom: 1px solid rgba(255,255,255,0.1);
+                padding: 1rem;
+            }
+            
+            .search-btn {
+                width: 100%;
+                margin-top: 1rem;
+            }
+            
+            .section {
+                padding: 3rem 1.5rem;
             }
         }
     </style>
 </head>
 <body>
 
-    <nav>
-        <div class="logo"><i class="fas fa-vr-cardboard"></i> 申城幻影</div>
+    <!-- 导航栏 -->
+    <nav id="navbar">
+        <div class="logo">申城幻影.</div>
         <div class="nav-links">
-            <div class="nav-item active" onclick="switchTab('home')"><i class="fas fa-home"></i> 首页</div>
-            <div class="nav-item" onclick="switchTab('collection')"><i class="fas fa-layer-group"></i> 我的卡包</div>
-            <div class="nav-item" onclick="switchTab('map')"><i class="fas fa-map-marked-alt"></i> AR导航</div>
-            <div class="nav-item" onclick="switchTab('achievements')"><i class="fas fa-medal"></i> 成就</div>
-            <div class="nav-item" onclick="switchTab('express')"><i class="fas fa-box-open"></i> 快递查询</div>
+            <a class="nav-item" onclick="scrollToSection('home')">首页</a>
+            <a class="nav-item" onclick="scrollToSection('collection')">卡片收藏</a>
+            <a class="nav-item" onclick="scrollToSection('tasks')">AR 任务</a>
+            <a class="nav-item" onclick="scrollToSection('achievements')">成就系统</a>
+            <a class="nav-item" onclick="openModal('expressModal')">快递查询</a>
         </div>
-        <button class="login-btn" onclick="toggleLogin()" id="authBtn">登录 / 注册</button>
+        <button class="login-btn" onclick="openModal('loginModal')">登录 / 注册</button>
     </nav>
 
-    <main>
-        <!-- 首页 -->
-        <div id="home" class="section active">
-            <div class="hero">
-                <h1>探索 · 收集 · 传承</h1>
-                <p>上海首个AR集换式卡片文旅联动平台</p>
-                <div style="margin-top: 2rem;">
-                    <button class="login-btn" onclick="switchTab('collection')">开始探索</button>
+    <!-- Hero 区域 -->
+    <div class="hero" id="home">
+        <div class="hero-content">
+            <h1 class="hero-title">探索魔都的<br>平行时空。</h1>
+            
+            <div class="search-container">
+                <div class="search-group">
+                    <i class="fas fa-search"></i>
+                    <input type="text" placeholder="搜索地标、卡片或任务...">
+                </div>
+                <div class="search-group">
+                    <i class="fas fa-map-marker-alt"></i>
+                    <input type="text" placeholder="全部区域" list="districts">
+                    <datalist id="districts">
+                        <option value="黄浦区">
+                        <option value="浦东新区">
+                        <option value="徐汇区">
+                        <option value="静安区">
+                    </datalist>
+                </div>
+                <div class="search-group">
+                    <i class="fas fa-layer-group"></i>
+                    <input type="text" placeholder="稀有度 (SSR/SR/R/N)">
+                </div>
+                <button class="search-btn">搜 索</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- 分类浏览 -->
+    <div class="section">
+        <h2 class="section-header">探索卡片分类</h2>
+        <div class="categories-scroll">
+            <div class="category-item active">
+                <i class="fas fa-star category-icon"></i>
+                <span class="category-text">全部</span>
+            </div>
+            <div class="category-item">
+                <i class="fas fa-gem category-icon" style="color: #ffd700;"></i>
+                <span class="category-text">SSR 极稀有</span>
+            </div>
+            <div class="category-item">
+                <i class="fas fa-certificate category-icon" style="color: #c0c0c0;"></i>
+                <span class="category-text">SR 稀有</span>
+            </div>
+            <div class="category-item">
+                <i class="fas fa-bookmark category-icon" style="color: #cd7f32;"></i>
+                <span class="category-text">R 精美</span>
+            </div>
+            <div class="category-item">
+                <i class="fas fa-map category-icon"></i>
+                <span class="category-text">N 普通</span>
+            </div>
+            <div class="category-item">
+                <i class="fas fa-landmark category-icon"></i>
+                <span class="category-text">历史建筑</span>
+            </div>
+            <div class="category-item">
+                <i class="fas fa-city category-icon"></i>
+                <span class="category-text">现代地标</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- 热门卡片展示 (类似 Top Destinations) -->
+    <div class="section" id="collection" style="padding-top: 0;">
+        <h2 class="section-header">热门地标卡片</h2>
+        <div class="card-carousel">
+            <!-- 卡片 1 -->
+            <div class="destination-card">
+                <img src="https://images.unsplash.com/photo-1548919973-5cef591cdbc9?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" class="destination-img" alt="外滩">
+                <div class="destination-overlay">
+                    <h3 class="destination-title">外滩万国建筑群</h3>
+                    <div class="destination-subtitle">
+                        <i class="fas fa-map-marker-alt"></i> 黄浦区 · SSR 级
+                    </div>
+                </div>
+            </div>
+
+            <!-- 卡片 2 -->
+            <div class="destination-card">
+                <img src="https://images.unsplash.com/photo-1505991754020-7212b4859bb4?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" class="destination-img" alt="陆家嘴">
+                <div class="destination-overlay">
+                    <h3 class="destination-title">陆家嘴三件套</h3>
+                    <div class="destination-subtitle">
+                        <i class="fas fa-map-marker-alt"></i> 浦东新区 · SR 级
+                    </div>
+                </div>
+            </div>
+
+            <!-- 卡片 3 -->
+            <div class="destination-card">
+                <img src="https://images.unsplash.com/photo-1548624313-0396c75e4b1a?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" class="destination-img" alt="武康大楼">
+                <div class="destination-overlay">
+                    <h3 class="destination-title">武康大楼</h3>
+                    <div class="destination-subtitle">
+                        <i class="fas fa-map-marker-alt"></i> 徐汇区 · R 级
+                    </div>
+                </div>
+            </div>
+
+            <!-- 卡片 4 -->
+            <div class="destination-card">
+                <img src="https://images.unsplash.com/photo-1582457882898-d892d5295c58?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" class="destination-img" alt="豫园">
+                <div class="destination-overlay">
+                    <h3 class="destination-title">豫园</h3>
+                    <div class="destination-subtitle">
+                        <i class="fas fa-map-marker-alt"></i> 黄浦区 · R 级
+                    </div>
                 </div>
             </div>
             
-            <div style="display: flex; gap: 2rem; margin-top: 3rem;">
-                <div style="flex: 1; padding: 2rem; background: var(--card-bg); border-radius: 15px; border: 1px solid rgba(255,215,0,0.1);">
-                    <h3 style="color: var(--primary); margin-bottom: 1rem;"><i class="fas fa-cube"></i> AR实景交互</h3>
-                    <p>扫描实体卡片，唤醒1:1还原的3D建筑模型，聆听建筑背后的历史故事。</p>
-                </div>
-                <div style="flex: 1; padding: 2rem; background: var(--card-bg); border-radius: 15px; border: 1px solid rgba(255,215,0,0.1);">
-                    <h3 style="color: var(--primary); margin-bottom: 1rem;"><i class="fas fa-map-marker-alt"></i> 实地打卡</h3>
-                    <p>跟随任务指引前往上海地标，完成时空打卡任务，解锁限定虚拟碎片。</p>
-                </div>
-                <div style="flex: 1; padding: 2rem; background: var(--card-bg); border-radius: 15px; border: 1px solid rgba(255,215,0,0.1);">
-                    <h3 style="color: var(--primary); margin-bottom: 1rem;"><i class="fas fa-gift"></i> 专属权益</h3>
-                    <p>集齐特定系列卡片，兑换限量周边、景区门票折扣及VIP快速通道特权。</p>
+            <!-- 卡片 5 -->
+             <div class="destination-card">
+                <img src="https://images.unsplash.com/photo-1643666504281-9b1695278c2e?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" class="destination-img" alt="静安寺">
+                <div class="destination-overlay">
+                    <h3 class="destination-title">静安寺</h3>
+                    <div class="destination-subtitle">
+                        <i class="fas fa-map-marker-alt"></i> 静安区 · N 级
+                    </div>
                 </div>
             </div>
         </div>
+    </div>
 
-        <!-- 收藏夹 -->
-        <div id="collection" class="section">
-            <h2 style="margin-bottom: 2rem; color: var(--primary);">我的卡片收藏</h2>
+    <!-- 任务/路线推荐 (类似 Packages) -->
+    <div class="section offers-section" id="tasks">
+        <h2 class="section-header">推荐 AR 探索路线</h2>
+        <div class="packages-grid">
             
-            <div class="filters">
-                <button class="filter-btn active" onclick="filterCards('all')">全部</button>
-                <button class="filter-btn" onclick="filterCards('SSR')">SSR 极稀有</button>
-                <button class="filter-btn" onclick="filterCards('SR')">SR 稀有</button>
-                <button class="filter-btn" onclick="filterCards('R')">R 精美</button>
-                <button class="filter-btn" onclick="filterCards('N')">N 普通</button>
+            <!-- 路线 1 -->
+            <div class="package-card">
+                <div class="package-img-container">
+                    <img src="https://images.unsplash.com/photo-1538428494232-9c0d8d3a50f0?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" class="package-img" alt="夜景">
+                </div>
+                <div class="package-content">
+                    <div class="package-header">
+                        <h3 class="package-title">魔都幻影夜行</h3>
+                        <div class="package-rating"><i class="fas fa-star" style="color: #ffd700;"></i> 4.9</div>
+                    </div>
+                    <div class="package-meta">3个打卡点 · 约2小时</div>
+                    
+                    <div class="package-icons">
+                        <div class="icon-item"><i class="fas fa-camera"></i><span>AR拍照</span></div>
+                        <div class="icon-item"><i class="fas fa-puzzle-piece"></i><span>碎片收集</span></div>
+                        <div class="icon-item"><i class="fas fa-gift"></i><span>限定周边</span></div>
+                        <div class="icon-item"><i class="fas fa-walking"></i><span>实地探索</span></div>
+                    </div>
+                    
+                    <div class="package-footer">
+                        <div class="package-price">免费参与 <span class="package-unit">需持卡</span></div>
+                        <button class="login-btn" style="background:var(--secondary); color:white; padding: 0.5rem 1rem; font-size: 0.8rem;">立即开始</button>
+                    </div>
+                </div>
             </div>
 
-            <div class="card-grid" id="cardGrid">
-                <!-- 卡片将通过JS生成 -->
+            <!-- 路线 2 -->
+            <div class="package-card">
+                <div class="package-img-container">
+                    <img src="https://images.unsplash.com/photo-1622384917904-87893c5c9604?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" class="package-img" alt="田子坊">
+                </div>
+                <div class="package-content">
+                    <div class="package-header">
+                        <h3 class="package-title">弄堂里的旧时光</h3>
+                        <div class="package-rating"><i class="fas fa-star" style="color: #ffd700;"></i> 4.7</div>
+                    </div>
+                    <div class="package-meta">5个打卡点 · 约3小时</div>
+                    
+                    <div class="package-icons">
+                        <div class="icon-item"><i class="fas fa-history"></i><span>历史问答</span></div>
+                        <div class="icon-item"><i class="fas fa-coffee"></i><span>Manner券</span></div>
+                        <div class="icon-item"><i class="fas fa-map-marked"></i><span>弄堂寻宝</span></div>
+                        <div class="icon-item"><i class="fas fa-users"></i><span>组队任务</span></div>
+                    </div>
+                    
+                    <div class="package-footer">
+                        <div class="package-price">免费参与 <span class="package-unit">限时活动</span></div>
+                        <button class="login-btn" style="background:var(--secondary); color:white; padding: 0.5rem 1rem; font-size: 0.8rem;">立即开始</button>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- 路线 3 -->
+            <div class="package-card">
+                <div class="package-img-container">
+                    <img src="https://images.unsplash.com/photo-1599818816962-d49926c4f346?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" class="package-img" alt="跑马厅">
+                </div>
+                <div class="package-content">
+                    <div class="package-header">
+                        <h3 class="package-title">寻找消失的建筑</h3>
+                        <div class="package-rating"><i class="fas fa-star" style="color: #ffd700;"></i> 5.0</div>
+                    </div>
+                    <div class="package-meta">1个极稀有点 · SSR限定</div>
+                    
+                    <div class="package-icons">
+                        <div class="icon-item"><i class="fas fa-vr-cardboard"></i><span>AR复原</span></div>
+                        <div class="icon-item"><i class="fas fa-medal"></i><span>绝版勋章</span></div>
+                        <div class="icon-item"><i class="fas fa-book-open"></i><span>语音导览</span></div>
+                        <div class="icon-item"><i class="fas fa-share-alt"></i><span>社交分享</span></div>
+                    </div>
+                    
+                    <div class="package-footer">
+                        <div class="package-price">SSR 卡专属 <span class="package-unit">需解锁</span></div>
+                        <button class="login-btn" style="background:var(--secondary); color:white; padding: 0.5rem 1rem; font-size: 0.8rem;">立即开始</button>
+                    </div>
+                </div>
+            </div>
+            
+        </div>
+    </div>
+
+    <!-- 成就系统 (类似 Offers) -->
+    <div class="section" id="achievements">
+        <h2 class="section-header">成就与奖励</h2>
+        <div class="card-carousel">
+             <div class="destination-card" style="min-width: 250px; height: 300px;">
+                <div style="height: 60%; background: #2c3e50; display: flex; justify-content: center; align-items: center; color: white; font-size: 4rem;">
+                    <i class="fas fa-building"></i>
+                </div>
+                <div style="padding: 1.5rem;">
+                    <h3 style="font-size: 1.2rem; font-weight: 700; margin-bottom: 0.5rem;">海派建筑师</h3>
+                    <p style="font-size: 0.9rem; color: #666;">集齐外滩系列卡片解锁</p>
+                </div>
+            </div>
+            
+            <div class="destination-card" style="min-width: 250px; height: 300px;">
+                <div style="height: 60%; background: #e74c3c; display: flex; justify-content: center; align-items: center; color: white; font-size: 4rem;">
+                    <i class="fas fa-coffee"></i>
+                </div>
+                <div style="padding: 1.5rem;">
+                    <h3 style="font-size: 1.2rem; font-weight: 700; margin-bottom: 0.5rem;">Manner 咖啡兑换券</h3>
+                    <p style="font-size: 0.9rem; color: #666;">完成3个打卡任务</p>
+                </div>
+            </div>
+            
+            <div class="destination-card" style="min-width: 250px; height: 300px;">
+                <div style="height: 60%; background: #f1c40f; display: flex; justify-content: center; align-items: center; color: white; font-size: 4rem;">
+                    <i class="fas fa-crown"></i>
+                </div>
+                <div style="padding: 1.5rem;">
+                    <h3 style="font-size: 1.2rem; font-weight: 700; margin-bottom: 0.5rem;">魔都守护者</h3>
+                    <p style="font-size: 0.9rem; color: #666;">集齐所有SSR卡片</p>
+                </div>
             </div>
         </div>
+    </div>
 
-        <!-- AR导航 -->
-        <div id="map" class="section">
-            <h2 style="margin-bottom: 2rem; color: var(--primary);">AR实景导航 & 任务点</h2>
-            <div class="map-container">
-                <div style="width: 100%; height: 100%; background: url('https://upload.wikimedia.org/wikipedia/commons/thumb/2/23/Shanghai_map_bilingual.svg/1200px-Shanghai_map_bilingual.svg.png') center/cover; opacity: 0.5;"></div>
-                <!-- 模拟地图标记 -->
-                <div class="map-marker" style="top: 30%; left: 45%;" title="外滩"><i class="fas fa-map-pin"></i></div>
-                <div class="map-marker" style="top: 35%; left: 55%; color: #e94560;" title="陆家嘴 (任务进行中)"><i class="fas fa-running"></i></div>
-                <div class="map-marker" style="top: 50%; left: 40%;" title="武康大楼"><i class="fas fa-map-pin"></i></div>
+    <!-- Footer -->
+    <footer>
+        <div class="footer-content">
+            <div class="footer-col">
+                <h2 style="margin-bottom: 1.5rem;">申城幻影.</h2>
+                <p style="opacity: 0.7; font-size: 0.9rem; line-height: 1.6;">
+                    连接虚拟与现实，重塑城市记忆。<br>
+                    上海首个AR集换式卡片文旅联动平台。
+                </p>
             </div>
-            <div style="background: var(--card-bg); padding: 1.5rem; border-radius: 15px;">
-                <h3><i class="fas fa-scroll"></i> 当前任务：陆家嘴幻影碎片收集</h3>
-                <p style="margin-top: 0.5rem; color: #aaa;">进度：2/5 碎片 | 剩余时间：12:30:00</p>
-                <div style="width: 100%; height: 10px; background: #333; border-radius: 5px; margin-top: 1rem; overflow: hidden;">
-                    <div style="width: 40%; height: 100%; background: var(--primary);"></div>
-                </div>
+            <div class="footer-col">
+                <h4>关于项目</h4>
+                <ul>
+                    <li><a href="#">项目介绍</a></li>
+                    <li><a href="#">合作伙伴</a></li>
+                    <li><a href="#">加入我们</a></li>
+                </ul>
             </div>
-        </div>
-
-        <!-- 成就系统 -->
-        <div id="achievements" class="section">
-            <h2 style="margin-bottom: 2rem; color: var(--primary);">成就勋章</h2>
-            <div class="achievements-grid">
-                <div class="achievement-card unlocked">
-                    <i class="fas fa-building achievement-icon"></i>
-                    <div>
-                        <h3>海派建筑师</h3>
-                        <p>收集齐所有外滩万国建筑群卡片</p>
-                        <small style="color: var(--primary);">已解锁 - 奖励：限定徽章</small>
-                    </div>
-                </div>
-                <div class="achievement-card unlocked">
-                    <i class="fas fa-walking achievement-icon"></i>
-                    <div>
-                        <h3>弄堂达人</h3>
-                        <p>完成5个老弄堂实地打卡任务</p>
-                        <small style="color: var(--primary);">已解锁 - 奖励：Manner咖啡兑换券</small>
-                    </div>
-                </div>
-                <div class="achievement-card">
-                    <i class="fas fa-crown achievement-icon"></i>
-                    <div>
-                        <h3>魔都守护者</h3>
-                        <p>集齐所有SSR等级卡片</p>
-                        <small>未解锁</small>
-                    </div>
+            <div class="footer-col">
+                <h4>卡片与玩法</h4>
+                <ul>
+                    <li><a href="#">卡片图鉴</a></li>
+                    <li><a href="#">任务指南</a></li>
+                    <li><a href="#">兑换规则</a></li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h4>关注我们</h4>
+                <div style="display: flex; gap: 1rem; font-size: 1.5rem; opacity: 0.8;">
+                    <i class="fab fa-weixin"></i>
+                    <i class="fab fa-weibo"></i>
+                    <i class="fab fa-instagram"></i>
                 </div>
             </div>
         </div>
-
-        <!-- 快递查询 -->
-        <div id="express" class="section">
-            <h2 style="margin-bottom: 2rem; color: var(--primary);">周边/卡片物流查询</h2>
-            <div class="express-tracker">
-                <div class="search-box">
-                    <input type="text" class="search-input" placeholder="请输入订单号或快递单号" id="trackingInput" value="SH2026AR8888">
-                    <button class="login-btn" onclick="trackOrder()">查询</button>
-                </div>
-                <div id="trackingResult" class="tracking-result" style="display: none;">
-                    <div class="timeline-item">
-                        <div class="timeline-date">2026-01-27 14:30</div>
-                        <div>【上海市】快件已送达，签收人：前台</div>
-                    </div>
-                    <div class="timeline-item">
-                        <div class="timeline-date">2026-01-27 09:15</div>
-                        <div>【上海市】上海静安区公司派件员正在派件</div>
-                    </div>
-                    <div class="timeline-item">
-                        <div class="timeline-date">2026-01-26 22:40</div>
-                        <div>【上海市】快件已到达上海转运中心</div>
-                    </div>
-                </div>
-            </div>
+        <div style="text-align: center; margin-top: 3rem; opacity: 0.5; font-size: 0.8rem; border-top: 1px solid #333; padding-top: 2rem;">
+            © 2026 Shanghai Phantom AR Project. All rights reserved.
         </div>
-    </main>
+    </footer>
 
-    <!-- 登录弹窗 -->
-    <div class="modal" id="loginModal">
+    <!-- 登录模态框 -->
+    <div class="modal-overlay" id="loginModal">
         <div class="modal-content">
-            <span class="close-modal" onclick="toggleLogin()">&times;</span>
-            <h2 style="color: var(--primary); margin-bottom: 2rem;">通行证登录</h2>
-            <div class="form-group">
-                <label>用户名 / 手机号</label>
-                <input type="text" class="form-input" placeholder="admin">
+            <button class="close-btn" onclick="closeModal('loginModal')">&times;</button>
+            <h2 style="margin-bottom: 1.5rem;">欢迎回来</h2>
+            <div style="margin-bottom: 1rem;">
+                <label style="display: block; margin-bottom: 0.5rem; font-weight: 600;">手机号码</label>
+                <input type="text" placeholder="请输入手机号" style="width: 100%; padding: 0.8rem; border: 1px solid #ddd; border-radius: 8px;">
             </div>
-            <div class="form-group">
-                <label>密码</label>
-                <input type="password" class="form-input" placeholder="******">
+            <div style="margin-bottom: 2rem;">
+                <label style="display: block; margin-bottom: 0.5rem; font-weight: 600;">验证码</label>
+                <input type="text" placeholder="请输入验证码" style="width: 100%; padding: 0.8rem; border: 1px solid #ddd; border-radius: 8px;">
             </div>
-            <button class="login-btn" style="width: 100%;" onclick="performLogin()">登录</button>
-            <p style="margin-top: 1rem; font-size: 0.9rem; color: #666;">还没有账号？<a href="#" style="color: var(--primary);">立即注册</a></p>
+            <button style="width: 100%; padding: 1rem; background: var(--secondary); color: white; border: none; border-radius: 8px; font-weight: 700; cursor: pointer;">登 录</button>
+        </div>
+    </div>
+
+    <!-- 快递查询模态框 -->
+    <div class="modal-overlay" id="expressModal">
+        <div class="modal-content">
+            <button class="close-btn" onclick="closeModal('expressModal')">&times;</button>
+            <h2 style="margin-bottom: 1.5rem;">物流查询</h2>
+            <div style="display: flex; gap: 10px;">
+                <input type="text" value="SH2026AR8888" style="flex: 1; padding: 0.8rem; border: 1px solid #ddd; border-radius: 8px;">
+                <button style="padding: 0.8rem 1.5rem; background: var(--secondary); color: white; border: none; border-radius: 8px; cursor: pointer;">查询</button>
+            </div>
+            
+            <div class="express-timeline">
+                <div class="timeline-item">
+                    <div style="font-weight: 700; font-size: 0.9rem;">已签收</div>
+                    <div style="color: #666; font-size: 0.8rem; margin-top: 0.3rem;">2026-01-27 14:30:00</div>
+                    <div style="color: #666; font-size: 0.9rem; margin-top: 0.5rem;">【上海市】您的快件已由前台代收</div>
+                </div>
+                <div class="timeline-item">
+                    <div style="font-weight: 700; font-size: 0.9rem;">派送中</div>
+                    <div style="color: #666; font-size: 0.8rem; margin-top: 0.3rem;">2026-01-27 09:15:00</div>
+                    <div style="color: #666; font-size: 0.9rem; margin-top: 0.5rem;">【上海市】派件员正在为您派件</div>
+                </div>
+            </div>
         </div>
     </div>
 
     <script>
-        // 模拟数据
-        const cards = [
-            { id: 1, title: '旧上海跑马厅', rarity: 'SSR', image: 'https://images.unsplash.com/photo-1599818816962-d49926c4f346?ixlib=rb-1.2.1&auto=format&fit=crop&w=600&q=80', description: '消失的历史建筑，重现1930年代风貌' },
-            { id: 2, title: '夜晚霓虹版外滩', rarity: 'SSR', image: 'https://images.unsplash.com/photo-1538428494232-9c0d8d3a50f0?ixlib=rb-1.2.1&auto=format&fit=crop&w=600&q=80', description: '特定时段限定，流光溢彩的魔都不夜城' },
-            { id: 3, title: '东方明珠', rarity: 'SR', image: 'https://images.unsplash.com/photo-1505991754020-7212b4859bb4?ixlib=rb-1.2.1&auto=format&fit=crop&w=600&q=80', description: '上海标志性建筑，见证浦东崛起' },
-            { id: 4, title: '陆家嘴三件套', rarity: 'SR', image: 'https://images.unsplash.com/photo-1474181487882-5abf3f0ba6c2?ixlib=rb-1.2.1&auto=format&fit=crop&w=600&q=80', description: '上海中心、环球金融中心、金茂大厦' },
-            { id: 5, title: '豫园', rarity: 'R', image: 'https://images.unsplash.com/photo-1582457882898-d892d5295c58?ixlib=rb-1.2.1&auto=format&fit=crop&w=600&q=80', description: '明代私家园林，江南古典园林典范' },
-            { id: 6, title: '田子坊', rarity: 'R', image: 'https://images.unsplash.com/photo-1622384917904-87893c5c9604?ixlib=rb-1.2.1&auto=format&fit=crop&w=600&q=80', description: '石库门弄堂里的艺术与生活' },
-            { id: 7, title: '武康大楼', rarity: 'N', image: 'https://images.unsplash.com/photo-1548624313-0396c75e4b1a?ixlib=rb-1.2.1&auto=format&fit=crop&w=600&q=80', description: '著名建筑设计师邬达克代表作' },
-            { id: 8, title: '静安寺', rarity: 'N', image: 'https://images.unsplash.com/photo-1643666504281-9b1695278c2e?ixlib=rb-1.2.1&auto=format&fit=crop&w=600&q=80', description: '繁华闹市中的千年古刹' }
-        ];
-
-        let isLoggedIn = false;
-
-        // 初始化
-        window.onload = () => {
-            renderCards(cards);
-        };
-
-        // 渲染卡片
-        function renderCards(data) {
-            const grid = document.getElementById('cardGrid');
-            grid.innerHTML = data.map(card => `
-                <div class="ar-card ${card.rarity.toLowerCase()}" data-rarity="${card.rarity}">
-                    <div class="card-img">
-                        <img src="${card.image}" alt="${card.title}">
-                        <span class="rarity-badge rarity-${card.rarity}">${card.rarity}</span>
-                    </div>
-                    <div class="card-info">
-                        <h3 class="card-title">${card.title}</h3>
-                        <p style="font-size: 0.9rem; color: #aaa; margin-bottom: 1rem;">${card.description}</p>
-                        <button class="scan-btn" onclick="startAR('${card.title}')">
-                            <i class="fas fa-cube"></i> 查看AR模型
-                        </button>
-                    </div>
-                </div>
-            `).join('');
-        }
-
-        // 筛选功能
-        function filterCards(rarity) {
-            // 更新按钮状态
-            document.querySelectorAll('.filter-btn').forEach(btn => btn.classList.remove('active'));
-            event.target.classList.add('active');
-
-            if (rarity === 'all') {
-                renderCards(cards);
+        // 导航栏滚动效果
+        window.addEventListener('scroll', () => {
+            const nav = document.getElementById('navbar');
+            if (window.scrollY > 50) {
+                nav.classList.add('scrolled');
             } else {
-                const filtered = cards.filter(card => card.rarity === rarity);
-                renderCards(filtered);
+                nav.classList.remove('scrolled');
+            }
+        });
+
+        // 平滑滚动
+        function scrollToSection(id) {
+            const element = document.getElementById(id);
+            if (element) {
+                element.scrollIntoView({ behavior: 'smooth' });
             }
         }
 
-        // 切换标签页
-        function switchTab(tabId) {
-            // 隐藏所有部分
-            document.querySelectorAll('.section').forEach(sec => sec.classList.remove('active'));
-            // 显示目标部分
-            document.getElementById(tabId).classList.add('active');
-            
-            // 更新导航栏状态
-            document.querySelectorAll('.nav-item').forEach(item => item.classList.remove('active'));
-            // 简单匹配，实际项目中可以用更好方式
-            const indexMap = { 'home': 0, 'collection': 1, 'map': 2, 'achievements': 3, 'express': 4 };
-            if (indexMap[tabId] !== undefined) {
-                document.querySelectorAll('.nav-item')[indexMap[tabId]].classList.add('active');
-            }
+        // 模态框控制
+        function openModal(id) {
+            document.getElementById(id).style.display = 'flex';
         }
 
-        // 登录模态框控制
-        function toggleLogin() {
-            const modal = document.getElementById('loginModal');
-            modal.style.display = modal.style.display === 'flex' ? 'none' : 'flex';
+        function closeModal(id) {
+            document.getElementById(id).style.display = 'none';
         }
 
-        function performLogin() {
-            isLoggedIn = true;
-            document.getElementById('authBtn').textContent = 'User_001';
-            toggleLogin();
-            alert('登录成功！欢迎回到申城幻影。');
-        }
-
-        // 模拟AR启动
-        function startAR(title) {
-            alert(`正在加载 [${title}] 的AR模型...\n\n请将摄像头对准实体卡片，或将手机指向平坦表面。`);
-        }
-
-        // 快递查询
-        function trackOrder() {
-            const input = document.getElementById('trackingInput').value;
-            if (!input) {
-                alert('请输入单号');
-                return;
-            }
-            
-            // 模拟查询过程
-            const btn = event.target;
-            const originalText = btn.textContent;
-            btn.textContent = '查询中...';
-            btn.disabled = true;
-
-            setTimeout(() => {
-                document.getElementById('trackingResult').style.display = 'block';
-                btn.textContent = originalText;
-                btn.disabled = false;
-            }, 1000);
-        }
-
-        // 关闭模态框点击外部
+        // 点击遮罩关闭
         window.onclick = function(event) {
-            const modal = document.getElementById('loginModal');
-            if (event.target == modal) {
-                modal.style.display = "none";
+            if (event.target.classList.contains('modal-overlay')) {
+                event.target.style.display = 'none';
             }
         }
     </script>
