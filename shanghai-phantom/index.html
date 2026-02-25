@@ -1,0 +1,684 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>申城幻影 - AR集换式卡片文旅联动平台</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #ffd700;
+            --secondary: #1a1a2e;
+            --accent: #e94560;
+            --text: #f0f0f0;
+            --card-bg: rgba(255, 255, 255, 0.05);
+            --ssr-glow: 0 0 15px #ffd700;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'PingFang SC', 'Microsoft YaHei', sans-serif;
+            background-color: var(--secondary);
+            color: var(--text);
+            line-height: 1.6;
+        }
+
+        /* 导航栏 */
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: rgba(26, 26, 46, 0.95);
+            backdrop-filter: blur(10px);
+            z-index: 1000;
+            border-bottom: 1px solid rgba(255, 215, 0, 0.2);
+            padding: 1rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: var(--primary);
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+        }
+
+        .nav-item {
+            cursor: pointer;
+            color: var(--text);
+            text-decoration: none;
+            transition: color 0.3s;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .nav-item:hover, .nav-item.active {
+            color: var(--primary);
+        }
+
+        .login-btn {
+            background: var(--primary);
+            color: var(--secondary);
+            padding: 0.5rem 1.5rem;
+            border-radius: 20px;
+            font-weight: bold;
+            border: none;
+            cursor: pointer;
+            transition: transform 0.2s;
+        }
+
+        .login-btn:hover {
+            transform: scale(1.05);
+        }
+
+        /* 主内容区域 */
+        main {
+            margin-top: 80px;
+            padding: 2rem;
+            min-height: calc(100vh - 80px);
+        }
+
+        .section {
+            display: none;
+            animation: fadeIn 0.5s ease;
+        }
+
+        .section.active {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* 首页 Hero */
+        .hero {
+            text-align: center;
+            padding: 4rem 0;
+            background: linear-gradient(rgba(26, 26, 46, 0.8), rgba(26, 26, 46, 0.8)), url('https://images.unsplash.com/photo-1548919973-5cef591cdbc9?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80');
+            background-size: cover;
+            border-radius: 20px;
+            margin-bottom: 2rem;
+            border: 1px solid rgba(255, 215, 0, 0.3);
+        }
+
+        .hero h1 {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            color: var(--primary);
+            text-shadow: 0 0 20px rgba(255, 215, 0, 0.5);
+        }
+
+        /* 卡片收藏夹 */
+        .filters {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 2rem;
+            justify-content: center;
+        }
+
+        .filter-btn {
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            color: var(--text);
+            padding: 0.5rem 1.5rem;
+            border-radius: 20px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .filter-btn.active, .filter-btn:hover {
+            background: var(--primary);
+            color: var(--secondary);
+            border-color: var(--primary);
+        }
+
+        .card-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 2rem;
+        }
+
+        .ar-card {
+            background: var(--card-bg);
+            border-radius: 15px;
+            overflow: hidden;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            transition: transform 0.3s, box-shadow 0.3s;
+            position: relative;
+        }
+
+        .ar-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+        }
+
+        .ar-card.ssr {
+            border: 1px solid var(--primary);
+            box-shadow: var(--ssr-glow);
+        }
+
+        .card-img {
+            width: 100%;
+            height: 350px;
+            background-color: #333;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .card-img img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .rarity-badge {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            padding: 0.2rem 0.8rem;
+            border-radius: 4px;
+            font-weight: bold;
+            font-size: 0.8rem;
+            background: rgba(0,0,0,0.7);
+        }
+
+        .rarity-SSR { color: #ffd700; border: 1px solid #ffd700; }
+        .rarity-SR { color: #c0c0c0; border: 1px solid #c0c0c0; }
+        .rarity-R { color: #cd7f32; border: 1px solid #cd7f32; }
+        .rarity-N { color: #fff; border: 1px solid #fff; }
+
+        .card-info {
+            padding: 1.5rem;
+        }
+
+        .card-title {
+            font-size: 1.2rem;
+            margin-bottom: 0.5rem;
+            color: var(--primary);
+        }
+
+        .scan-btn {
+            width: 100%;
+            padding: 0.8rem;
+            background: transparent;
+            border: 1px solid var(--primary);
+            color: var(--primary);
+            border-radius: 8px;
+            margin-top: 1rem;
+            cursor: pointer;
+            transition: background 0.3s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+        }
+
+        .scan-btn:hover {
+            background: rgba(255, 215, 0, 0.1);
+        }
+
+        /* 导航地图 */
+        .map-container {
+            width: 100%;
+            height: 500px;
+            background: #2a2a40;
+            border-radius: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #666;
+            margin-bottom: 2rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .map-marker {
+            position: absolute;
+            font-size: 2rem;
+            color: var(--primary);
+            cursor: pointer;
+            animation: bounce 2s infinite;
+        }
+
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+
+        /* 成就系统 */
+        .achievements-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .achievement-card {
+            background: var(--card-bg);
+            padding: 2rem;
+            border-radius: 15px;
+            display: flex;
+            align-items: center;
+            gap: 1.5rem;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .achievement-icon {
+            font-size: 3rem;
+            color: #666;
+        }
+
+        .achievement-card.unlocked .achievement-icon {
+            color: var(--primary);
+            text-shadow: 0 0 10px rgba(255, 215, 0, 0.5);
+        }
+
+        .achievement-card.unlocked {
+            border-color: var(--primary);
+            background: rgba(255, 215, 0, 0.05);
+        }
+
+        /* 快递查询 */
+        .express-tracker {
+            max-width: 600px;
+            margin: 0 auto;
+            background: var(--card-bg);
+            padding: 2rem;
+            border-radius: 15px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .search-box {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 2rem;
+        }
+
+        .search-input {
+            flex: 1;
+            padding: 1rem;
+            background: rgba(0, 0, 0, 0.3);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            color: var(--text);
+            border-radius: 8px;
+        }
+
+        .tracking-result {
+            margin-top: 1rem;
+            border-left: 2px solid var(--primary);
+            padding-left: 2rem;
+            position: relative;
+        }
+
+        .timeline-item {
+            margin-bottom: 1.5rem;
+            position: relative;
+        }
+
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            left: -2.4rem;
+            top: 5px;
+            width: 12px;
+            height: 12px;
+            background: var(--secondary);
+            border: 2px solid var(--primary);
+            border-radius: 50%;
+        }
+
+        .timeline-date {
+            font-size: 0.8rem;
+            color: #888;
+            margin-bottom: 0.3rem;
+        }
+
+        /* 登录模态框 */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.8);
+            z-index: 2000;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .modal-content {
+            background: var(--secondary);
+            padding: 3rem;
+            border-radius: 20px;
+            border: 1px solid var(--primary);
+            width: 400px;
+            text-align: center;
+            position: relative;
+        }
+
+        .close-modal {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            cursor: pointer;
+            color: #666;
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+            text-align: left;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            color: var(--primary);
+        }
+
+        .form-input {
+            width: 100%;
+            padding: 0.8rem;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            color: white;
+            border-radius: 8px;
+        }
+
+        /* 响应式 */
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none; /* 移动端简化 */
+            }
+            .hero h1 {
+                font-size: 2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <nav>
+        <div class="logo"><i class="fas fa-vr-cardboard"></i> 申城幻影</div>
+        <div class="nav-links">
+            <div class="nav-item active" onclick="switchTab('home')"><i class="fas fa-home"></i> 首页</div>
+            <div class="nav-item" onclick="switchTab('collection')"><i class="fas fa-layer-group"></i> 我的卡包</div>
+            <div class="nav-item" onclick="switchTab('map')"><i class="fas fa-map-marked-alt"></i> AR导航</div>
+            <div class="nav-item" onclick="switchTab('achievements')"><i class="fas fa-medal"></i> 成就</div>
+            <div class="nav-item" onclick="switchTab('express')"><i class="fas fa-box-open"></i> 快递查询</div>
+        </div>
+        <button class="login-btn" onclick="toggleLogin()" id="authBtn">登录 / 注册</button>
+    </nav>
+
+    <main>
+        <!-- 首页 -->
+        <div id="home" class="section active">
+            <div class="hero">
+                <h1>探索 · 收集 · 传承</h1>
+                <p>上海首个AR集换式卡片文旅联动平台</p>
+                <div style="margin-top: 2rem;">
+                    <button class="login-btn" onclick="switchTab('collection')">开始探索</button>
+                </div>
+            </div>
+            
+            <div style="display: flex; gap: 2rem; margin-top: 3rem;">
+                <div style="flex: 1; padding: 2rem; background: var(--card-bg); border-radius: 15px; border: 1px solid rgba(255,215,0,0.1);">
+                    <h3 style="color: var(--primary); margin-bottom: 1rem;"><i class="fas fa-cube"></i> AR实景交互</h3>
+                    <p>扫描实体卡片，唤醒1:1还原的3D建筑模型，聆听建筑背后的历史故事。</p>
+                </div>
+                <div style="flex: 1; padding: 2rem; background: var(--card-bg); border-radius: 15px; border: 1px solid rgba(255,215,0,0.1);">
+                    <h3 style="color: var(--primary); margin-bottom: 1rem;"><i class="fas fa-map-marker-alt"></i> 实地打卡</h3>
+                    <p>跟随任务指引前往上海地标，完成时空打卡任务，解锁限定虚拟碎片。</p>
+                </div>
+                <div style="flex: 1; padding: 2rem; background: var(--card-bg); border-radius: 15px; border: 1px solid rgba(255,215,0,0.1);">
+                    <h3 style="color: var(--primary); margin-bottom: 1rem;"><i class="fas fa-gift"></i> 专属权益</h3>
+                    <p>集齐特定系列卡片，兑换限量周边、景区门票折扣及VIP快速通道特权。</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- 收藏夹 -->
+        <div id="collection" class="section">
+            <h2 style="margin-bottom: 2rem; color: var(--primary);">我的卡片收藏</h2>
+            
+            <div class="filters">
+                <button class="filter-btn active" onclick="filterCards('all')">全部</button>
+                <button class="filter-btn" onclick="filterCards('SSR')">SSR 极稀有</button>
+                <button class="filter-btn" onclick="filterCards('SR')">SR 稀有</button>
+                <button class="filter-btn" onclick="filterCards('R')">R 精美</button>
+                <button class="filter-btn" onclick="filterCards('N')">N 普通</button>
+            </div>
+
+            <div class="card-grid" id="cardGrid">
+                <!-- 卡片将通过JS生成 -->
+            </div>
+        </div>
+
+        <!-- AR导航 -->
+        <div id="map" class="section">
+            <h2 style="margin-bottom: 2rem; color: var(--primary);">AR实景导航 & 任务点</h2>
+            <div class="map-container">
+                <div style="width: 100%; height: 100%; background: url('https://upload.wikimedia.org/wikipedia/commons/thumb/2/23/Shanghai_map_bilingual.svg/1200px-Shanghai_map_bilingual.svg.png') center/cover; opacity: 0.5;"></div>
+                <!-- 模拟地图标记 -->
+                <div class="map-marker" style="top: 30%; left: 45%;" title="外滩"><i class="fas fa-map-pin"></i></div>
+                <div class="map-marker" style="top: 35%; left: 55%; color: #e94560;" title="陆家嘴 (任务进行中)"><i class="fas fa-running"></i></div>
+                <div class="map-marker" style="top: 50%; left: 40%;" title="武康大楼"><i class="fas fa-map-pin"></i></div>
+            </div>
+            <div style="background: var(--card-bg); padding: 1.5rem; border-radius: 15px;">
+                <h3><i class="fas fa-scroll"></i> 当前任务：陆家嘴幻影碎片收集</h3>
+                <p style="margin-top: 0.5rem; color: #aaa;">进度：2/5 碎片 | 剩余时间：12:30:00</p>
+                <div style="width: 100%; height: 10px; background: #333; border-radius: 5px; margin-top: 1rem; overflow: hidden;">
+                    <div style="width: 40%; height: 100%; background: var(--primary);"></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 成就系统 -->
+        <div id="achievements" class="section">
+            <h2 style="margin-bottom: 2rem; color: var(--primary);">成就勋章</h2>
+            <div class="achievements-grid">
+                <div class="achievement-card unlocked">
+                    <i class="fas fa-building achievement-icon"></i>
+                    <div>
+                        <h3>海派建筑师</h3>
+                        <p>收集齐所有外滩万国建筑群卡片</p>
+                        <small style="color: var(--primary);">已解锁 - 奖励：限定徽章</small>
+                    </div>
+                </div>
+                <div class="achievement-card unlocked">
+                    <i class="fas fa-walking achievement-icon"></i>
+                    <div>
+                        <h3>弄堂达人</h3>
+                        <p>完成5个老弄堂实地打卡任务</p>
+                        <small style="color: var(--primary);">已解锁 - 奖励：Manner咖啡兑换券</small>
+                    </div>
+                </div>
+                <div class="achievement-card">
+                    <i class="fas fa-crown achievement-icon"></i>
+                    <div>
+                        <h3>魔都守护者</h3>
+                        <p>集齐所有SSR等级卡片</p>
+                        <small>未解锁</small>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 快递查询 -->
+        <div id="express" class="section">
+            <h2 style="margin-bottom: 2rem; color: var(--primary);">周边/卡片物流查询</h2>
+            <div class="express-tracker">
+                <div class="search-box">
+                    <input type="text" class="search-input" placeholder="请输入订单号或快递单号" id="trackingInput" value="SH2026AR8888">
+                    <button class="login-btn" onclick="trackOrder()">查询</button>
+                </div>
+                <div id="trackingResult" class="tracking-result" style="display: none;">
+                    <div class="timeline-item">
+                        <div class="timeline-date">2026-01-27 14:30</div>
+                        <div>【上海市】快件已送达，签收人：前台</div>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="timeline-date">2026-01-27 09:15</div>
+                        <div>【上海市】上海静安区公司派件员正在派件</div>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="timeline-date">2026-01-26 22:40</div>
+                        <div>【上海市】快件已到达上海转运中心</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- 登录弹窗 -->
+    <div class="modal" id="loginModal">
+        <div class="modal-content">
+            <span class="close-modal" onclick="toggleLogin()">&times;</span>
+            <h2 style="color: var(--primary); margin-bottom: 2rem;">通行证登录</h2>
+            <div class="form-group">
+                <label>用户名 / 手机号</label>
+                <input type="text" class="form-input" placeholder="admin">
+            </div>
+            <div class="form-group">
+                <label>密码</label>
+                <input type="password" class="form-input" placeholder="******">
+            </div>
+            <button class="login-btn" style="width: 100%;" onclick="performLogin()">登录</button>
+            <p style="margin-top: 1rem; font-size: 0.9rem; color: #666;">还没有账号？<a href="#" style="color: var(--primary);">立即注册</a></p>
+        </div>
+    </div>
+
+    <script>
+        // 模拟数据
+        const cards = [
+            { id: 1, title: '旧上海跑马厅', rarity: 'SSR', image: 'https://images.unsplash.com/photo-1599818816962-d49926c4f346?ixlib=rb-1.2.1&auto=format&fit=crop&w=600&q=80', description: '消失的历史建筑，重现1930年代风貌' },
+            { id: 2, title: '夜晚霓虹版外滩', rarity: 'SSR', image: 'https://images.unsplash.com/photo-1538428494232-9c0d8d3a50f0?ixlib=rb-1.2.1&auto=format&fit=crop&w=600&q=80', description: '特定时段限定，流光溢彩的魔都不夜城' },
+            { id: 3, title: '东方明珠', rarity: 'SR', image: 'https://images.unsplash.com/photo-1505991754020-7212b4859bb4?ixlib=rb-1.2.1&auto=format&fit=crop&w=600&q=80', description: '上海标志性建筑，见证浦东崛起' },
+            { id: 4, title: '陆家嘴三件套', rarity: 'SR', image: 'https://images.unsplash.com/photo-1474181487882-5abf3f0ba6c2?ixlib=rb-1.2.1&auto=format&fit=crop&w=600&q=80', description: '上海中心、环球金融中心、金茂大厦' },
+            { id: 5, title: '豫园', rarity: 'R', image: 'https://images.unsplash.com/photo-1582457882898-d892d5295c58?ixlib=rb-1.2.1&auto=format&fit=crop&w=600&q=80', description: '明代私家园林，江南古典园林典范' },
+            { id: 6, title: '田子坊', rarity: 'R', image: 'https://images.unsplash.com/photo-1622384917904-87893c5c9604?ixlib=rb-1.2.1&auto=format&fit=crop&w=600&q=80', description: '石库门弄堂里的艺术与生活' },
+            { id: 7, title: '武康大楼', rarity: 'N', image: 'https://images.unsplash.com/photo-1548624313-0396c75e4b1a?ixlib=rb-1.2.1&auto=format&fit=crop&w=600&q=80', description: '著名建筑设计师邬达克代表作' },
+            { id: 8, title: '静安寺', rarity: 'N', image: 'https://images.unsplash.com/photo-1643666504281-9b1695278c2e?ixlib=rb-1.2.1&auto=format&fit=crop&w=600&q=80', description: '繁华闹市中的千年古刹' }
+        ];
+
+        let isLoggedIn = false;
+
+        // 初始化
+        window.onload = () => {
+            renderCards(cards);
+        };
+
+        // 渲染卡片
+        function renderCards(data) {
+            const grid = document.getElementById('cardGrid');
+            grid.innerHTML = data.map(card => `
+                <div class="ar-card ${card.rarity.toLowerCase()}" data-rarity="${card.rarity}">
+                    <div class="card-img">
+                        <img src="${card.image}" alt="${card.title}">
+                        <span class="rarity-badge rarity-${card.rarity}">${card.rarity}</span>
+                    </div>
+                    <div class="card-info">
+                        <h3 class="card-title">${card.title}</h3>
+                        <p style="font-size: 0.9rem; color: #aaa; margin-bottom: 1rem;">${card.description}</p>
+                        <button class="scan-btn" onclick="startAR('${card.title}')">
+                            <i class="fas fa-cube"></i> 查看AR模型
+                        </button>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        // 筛选功能
+        function filterCards(rarity) {
+            // 更新按钮状态
+            document.querySelectorAll('.filter-btn').forEach(btn => btn.classList.remove('active'));
+            event.target.classList.add('active');
+
+            if (rarity === 'all') {
+                renderCards(cards);
+            } else {
+                const filtered = cards.filter(card => card.rarity === rarity);
+                renderCards(filtered);
+            }
+        }
+
+        // 切换标签页
+        function switchTab(tabId) {
+            // 隐藏所有部分
+            document.querySelectorAll('.section').forEach(sec => sec.classList.remove('active'));
+            // 显示目标部分
+            document.getElementById(tabId).classList.add('active');
+            
+            // 更新导航栏状态
+            document.querySelectorAll('.nav-item').forEach(item => item.classList.remove('active'));
+            // 简单匹配，实际项目中可以用更好方式
+            const indexMap = { 'home': 0, 'collection': 1, 'map': 2, 'achievements': 3, 'express': 4 };
+            if (indexMap[tabId] !== undefined) {
+                document.querySelectorAll('.nav-item')[indexMap[tabId]].classList.add('active');
+            }
+        }
+
+        // 登录模态框控制
+        function toggleLogin() {
+            const modal = document.getElementById('loginModal');
+            modal.style.display = modal.style.display === 'flex' ? 'none' : 'flex';
+        }
+
+        function performLogin() {
+            isLoggedIn = true;
+            document.getElementById('authBtn').textContent = 'User_001';
+            toggleLogin();
+            alert('登录成功！欢迎回到申城幻影。');
+        }
+
+        // 模拟AR启动
+        function startAR(title) {
+            alert(`正在加载 [${title}] 的AR模型...\n\n请将摄像头对准实体卡片，或将手机指向平坦表面。`);
+        }
+
+        // 快递查询
+        function trackOrder() {
+            const input = document.getElementById('trackingInput').value;
+            if (!input) {
+                alert('请输入单号');
+                return;
+            }
+            
+            // 模拟查询过程
+            const btn = event.target;
+            const originalText = btn.textContent;
+            btn.textContent = '查询中...';
+            btn.disabled = true;
+
+            setTimeout(() => {
+                document.getElementById('trackingResult').style.display = 'block';
+                btn.textContent = originalText;
+                btn.disabled = false;
+            }, 1000);
+        }
+
+        // 关闭模态框点击外部
+        window.onclick = function(event) {
+            const modal = document.getElementById('loginModal');
+            if (event.target == modal) {
+                modal.style.display = "none";
+            }
+        }
+    </script>
+</body>
+</html>
