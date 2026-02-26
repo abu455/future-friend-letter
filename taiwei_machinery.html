@@ -12,6 +12,7 @@
             --text-grey: #cccccc;
             --glass-border: rgba(255, 255, 255, 0.2);
             --glass-bg: rgba(0, 0, 0, 0.3);
+            --card-bg: #141414;
         }
 
         * {
@@ -185,6 +186,25 @@
             background-color: #ff1a1a;
         }
 
+        /* Banner Section */
+        .banner {
+            background-color: var(--primary-red);
+            color: white;
+            padding: 60px 50px;
+            text-align: center;
+        }
+        
+        .banner h2 {
+            font-size: 36px;
+            margin-bottom: 15px;
+            text-transform: uppercase;
+        }
+        
+        .banner p {
+            font-size: 18px;
+            opacity: 0.9;
+        }
+
         /* Features Section */
         .features {
             padding: 100px 50px;
@@ -245,23 +265,326 @@
             display: block;
         }
 
-        /* Banner Section */
-        .banner {
-            background-color: var(--primary-red);
+        /* Manufacturing Services Section */
+        .services-section {
+            padding: 80px 50px;
+            background-color: #f5f5f5;
+            color: #111;
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 60px;
+        }
+
+        .section-header h2 {
+            font-size: 42px;
+            font-weight: 800;
+            text-transform: uppercase;
+            margin-bottom: 15px;
+            color: #111;
+        }
+
+        .service-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 40px;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .service-item {
+            display: flex;
+            background: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+            transition: transform 0.3s;
+        }
+
+        .service-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 40px rgba(230, 0, 18, 0.1);
+        }
+
+        .service-content {
+            padding: 40px;
+            flex: 1;
+        }
+
+        .service-num {
+            font-size: 48px;
+            font-weight: 800;
+            color: #eee;
+            margin-bottom: 10px;
+            line-height: 1;
+        }
+
+        .service-title {
+            font-size: 24px;
+            font-weight: 700;
+            margin-bottom: 15px;
+            color: #111;
+        }
+
+        .service-desc {
+            color: #666;
+            font-size: 14px;
+            line-height: 1.6;
+            margin-bottom: 25px;
+        }
+
+        .service-btn {
+            color: var(--primary-red);
+            text-decoration: none;
+            font-weight: 700;
+            font-size: 14px;
+            text-transform: uppercase;
+            display: inline-flex;
+            align-items: center;
+        }
+
+        .service-btn::after {
+            content: '→';
+            margin-left: 5px;
+            transition: transform 0.3s;
+        }
+
+        .service-btn:hover::after {
+            transform: translateX(5px);
+        }
+
+        .service-img {
+            width: 40%;
+            background-size: cover;
+            background-position: center;
+        }
+
+        /* Ready to Start Section */
+        .cta-section {
+            position: relative;
+            padding: 100px 50px;
+            background: url('https://images.unsplash.com/photo-1504917595217-d4dc5ebe6122?ixlib=rb-1.2.1&auto=format&fit=crop&w=1950&q=80') center/cover;
             color: white;
-            padding: 60px 50px;
+        }
+
+        .cta-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.7);
+        }
+
+        .cta-container {
+            position: relative;
+            z-index: 1;
+            display: flex;
+            justify-content: space-between;
+            max-width: 1200px;
+            margin: 0 auto;
+            align-items: center;
+        }
+
+        .cta-text {
+            max-width: 500px;
+        }
+
+        .cta-text h2 {
+            font-size: 48px;
+            margin-bottom: 20px;
+            line-height: 1.1;
+        }
+        
+        .cta-text p {
+            font-size: 16px;
+            color: #ccc;
+            margin-bottom: 30px;
+        }
+
+        .cta-form {
+            background: rgba(255,255,255,0.1);
+            backdrop-filter: blur(10px);
+            padding: 40px;
+            border-radius: 10px;
+            width: 450px;
+            border: 1px solid rgba(255,255,255,0.2);
+        }
+
+        .cta-form h3 {
+            margin-bottom: 20px;
+            font-size: 24px;
+        }
+
+        .form-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+            margin-bottom: 15px;
+        }
+
+        .form-input {
+            width: 100%;
+            padding: 12px;
+            background: rgba(0,0,0,0.3);
+            border: 1px solid rgba(255,255,255,0.2);
+            color: white;
+            border-radius: 5px;
+            outline: none;
+        }
+        
+        .form-input:focus {
+            border-color: var(--primary-red);
+        }
+
+        .form-submit {
+            width: 100%;
+            padding: 15px;
+            background: white;
+            color: black;
+            border: none;
+            border-radius: 5px;
+            font-weight: 700;
+            cursor: pointer;
+            text-transform: uppercase;
+            transition: background 0.3s;
+        }
+
+        .form-submit:hover {
+            background: var(--primary-red);
+            color: white;
+        }
+
+        /* Industries We Serve */
+        .industries {
+            padding: 100px 50px;
+            background-color: var(--dark-black);
             text-align: center;
         }
         
-        .banner h2 {
-            font-size: 36px;
-            margin-bottom: 15px;
-            text-transform: uppercase;
+        .industries h2 {
+            font-size: 42px;
+            margin-bottom: 60px;
+        }
+
+        .industries h2 span {
+            color: var(--primary-red);
+        }
+
+        .industry-grid {
+            display: flex;
+            gap: 20px;
+            overflow-x: auto;
+            padding-bottom: 20px;
+            max-width: 1400px;
+            margin: 0 auto;
         }
         
-        .banner p {
+        /* Hide scrollbar */
+        .industry-grid::-webkit-scrollbar {
+            display: none;
+        }
+
+        .industry-card {
+            min-width: 250px;
+            height: 350px;
+            border-radius: 15px;
+            position: relative;
+            overflow: hidden;
+            flex-shrink: 0;
+            cursor: pointer;
+        }
+
+        .industry-card img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s;
+        }
+
+        .industry-card:hover img {
+            transform: scale(1.1);
+        }
+
+        .industry-overlay {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            padding: 20px;
+            background: linear-gradient(transparent, black);
+            text-align: left;
+        }
+
+        .industry-title {
             font-size: 18px;
-            opacity: 0.9;
+            font-weight: 700;
+        }
+
+        /* Testimonials */
+        .testimonials {
+            padding: 100px 50px;
+            background-color: #fff;
+            color: #111;
+            text-align: center;
+        }
+
+        .testimonial-box {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 40px;
+            border: 1px solid #eee;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+        }
+
+        .quote-icon {
+            font-size: 40px;
+            color: var(--primary-red);
+            margin-bottom: 20px;
+            display: block;
+        }
+
+        .testimonial-text {
+            font-size: 18px;
+            line-height: 1.6;
+            margin-bottom: 30px;
+            color: #555;
+        }
+        
+        .client-info {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 15px;
+        }
+        
+        .client-avatar {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background: #ddd;
+            background-image: url('https://randomuser.me/api/portraits/men/32.jpg');
+            background-size: cover;
+        }
+
+        /* Client Logos */
+        .client-logos {
+            display: flex;
+            justify-content: center;
+            gap: 50px;
+            padding: 50px;
+            background: #f9f9f9;
+            flex-wrap: wrap;
+            opacity: 0.5;
+            filter: grayscale(100%);
+        }
+        
+        .client-logo-item {
+            font-size: 24px;
+            font-weight: 800;
+            color: #333;
         }
 
         /* Footer */
@@ -328,6 +651,23 @@
             }
             .features {
                 grid-template-columns: 1fr;
+            }
+            .service-grid {
+                grid-template-columns: 1fr;
+            }
+            .service-item {
+                flex-direction: column;
+            }
+            .service-img {
+                width: 100%;
+                height: 200px;
+            }
+            .cta-container {
+                flex-direction: column;
+                gap: 40px;
+            }
+            .cta-form {
+                width: 100%;
             }
             .footer-content {
                 grid-template-columns: 1fr;
@@ -401,6 +741,162 @@
             <h3 class="feature-title">核心价值观</h3>
             <p class="feature-desc">INTEGRITY, DEDICATION<br>诚信 · 用心 · 专业 · 规范</p>
         </div>
+    </div>
+
+    <!-- Manufacturing Services -->
+    <div class="services-section">
+        <div class="section-header">
+            <h2>智能装备系列</h2>
+            <p style="color: #666;">MANUFACTURING SERVICES</p>
+        </div>
+        <div class="service-grid">
+            <div class="service-item">
+                <div class="service-content">
+                    <div class="service-num">01</div>
+                    <h3 class="service-title">全自动智能裁断机</h3>
+                    <p class="service-desc">采用先进的液压驱动系统，压力稳定，裁断精度高。适用于皮革、塑胶、帆布等非金属材料的成型裁断。</p>
+                    <a href="#" class="service-btn">查看详情</a>
+                </div>
+                <div class="service-img" style="background-image: url('https://images.unsplash.com/photo-1565043589221-1a6a8bc66953?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80');"></div>
+            </div>
+            <div class="service-item">
+                <div class="service-content">
+                    <div class="service-num">02</div>
+                    <h3 class="service-title">数控自动送料机</h3>
+                    <p class="service-desc">双边自动送料设计，效率提升30%。伺服电机控制送料距离，误差控制在0.1mm以内。</p>
+                    <a href="#" class="service-btn">查看详情</a>
+                </div>
+                <div class="service-img" style="background-image: url('https://images.unsplash.com/photo-1621905251189-08b45d6a269e?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80');"></div>
+            </div>
+            <div class="service-item">
+                <div class="service-content">
+                    <div class="service-num">03</div>
+                    <h3 class="service-title">精密四柱裁断机</h3>
+                    <p class="service-desc">经典四柱双油缸结构，中央自动平衡连杆机构，保证每个裁断位置深度一致。</p>
+                    <a href="#" class="service-btn">查看详情</a>
+                </div>
+                <div class="service-img" style="background-image: url('https://images.unsplash.com/photo-1580982327559-c1202864eb05?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80');"></div>
+            </div>
+            <div class="service-item">
+                <div class="service-content">
+                    <div class="service-num">04</div>
+                    <h3 class="service-title">激光辅助定位系统</h3>
+                    <p class="service-desc">结合视觉识别技术，实现对不规则材料的智能排版和定位裁切，大幅提高材料利用率。</p>
+                    <a href="#" class="service-btn">查看详情</a>
+                </div>
+                <div class="service-img" style="background-image: url('https://images.unsplash.com/photo-1531297461136-82lw85817c80?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80');"></div>
+            </div>
+        </div>
+        <div style="text-align: center; margin-top: 50px;">
+            <a href="#" class="hero-btn" style="background-color: #e60012;">查看所有产品系列 ></a>
+        </div>
+    </div>
+
+    <!-- Ready to Start (Quote) -->
+    <div class="cta-section">
+        <div class="cta-overlay"></div>
+        <div class="cta-container">
+            <div class="cta-text">
+                <h2>Ready to Start<br>Your Project?</h2>
+                <p>无论您需要标准的裁断设备，还是定制化的智能生产线方案，台威精机都已准备就绪。<br>立即联系我们获取专业的技术支持和报价。</p>
+                <div style="display: flex; gap: 20px;">
+                    <div>
+                        <div style="font-size: 24px; font-weight: bold;">20+</div>
+                        <div style="font-size: 12px; color: #ccc;">年行业经验</div>
+                    </div>
+                    <div>
+                        <div style="font-size: 24px; font-weight: bold;">50+</div>
+                        <div style="font-size: 12px; color: #ccc;">国家出口</div>
+                    </div>
+                </div>
+            </div>
+            <div class="cta-form">
+                <h3>Request a Quote | 索取报价</h3>
+                <form>
+                    <div class="form-grid">
+                        <input type="text" class="form-input" placeholder="姓名 Name">
+                        <input type="email" class="form-input" placeholder="邮箱 Email">
+                    </div>
+                    <div class="form-grid">
+                        <input type="text" class="form-input" placeholder="电话 Phone">
+                        <input type="text" class="form-input" placeholder="公司 Company">
+                    </div>
+                    <textarea class="form-input" style="width: 100%; height: 100px; margin-bottom: 15px;" placeholder="需求描述 Message"></textarea>
+                    <button type="button" class="form-submit">提交需求 Submit Quote</button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Industries -->
+    <div class="industries">
+        <h2>服务 <span>行业领域</span></h2>
+        <div class="industry-grid">
+            <div class="industry-card">
+                <img src="https://images.unsplash.com/photo-1542291026-7eec264c27ff?ixlib=rb-1.2.1&auto=format&fit=crop&w=600&q=80" alt="Shoes">
+                <div class="industry-overlay">
+                    <div class="industry-title">制鞋行业</div>
+                    <div style="font-size: 12px; color: #ccc;">Footwear Industry</div>
+                </div>
+            </div>
+            <div class="industry-card">
+                <img src="https://images.unsplash.com/photo-1520116468816-95b69f847357?ixlib=rb-1.2.1&auto=format&fit=crop&w=600&q=80" alt="Automotive">
+                <div class="industry-overlay">
+                    <div class="industry-title">汽车内饰</div>
+                    <div style="font-size: 12px; color: #ccc;">Automotive Interiors</div>
+                </div>
+            </div>
+            <div class="industry-card">
+                <img src="https://images.unsplash.com/photo-1584917865442-de89df76afd3?ixlib=rb-1.2.1&auto=format&fit=crop&w=600&q=80" alt="Bags">
+                <div class="industry-overlay">
+                    <div class="industry-title">箱包皮具</div>
+                    <div style="font-size: 12px; color: #ccc;">Bags & Leather</div>
+                </div>
+            </div>
+            <div class="industry-card">
+                <img src="https://images.unsplash.com/photo-1616400619175-5beda3a17896?ixlib=rb-1.2.1&auto=format&fit=crop&w=600&q=80" alt="Packaging">
+                <div class="industry-overlay">
+                    <div class="industry-title">包装行业</div>
+                    <div style="font-size: 12px; color: #ccc;">Packaging Industry</div>
+                </div>
+            </div>
+            <div class="industry-card">
+                <img src="https://images.unsplash.com/photo-1596461404969-9ae70f2830c1?ixlib=rb-1.2.1&auto=format&fit=crop&w=600&q=80" alt="Textile">
+                <div class="industry-overlay">
+                    <div class="industry-title">纺织服装</div>
+                    <div style="font-size: 12px; color: #ccc;">Textile & Garment</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Testimonials -->
+    <div class="testimonials">
+        <h2>客户评价</h2>
+        <div style="color: var(--primary-red); margin-bottom: 40px;">What Our Clients Say</div>
+        <div class="testimonial-box">
+            <span class="quote-icon">“</span>
+            <p class="testimonial-text">
+                Taiwei's intelligent cutting machines have significantly improved our production efficiency. 
+                The precision is outstanding, and their after-sales service is professional and timely. 
+                台威的智能裁断机显著提高了我们的生产效率，精度非常出色，售后服务也专业及时。
+            </p>
+            <div class="client-info">
+                <div class="client-avatar"></div>
+                <div style="text-align: left;">
+                    <div style="font-weight: bold; color: #111;">Operations Director</div>
+                    <div style="font-size: 12px; color: #666;">Leading Footwear Manufacturer</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="client-logos">
+        <div class="client-logo-item">ADIDAS</div>
+        <div class="client-logo-item">NIKE</div>
+        <div class="client-logo-item">BOSCH</div>
+        <div class="client-logo-item">LEAR</div>
+        <div class="client-logo-item">FAURECIA</div>
     </div>
 
     <footer>
