@@ -18,7 +18,7 @@
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+            font-family: 'PingFang SC', 'Microsoft YaHei', 'Helvetica Neue', Helvetica, Arial, sans-serif;
         }
 
         body {
@@ -41,26 +41,29 @@
         }
 
         .logo {
-            font-size: 24px;
-            font-weight: 700;
-            letter-spacing: 1px;
+            font-size: 26px;
+            font-weight: 800;
+            letter-spacing: 2px;
             color: var(--text-white);
             text-transform: uppercase;
             text-shadow: 0 2px 4px rgba(0,0,0,0.5);
             display: flex;
-            flex-direction: column;
-            line-height: 1.2;
+            align-items: center;
+            gap: 10px;
         }
 
         .logo span {
             color: var(--primary-red);
         }
         
-        .logo-sub {
-            font-size: 12px;
-            font-weight: 400;
-            letter-spacing: 2px;
-            color: var(--text-grey);
+        .logo-cn {
+            font-size: 20px;
+            font-weight: 500;
+            letter-spacing: 1px;
+            color: var(--text-white);
+            margin-left: 10px;
+            border-left: 1px solid rgba(255,255,255,0.3);
+            padding-left: 10px;
         }
 
         .nav-container {
@@ -142,19 +145,25 @@
         }
 
         .main-headline {
-            font-size: 60px;
-            line-height: 1.2;
+            font-size: 52px;
+            line-height: 1.3;
             font-weight: 800;
             margin-bottom: 30px;
             color: var(--text-white);
+            letter-spacing: 2px;
+        }
+
+        .main-headline span {
+            display: block;
+            margin-top: 10px;
         }
         
         .sub-headline {
-            font-size: 24px;
+            font-size: 20px;
             color: var(--text-grey);
             margin-bottom: 40px;
             font-weight: 300;
-            line-height: 1.4;
+            line-height: 1.6;
         }
 
         .hero-btn {
@@ -338,17 +347,17 @@
     <nav>
         <div class="logo">
             TAIWEI <span>MACHINERY</span>
-            <div class="logo-sub">台威精机</div>
+            <div class="logo-cn">台威精机</div>
         </div>
         <div class="nav-container">
             <div class="nav-links">
-                <a href="#">首页 Home</a>
-                <a href="#">关于我们 About</a>
-                <a href="#">产品中心 Products</a>
-                <a href="#">解决方案 Solutions</a>
-                <a href="#">联系我们 Contact</a>
+                <a href="#">网站首页</a>
+                <a href="#">关于台威</a>
+                <a href="#">智能装备</a>
+                <a href="#">技术方案</a>
+                <a href="#">联系我们</a>
             </div>
-            <a href="#" class="quote-btn">联系报价 Quote</a>
+            <a href="#" class="quote-btn">在线咨询</a>
         </div>
     </nav>
 
@@ -358,39 +367,39 @@
         <div style="position: absolute; width: 100px; height: 1px; background: white; transform: rotate(-45deg); bottom: 25%; right: 15%;"></div>
 
         <div class="hero-content">
-            <span class="welcome-text">世界品质 · 浙江制造</span>
+            <span class="welcome-text">中德高端智能冲裁技术合作典范</span>
             <h1 class="main-headline">
-                智能精裁 质赢未来<br>
-                <span style="font-size: 0.5em; font-weight: 300; display:block; margin-top: 10px;">INTELLIGENT PRECISION CUTTING, QUALITY WINS FUTURE</span>
+                智能精裁 · 质赢未来<br>
+                <span style="font-size: 0.7em; color: var(--primary-red);">为柔性全物料提供智能冲裁技术与方案</span>
             </h1>
             <p class="sub-headline">
-                为柔性全物料提供智能冲裁技术与方案<br>
-                是全球智能裁断装备技术与方案领导者
+                是全球智能裁断装备技术与方案领导者<br>
+                Become a global leader in intelligent cutting equipment technology and solutions
             </p>
-            <a href="#" class="hero-btn">了解更多 Learn More</a>
+            <a href="#" class="hero-btn">了解更多方案</a>
         </div>
     </div>
 
     <div class="banner">
-        <h2>Become a global leader</h2>
-        <p>in intelligent cutting equipment technology and solutions</p>
+        <h2>专注裁断机行业 20+ 年</h2>
+        <p>深耕行业二十载，积累了丰富的技术经验与市场口碑</p>
     </div>
 
     <div class="features">
         <div class="feature-card">
-            <span class="feature-year">20+</span>
-            <h3 class="feature-title">专注裁断机行业</h3>
-            <p class="feature-desc">Dedicating in cutting industry 20+ years.<br>深耕行业二十载，积累了丰富的技术经验与市场口碑。</p>
+            <span class="feature-year">智能</span>
+            <h3 class="feature-title">智能精裁</h3>
+            <p class="feature-desc">INTELLIGENT PRECISION CUTTING<br>为柔性全物料提供智能冲裁技术与方案。</p>
         </div>
         <div class="feature-card">
-            <span class="feature-year" style="font-size: 30px;">SINO-GERMANY</span>
-            <h3 class="feature-title">中德技术合作</h3>
-            <p class="feature-desc">The Model of Sino-Germany Cooperation in the area of High-end Intelligent Cutting Machine.<br>中德高端智能冲裁技术合作典范。</p>
+            <span class="feature-year">品质</span>
+            <h3 class="feature-title">质赢未来</h3>
+            <p class="feature-desc">QUALITY WINS FUTURE<br>世界品质，浙江制造。中德高端智能冲裁技术合作典范。</p>
         </div>
         <div class="feature-card">
-            <span class="feature-year" style="font-size: 30px;">VALUES</span>
-            <h3 class="feature-title">企业核心价值观</h3>
-            <p class="feature-desc">INTEGRITY, DEDICATION, PROFESSIONALISM AND NORMS<br>诚信 · 用心 · 专业 · 规范</p>
+            <span class="feature-year">诚信</span>
+            <h3 class="feature-title">核心价值观</h3>
+            <p class="feature-desc">INTEGRITY, DEDICATION<br>诚信 · 用心 · 专业 · 规范</p>
         </div>
     </div>
 
