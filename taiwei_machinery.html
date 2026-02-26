@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>台威精机 TAIWEI PRECISION - 一站式精密制造解决方案</title>
+    <title>衢州台威精工机械有限公司 - QUZHOU TAIWEI PRECISE MACHINERY CO.,LTD</title>
     <style>
         :root {
             --primary-red: #E60012;
@@ -41,16 +41,26 @@
         }
 
         .logo {
-            font-size: 28px;
+            font-size: 24px;
             font-weight: 700;
-            letter-spacing: 2px;
+            letter-spacing: 1px;
             color: var(--text-white);
             text-transform: uppercase;
             text-shadow: 0 2px 4px rgba(0,0,0,0.5);
+            display: flex;
+            flex-direction: column;
+            line-height: 1.2;
         }
 
         .logo span {
             color: var(--primary-red);
+        }
+        
+        .logo-sub {
+            font-size: 12px;
+            font-weight: 400;
+            letter-spacing: 2px;
+            color: var(--text-grey);
         }
 
         .nav-container {
@@ -105,7 +115,7 @@
         .hero {
             height: 100vh;
             width: 100%;
-            background: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.6)), url('https://images.unsplash.com/photo-1565439398532-39f8e434f95d?ixlib=rb-1.2.1&auto=format&fit=crop&w=1950&q=80');
+            background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.7)), url('https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?ixlib=rb-1.2.1&auto=format&fit=crop&w=1950&q=80');
             background-size: cover;
             background-position: center;
             display: flex;
@@ -115,40 +125,42 @@
         }
 
         .hero-content {
-            max-width: 800px;
+            max-width: 1000px;
             position: relative;
             z-index: 2;
             margin-top: 50px; /* Offset for nav */
         }
 
         .welcome-text {
-            font-size: 14px;
+            font-size: 16px;
             letter-spacing: 3px;
             text-transform: uppercase;
-            color: var(--text-grey);
+            color: var(--primary-red);
             margin-bottom: 20px;
             display: block;
-            font-weight: 600;
+            font-weight: 700;
         }
 
         .main-headline {
-            font-size: 80px;
-            line-height: 1;
+            font-size: 60px;
+            line-height: 1.2;
             font-weight: 800;
-            text-transform: uppercase;
-            margin-bottom: 40px;
+            margin-bottom: 30px;
             color: var(--text-white);
         }
-
-        .main-headline .highlight {
-            -webkit-text-stroke: 2px var(--text-white);
-            color: transparent;
+        
+        .sub-headline {
+            font-size: 24px;
+            color: var(--text-grey);
+            margin-bottom: 40px;
+            font-weight: 300;
+            line-height: 1.4;
         }
 
         .hero-btn {
             display: inline-block;
-            background-color: var(--text-white);
-            color: var(--dark-black);
+            background-color: var(--primary-red);
+            color: var(--text-white);
             padding: 18px 40px;
             border-radius: 5px;
             text-decoration: none;
@@ -156,22 +168,12 @@
             font-size: 16px;
             text-transform: uppercase;
             transition: transform 0.3s, background 0.3s;
+            border: none;
         }
 
         .hero-btn:hover {
             transform: translateY(-5px);
-            background-color: var(--primary-red);
-            color: var(--text-white);
-        }
-
-        /* Decoration Lines */
-        .deco-line {
-            position: absolute;
-            height: 1px;
-            background: rgba(255,255,255,0.3);
-            width: 100%;
-            left: 0;
-            z-index: 1;
+            background-color: #ff1a1a;
         }
 
         /* Features Section */
@@ -189,6 +191,7 @@
             transition: all 0.3s;
             position: relative;
             overflow: hidden;
+            background: rgba(255,255,255,0.02);
         }
 
         .feature-card:hover {
@@ -213,33 +216,90 @@
         }
 
         .feature-title {
-            font-size: 24px;
+            font-size: 22px;
             margin-bottom: 20px;
             font-weight: 700;
+            color: var(--text-white);
         }
 
         .feature-desc {
             color: var(--text-grey);
             line-height: 1.6;
+            font-size: 14px;
+        }
+        
+        .feature-year {
+            font-size: 40px;
+            color: var(--primary-red);
+            font-weight: 800;
+            margin-bottom: 10px;
+            display: block;
+        }
+
+        /* Banner Section */
+        .banner {
+            background-color: var(--primary-red);
+            color: white;
+            padding: 60px 50px;
+            text-align: center;
+        }
+        
+        .banner h2 {
+            font-size: 36px;
+            margin-bottom: 15px;
+            text-transform: uppercase;
+        }
+        
+        .banner p {
+            font-size: 18px;
+            opacity: 0.9;
         }
 
         /* Footer */
         footer {
-            background: #000;
-            padding: 50px;
-            text-align: center;
+            background: #050505;
+            padding: 60px 50px;
             border-top: 1px solid rgba(255,255,255,0.1);
+            font-size: 14px;
+            color: #888;
         }
 
-        .footer-logo {
-            font-size: 24px;
-            font-weight: 700;
+        .footer-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 50px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .footer-left h3 {
+            color: white;
+            font-size: 20px;
             margin-bottom: 20px;
-            display: inline-block;
+        }
+        
+        .footer-left p {
+            margin-bottom: 10px;
+            line-height: 1.6;
         }
 
-        .footer-logo span {
-            color: var(--primary-red);
+        .footer-right {
+            text-align: right;
+        }
+        
+        .cert-logos {
+            margin-top: 20px;
+            display: flex;
+            gap: 15px;
+            justify-content: flex-end;
+        }
+        
+        .cert-badge {
+            border: 1px solid #444;
+            padding: 5px 10px;
+            border-radius: 4px;
+            font-size: 12px;
+            color: white;
         }
 
         @media (max-width: 768px) {
@@ -249,16 +309,26 @@
                 background: rgba(0,0,0,0.9);
             }
             .nav-container {
-                display: none; /* Simplify for mobile */
+                display: none; 
             }
             .hero {
-                padding: 0 20px;
+                padding: 0 30px;
             }
             .main-headline {
-                font-size: 40px;
+                font-size: 36px;
             }
             .features {
                 grid-template-columns: 1fr;
+            }
+            .footer-content {
+                grid-template-columns: 1fr;
+                text-align: left;
+            }
+            .footer-right {
+                text-align: left;
+            }
+            .cert-logos {
+                justify-content: flex-start;
             }
         }
     </style>
@@ -266,54 +336,93 @@
 <body>
 
     <nav>
-        <div class="logo">TAIWEI <span>PRECISION</span></div>
+        <div class="logo">
+            TAIWEI <span>MACHINERY</span>
+            <div class="logo-sub">台威精机</div>
+        </div>
         <div class="nav-container">
             <div class="nav-links">
-                <a href="#">Home</a>
-                <a href="#">About Us</a>
-                <a href="#">Services</a>
-                <a href="#">Equipment</a>
-                <a href="#">Gallery</a>
-                <a href="#">Contact</a>
+                <a href="#">首页 Home</a>
+                <a href="#">关于我们 About</a>
+                <a href="#">产品中心 Products</a>
+                <a href="#">解决方案 Solutions</a>
+                <a href="#">联系我们 Contact</a>
             </div>
-            <a href="#" class="quote-btn">Request a Quote</a>
+            <a href="#" class="quote-btn">联系报价 Quote</a>
         </div>
     </nav>
 
     <div class="hero">
-        <!-- Abstract deco lines to match the "spark" feel of the image -->
+        <!-- Abstract deco lines -->
         <div style="position: absolute; width: 300px; height: 1px; background: var(--primary-red); transform: rotate(-30deg); bottom: 20%; right: 20%; box-shadow: 0 0 10px var(--primary-red);"></div>
         <div style="position: absolute; width: 100px; height: 1px; background: white; transform: rotate(-45deg); bottom: 25%; right: 15%;"></div>
 
         <div class="hero-content">
-            <span class="welcome-text">Welcome to Taiwei Precision Machinery</span>
+            <span class="welcome-text">世界品质 · 浙江制造</span>
             <h1 class="main-headline">
-                YOUR ONE STOP FOR<br>
-                <span style="color: var(--primary-red);">MANUFACTURING</span>
-                EXCELLENCE
+                智能精裁 质赢未来<br>
+                <span style="font-size: 0.5em; font-weight: 300; display:block; margin-top: 10px;">INTELLIGENT PRECISION CUTTING, QUALITY WINS FUTURE</span>
             </h1>
-            <a href="#" class="hero-btn">Get Started</a>
+            <p class="sub-headline">
+                为柔性全物料提供智能冲裁技术与方案<br>
+                是全球智能裁断装备技术与方案领导者
+            </p>
+            <a href="#" class="hero-btn">了解更多 Learn More</a>
         </div>
+    </div>
+
+    <div class="banner">
+        <h2>Become a global leader</h2>
+        <p>in intelligent cutting equipment technology and solutions</p>
     </div>
 
     <div class="features">
         <div class="feature-card">
-            <h3 class="feature-title">CNC Machining</h3>
-            <p class="feature-desc">High-precision CNC milling and turning services for complex geometries and tight tolerances. State-of-the-art equipment ensures superior quality.</p>
+            <span class="feature-year">20+</span>
+            <h3 class="feature-title">专注裁断机行业</h3>
+            <p class="feature-desc">Dedicating in cutting industry 20+ years.<br>深耕行业二十载，积累了丰富的技术经验与市场口碑。</p>
         </div>
         <div class="feature-card">
-            <h3 class="feature-title">Rapid Prototyping</h3>
-            <p class="feature-desc">Fast turnaround times for prototypes to help you validate designs quickly. From concept to physical part in record time.</p>
+            <span class="feature-year" style="font-size: 30px;">SINO-GERMANY</span>
+            <h3 class="feature-title">中德技术合作</h3>
+            <p class="feature-desc">The Model of Sino-Germany Cooperation in the area of High-end Intelligent Cutting Machine.<br>中德高端智能冲裁技术合作典范。</p>
         </div>
         <div class="feature-card">
-            <h3 class="feature-title">Quality Assurance</h3>
-            <p class="feature-desc">ISO 9001 certified processes. Comprehensive inspection reports and material certifications provided with every order.</p>
+            <span class="feature-year" style="font-size: 30px;">VALUES</span>
+            <h3 class="feature-title">企业核心价值观</h3>
+            <p class="feature-desc">INTEGRITY, DEDICATION, PROFESSIONALISM AND NORMS<br>诚信 · 用心 · 专业 · 规范</p>
         </div>
     </div>
 
     <footer>
-        <div class="footer-logo">TAIWEI <span>精机</span></div>
-        <p style="color: #666; margin-top: 10px;">&copy; 2026 Taiwei Precision Machinery Co., Ltd. All rights reserved.</p>
+        <div class="footer-content">
+            <div class="footer-left">
+                <h3>衢州台威精工机械有限公司</h3>
+                <p style="text-transform: uppercase; font-size: 12px; margin-bottom: 20px;">QUZHOU TAIWEI PRECISE MACHINERY CO.,LTD</p>
+                <p>地址：衢州市东港开发区<br>Add: Donggang Development Zone, Quzhou City</p>
+                <p>电话 Tel: 0570-3832366 / 3832811</p>
+                <p>传真 Fax: 0570-3832698</p>
+                <p>邮箱 Email: sales@twcdj.com</p>
+                <p>网址 Website: www.twcdj.com</p>
+            </div>
+            <div class="footer-right">
+                <div class="logo" style="margin-bottom: 20px; align-items: flex-end;">
+                    TAIWEI <span>MACHINERY</span>
+                </div>
+                <p>本公司技术产品不断研究改进，产品技术参数如有变动，恕不另行通知。<br>
+                We are keeping improving hydraulic cutting technology, Specifications supplied are subject to change without notice at any time.</p>
+                
+                <div class="cert-logos">
+                    <span class="cert-badge">CNAS</span>
+                    <span class="cert-badge">IAF</span>
+                    <span class="cert-badge">ANAB</span>
+                    <span class="cert-badge">ISO 9001</span>
+                </div>
+            </div>
+        </div>
+        <div style="text-align: center; margin-top: 40px; padding-top: 20px; border-top: 1px solid #222;">
+            &copy; 2026 Quzhou Taiwei Precise Machinery Co.,Ltd. All rights reserved.
+        </div>
     </footer>
 
 </body>
