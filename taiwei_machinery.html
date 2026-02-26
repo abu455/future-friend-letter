@@ -1,0 +1,320 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>台威精机 TAIWEI PRECISION - 一站式精密制造解决方案</title>
+    <style>
+        :root {
+            --primary-red: #E60012;
+            --dark-black: #0a0a0a;
+            --text-white: #ffffff;
+            --text-grey: #cccccc;
+            --glass-border: rgba(255, 255, 255, 0.2);
+            --glass-bg: rgba(0, 0, 0, 0.3);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+        }
+
+        body {
+            background-color: var(--dark-black);
+            color: var(--text-white);
+            overflow-x: hidden;
+        }
+
+        /* Navigation */
+        nav {
+            position: fixed;
+            top: 30px;
+            left: 0;
+            width: 100%;
+            padding: 0 50px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            z-index: 1000;
+        }
+
+        .logo {
+            font-size: 28px;
+            font-weight: 700;
+            letter-spacing: 2px;
+            color: var(--text-white);
+            text-transform: uppercase;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.5);
+        }
+
+        .logo span {
+            color: var(--primary-red);
+        }
+
+        .nav-container {
+            background: var(--glass-bg);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border: 1px solid var(--glass-border);
+            padding: 10px 10px 10px 30px;
+            border-radius: 50px;
+            display: flex;
+            align-items: center;
+            gap: 30px;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 25px;
+        }
+
+        .nav-links a {
+            color: var(--text-white);
+            text-decoration: none;
+            font-size: 14px;
+            font-weight: 500;
+            transition: color 0.3s;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .nav-links a:hover {
+            color: var(--primary-red);
+        }
+
+        .quote-btn {
+            background-color: var(--text-white);
+            color: var(--dark-black);
+            padding: 12px 25px;
+            border-radius: 30px;
+            text-decoration: none;
+            font-weight: 700;
+            font-size: 14px;
+            transition: all 0.3s;
+            text-transform: uppercase;
+        }
+
+        .quote-btn:hover {
+            background-color: var(--primary-red);
+            color: var(--text-white);
+        }
+
+        /* Hero Section */
+        .hero {
+            height: 100vh;
+            width: 100%;
+            background: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.6)), url('https://images.unsplash.com/photo-1565439398532-39f8e434f95d?ixlib=rb-1.2.1&auto=format&fit=crop&w=1950&q=80');
+            background-size: cover;
+            background-position: center;
+            display: flex;
+            align-items: center;
+            padding: 0 100px;
+            position: relative;
+        }
+
+        .hero-content {
+            max-width: 800px;
+            position: relative;
+            z-index: 2;
+            margin-top: 50px; /* Offset for nav */
+        }
+
+        .welcome-text {
+            font-size: 14px;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            color: var(--text-grey);
+            margin-bottom: 20px;
+            display: block;
+            font-weight: 600;
+        }
+
+        .main-headline {
+            font-size: 80px;
+            line-height: 1;
+            font-weight: 800;
+            text-transform: uppercase;
+            margin-bottom: 40px;
+            color: var(--text-white);
+        }
+
+        .main-headline .highlight {
+            -webkit-text-stroke: 2px var(--text-white);
+            color: transparent;
+        }
+
+        .hero-btn {
+            display: inline-block;
+            background-color: var(--text-white);
+            color: var(--dark-black);
+            padding: 18px 40px;
+            border-radius: 5px;
+            text-decoration: none;
+            font-weight: 700;
+            font-size: 16px;
+            text-transform: uppercase;
+            transition: transform 0.3s, background 0.3s;
+        }
+
+        .hero-btn:hover {
+            transform: translateY(-5px);
+            background-color: var(--primary-red);
+            color: var(--text-white);
+        }
+
+        /* Decoration Lines */
+        .deco-line {
+            position: absolute;
+            height: 1px;
+            background: rgba(255,255,255,0.3);
+            width: 100%;
+            left: 0;
+            z-index: 1;
+        }
+
+        /* Features Section */
+        .features {
+            padding: 100px 50px;
+            background-color: var(--dark-black);
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 40px;
+        }
+
+        .feature-card {
+            border: 1px solid rgba(255,255,255,0.1);
+            padding: 40px;
+            transition: all 0.3s;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .feature-card:hover {
+            border-color: var(--primary-red);
+            background: rgba(230, 0, 18, 0.05);
+        }
+
+        .feature-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 4px;
+            height: 100%;
+            background: var(--primary-red);
+            transform: scaleY(0);
+            transition: transform 0.3s;
+        }
+
+        .feature-card:hover::before {
+            transform: scaleY(1);
+        }
+
+        .feature-title {
+            font-size: 24px;
+            margin-bottom: 20px;
+            font-weight: 700;
+        }
+
+        .feature-desc {
+            color: var(--text-grey);
+            line-height: 1.6;
+        }
+
+        /* Footer */
+        footer {
+            background: #000;
+            padding: 50px;
+            text-align: center;
+            border-top: 1px solid rgba(255,255,255,0.1);
+        }
+
+        .footer-logo {
+            font-size: 24px;
+            font-weight: 700;
+            margin-bottom: 20px;
+            display: inline-block;
+        }
+
+        .footer-logo span {
+            color: var(--primary-red);
+        }
+
+        @media (max-width: 768px) {
+            nav {
+                padding: 20px;
+                top: 0;
+                background: rgba(0,0,0,0.9);
+            }
+            .nav-container {
+                display: none; /* Simplify for mobile */
+            }
+            .hero {
+                padding: 0 20px;
+            }
+            .main-headline {
+                font-size: 40px;
+            }
+            .features {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <nav>
+        <div class="logo">TAIWEI <span>PRECISION</span></div>
+        <div class="nav-container">
+            <div class="nav-links">
+                <a href="#">Home</a>
+                <a href="#">About Us</a>
+                <a href="#">Services</a>
+                <a href="#">Equipment</a>
+                <a href="#">Gallery</a>
+                <a href="#">Contact</a>
+            </div>
+            <a href="#" class="quote-btn">Request a Quote</a>
+        </div>
+    </nav>
+
+    <div class="hero">
+        <!-- Abstract deco lines to match the "spark" feel of the image -->
+        <div style="position: absolute; width: 300px; height: 1px; background: var(--primary-red); transform: rotate(-30deg); bottom: 20%; right: 20%; box-shadow: 0 0 10px var(--primary-red);"></div>
+        <div style="position: absolute; width: 100px; height: 1px; background: white; transform: rotate(-45deg); bottom: 25%; right: 15%;"></div>
+
+        <div class="hero-content">
+            <span class="welcome-text">Welcome to Taiwei Precision Machinery</span>
+            <h1 class="main-headline">
+                YOUR ONE STOP FOR<br>
+                <span style="color: var(--primary-red);">MANUFACTURING</span>
+                EXCELLENCE
+            </h1>
+            <a href="#" class="hero-btn">Get Started</a>
+        </div>
+    </div>
+
+    <div class="features">
+        <div class="feature-card">
+            <h3 class="feature-title">CNC Machining</h3>
+            <p class="feature-desc">High-precision CNC milling and turning services for complex geometries and tight tolerances. State-of-the-art equipment ensures superior quality.</p>
+        </div>
+        <div class="feature-card">
+            <h3 class="feature-title">Rapid Prototyping</h3>
+            <p class="feature-desc">Fast turnaround times for prototypes to help you validate designs quickly. From concept to physical part in record time.</p>
+        </div>
+        <div class="feature-card">
+            <h3 class="feature-title">Quality Assurance</h3>
+            <p class="feature-desc">ISO 9001 certified processes. Comprehensive inspection reports and material certifications provided with every order.</p>
+        </div>
+    </div>
+
+    <footer>
+        <div class="footer-logo">TAIWEI <span>精机</span></div>
+        <p style="color: #666; margin-top: 10px;">&copy; 2026 Taiwei Precision Machinery Co., Ltd. All rights reserved.</p>
+    </footer>
+
+</body>
+</html>
