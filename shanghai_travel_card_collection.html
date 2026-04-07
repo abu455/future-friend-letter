@@ -3,22 +3,18 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>上海文旅 · 卡牌收藏</title>
+    <title>上海文旅卡牌收藏</title>
     <style>
         :root {
-            --bg: #070b17;
-            --bg-soft: #121a2d;
-            --panel: rgba(14, 21, 39, 0.84);
-            --panel-border: rgba(133, 169, 255, 0.25);
-            --text-main: #f3f6ff;
-            --text-secondary: #9fb0d8;
-            --accent-a: #63d0ff;
-            --accent-b: #a786ff;
-            --accent-c: #ff7acc;
-            --success: #69e5a8;
-            --danger: #ff7f9b;
-            --card-radius: 18px;
-            --shadow: 0 18px 36px rgba(0, 0, 0, 0.36);
+            --bg: #f5f7fb;
+            --panel: #ffffff;
+            --line: #e9edf5;
+            --text: #2a3444;
+            --muted: #8d98ab;
+            --brand: #1ec8ef;
+            --brand-strong: #05b1df;
+            --shadow: 0 8px 20px rgba(24, 39, 75, 0.08);
+            --radius: 10px;
         }
 
         * {
@@ -28,629 +24,379 @@
         }
 
         body {
+            background: var(--bg);
+            color: var(--text);
             font-family: "PingFang SC", "Microsoft YaHei", "Segoe UI", sans-serif;
             min-height: 100vh;
-            color: var(--text-main);
-            background:
-                radial-gradient(circle at 14% 16%, rgba(99, 208, 255, 0.18), transparent 32%),
-                radial-gradient(circle at 84% 0%, rgba(167, 134, 255, 0.24), transparent 28%),
-                radial-gradient(circle at 84% 70%, rgba(255, 122, 204, 0.2), transparent 25%),
-                #070b17;
-            padding: 26px;
         }
 
-        .page {
-            width: min(1320px, 100%);
-            margin: 0 auto;
-            position: relative;
-        }
-
-        .hero {
-            border: 1px solid var(--panel-border);
-            border-radius: 24px;
-            overflow: hidden;
-            background:
-                linear-gradient(120deg, rgba(8, 15, 32, 0.92), rgba(8, 15, 32, 0.65)),
-                url("assets/references/ref-style-01.jpg") center/cover no-repeat;
-            box-shadow: var(--shadow);
-            position: relative;
-        }
-
-        .hero::before {
-            content: "";
-            position: absolute;
-            inset: 0;
-            background:
-                linear-gradient(100deg, rgba(8, 11, 25, 0.85) 0%, rgba(8, 11, 25, 0.48) 50%, rgba(8, 11, 25, 0.9) 100%),
-                url("assets/references/ref-ui-02.jpg") center/cover no-repeat;
-            mix-blend-mode: screen;
-            opacity: 0.23;
-            pointer-events: none;
-        }
-
-        .hero-inner {
-            position: relative;
-            z-index: 1;
-            padding: 30px;
+        .layout {
             display: grid;
-            grid-template-columns: 1fr auto;
-            gap: 24px;
-            align-items: end;
+            grid-template-columns: 220px 1fr;
+            min-height: 100vh;
         }
 
-        .title-badge {
-            display: inline-flex;
+        .sidebar {
+            background: #fff;
+            border-right: 1px solid var(--line);
+            padding: 18px 12px;
+        }
+
+        .brand {
+            display: flex;
             align-items: center;
-            gap: 8px;
-            border: 1px solid rgba(99, 208, 255, 0.55);
-            border-radius: 999px;
-            color: #c8f2ff;
-            padding: 6px 14px;
-            font-size: 12px;
-            margin-bottom: 12px;
-            background: rgba(99, 208, 255, 0.12);
-            backdrop-filter: blur(6px);
-        }
-
-        h1 {
-            font-size: clamp(28px, 4vw, 42px);
-            line-height: 1.18;
-            letter-spacing: 1px;
-            margin-bottom: 10px;
-        }
-
-        .subtitle {
-            color: var(--text-secondary);
-            max-width: 760px;
-            line-height: 1.7;
-            font-size: 15px;
-        }
-
-        .meta {
-            display: grid;
             gap: 10px;
-            min-width: 300px;
+            font-weight: 700;
+            color: #4c576c;
+            margin-bottom: 14px;
+            padding: 0 8px;
         }
 
-        .meta-card {
-            border: 1px solid rgba(140, 160, 200, 0.25);
-            border-radius: 14px;
-            padding: 12px 14px;
-            background: rgba(7, 12, 25, 0.58);
-        }
-
-        .meta-head {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            color: var(--text-secondary);
-            margin-bottom: 8px;
-            font-size: 13px;
-        }
-
-        .progress {
-            position: relative;
-            height: 8px;
-            border-radius: 999px;
-            overflow: hidden;
-            background: rgba(255, 255, 255, 0.08);
-        }
-
-        .progress > span {
-            position: absolute;
-            inset: 0;
-            width: 66%;
-            border-radius: inherit;
-            background: linear-gradient(90deg, var(--accent-a), var(--accent-b));
-        }
-
-        .toolbar {
-            margin-top: 18px;
-            padding: 16px;
-            border: 1px solid rgba(129, 149, 190, 0.2);
-            border-radius: 16px;
-            background: rgba(14, 20, 37, 0.72);
+        .brand-icon {
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #62dfff, #19bee8);
+            color: #fff;
             display: grid;
-            grid-template-columns: auto 1fr auto;
-            gap: 12px;
-            align-items: center;
-        }
-
-        .chips {
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            flex-wrap: wrap;
-        }
-
-        .chip {
-            border: 1px solid rgba(119, 150, 221, 0.45);
-            background: rgba(26, 35, 62, 0.72);
-            color: #d9e6ff;
-            border-radius: 999px;
-            padding: 7px 14px;
+            place-items: center;
             font-size: 13px;
-            cursor: pointer;
-            transition: 0.2s;
-        }
-
-        .chip:hover {
-            border-color: rgba(145, 225, 255, 0.95);
-        }
-
-        .chip.active {
-            color: #081224;
-            border-color: transparent;
-            background: linear-gradient(90deg, var(--accent-a), var(--accent-b));
             font-weight: 700;
         }
 
-        .search {
-            width: 100%;
-            border: 1px solid rgba(139, 152, 186, 0.32);
-            border-radius: 10px;
-            height: 38px;
-            background: rgba(8, 12, 24, 0.84);
-            color: var(--text-main);
-            padding: 0 12px;
-            outline: none;
-        }
-
-        .search::placeholder {
-            color: #90a2cd;
-        }
-
-        .sort {
-            border: 1px solid rgba(139, 152, 186, 0.32);
-            border-radius: 10px;
-            height: 38px;
-            background: rgba(8, 12, 24, 0.84);
-            color: var(--text-main);
-            padding: 0 10px;
-        }
-
-        .grid {
-            margin-top: 18px;
+        .menu {
+            list-style: none;
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(225px, 1fr));
-            gap: 16px;
+            gap: 6px;
+        }
+
+        .menu button {
+            width: 100%;
+            text-align: left;
+            border: 0;
+            border-radius: 8px;
+            background: transparent;
+            color: #92a0b7;
+            padding: 10px 12px;
+            font-size: 15px;
+            font-weight: 600;
+            cursor: pointer;
+        }
+
+        .menu button.active {
+            color: #2b3444;
+            background: #fff;
+            box-shadow: 0 3px 12px rgba(13, 29, 64, 0.08);
+            border: 1px solid #edf1f8;
+        }
+
+        .content {
+            padding: 14px 18px 26px;
+        }
+
+        .topbar {
+            display: grid;
+            grid-template-columns: auto minmax(200px, 430px) auto;
+            gap: 10px;
+            align-items: center;
+            margin-bottom: 12px;
+        }
+
+        .title {
+            font-size: 34px;
+            font-weight: 800;
+            letter-spacing: 0.2px;
+            color: #2d384d;
+        }
+
+        .search-wrap {
+            display: grid;
+            grid-template-columns: 1fr 40px;
+            background: #fff;
+            border: 1px solid var(--line);
+            border-radius: 8px;
+            overflow: hidden;
+        }
+
+        .search-wrap input {
+            border: 0;
+            outline: none;
+            padding: 10px 12px;
+            font-size: 14px;
+            color: #40506a;
+        }
+
+        .search-wrap input::placeholder {
+            color: #b0bbcd;
+        }
+
+        .search-btn {
+            border: 0;
+            background: var(--brand);
+            color: white;
+            cursor: pointer;
+            font-size: 17px;
+            font-weight: 700;
+        }
+
+        .view-switch {
+            justify-self: end;
+            display: flex;
+            gap: 8px;
+        }
+
+        .view-btn {
+            border: 0;
+            background: #9faac0;
+            color: #fff;
+            border-radius: 6px;
+            padding: 9px 14px;
+            font-size: 14px;
+            font-weight: 700;
+            cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .view-btn.active {
+            background: var(--brand);
+        }
+
+        .cards {
+            display: grid;
+            grid-template-columns: repeat(6, minmax(120px, 1fr));
+            gap: 12px;
+        }
+
+        .cards.list-mode {
+            grid-template-columns: 1fr;
         }
 
         .card {
-            border-radius: var(--card-radius);
-            overflow: hidden;
-            border: 1px solid rgba(125, 142, 185, 0.26);
-            background: linear-gradient(165deg, rgba(16, 23, 42, 0.98), rgba(10, 15, 28, 0.95));
-            box-shadow: var(--shadow);
-            transition: transform 0.18s ease, border-color 0.2s ease;
+            background: #fff;
+            border: 1px solid #edf1f7;
+            border-radius: 8px;
+            padding: 8px;
+            box-shadow: 0 3px 10px rgba(29, 47, 83, 0.06);
             cursor: pointer;
         }
 
         .card:hover {
-            transform: translateY(-5px);
-            border-color: rgba(103, 215, 255, 0.75);
+            box-shadow: var(--shadow);
+            transform: translateY(-1px);
         }
 
-        .card-cover {
-            height: 292px;
+        .card-art {
             position: relative;
+            border: 3px solid #efd12e;
+            border-radius: 4px;
+            background:
+                linear-gradient(130deg, rgba(87, 170, 255, 0.25), rgba(240, 245, 255, 0.2)),
+                #ccd6ea;
             background-size: cover;
             background-position: center;
+            padding-top: 140%;
+            overflow: hidden;
         }
 
-        .card-overlay {
+        .card-art::after {
+            content: "";
             position: absolute;
             inset: 0;
-            background:
-                linear-gradient(180deg, rgba(0, 0, 0, 0.15) 32%, rgba(4, 8, 17, 0.85) 100%);
+            border: 2px solid rgba(255, 255, 255, 0.32);
+            pointer-events: none;
         }
 
-        .tag-rarity {
+        .card.highlight .card-art::before {
+            content: "";
             position: absolute;
-            top: 12px;
-            left: 12px;
+            inset: 0;
+            background: rgba(0, 0, 0, 0.5);
             z-index: 2;
-            font-size: 12px;
-            font-weight: 700;
-            letter-spacing: 0.5px;
-            border-radius: 999px;
-            padding: 5px 10px;
-            color: #081122;
-            background: #ccf3ff;
         }
 
-        .tag-SSR { background: linear-gradient(90deg, #ffd885, #ffb847); }
-        .tag-SR  { background: linear-gradient(90deg, #bce4ff, #7fc5ff); }
-        .tag-R   { background: linear-gradient(90deg, #ccb5ff, #9f8cff); color: #0f1330; }
-        .tag-N   { background: linear-gradient(90deg, #c7d3e8, #a2b2cf); color: #121a30; }
-
-        .card-content {
+        .card.highlight .dots {
             position: absolute;
-            bottom: 0;
-            left: 0;
-            right: 0;
-            z-index: 2;
-            padding: 14px;
+            right: 8px;
+            bottom: 4px;
+            z-index: 3;
+            font-size: 22px;
+            color: #fff;
         }
 
         .card-name {
-            font-size: 20px;
+            margin-top: 7px;
+            color: #2c3546;
+            font-weight: 800;
+            font-size: 30px;
+            line-height: 1.05;
+        }
+
+        .card-set {
+            color: #8a95a8;
             font-weight: 700;
-            margin-bottom: 6px;
-            text-shadow: 0 4px 10px rgba(0, 0, 0, 0.55);
+            font-size: 24px;
+            margin-top: 2px;
         }
 
-        .card-meta {
-            font-size: 13px;
-            color: #d8e5ff;
-            display: flex;
-            gap: 10px;
-        }
-
-        .card-footer {
-            border-top: 1px solid rgba(146, 168, 220, 0.23);
-            padding: 12px 14px;
-            display: flex;
-            justify-content: space-between;
-            font-size: 13px;
-            color: var(--text-secondary);
-        }
-
-        .modal {
-            position: fixed;
-            inset: 0;
-            background: rgba(5, 8, 16, 0.75);
-            display: none;
+        .cards.list-mode .card {
+            display: grid;
+            grid-template-columns: 120px 1fr;
+            gap: 12px;
             align-items: center;
-            justify-content: center;
-            z-index: 20;
-            padding: 20px;
         }
 
-        .modal.open {
-            display: flex;
+        .cards.list-mode .card .card-art {
+            padding-top: 160px;
         }
 
-        .modal-body {
-            width: min(900px, 100%);
-            border: 1px solid rgba(136, 157, 201, 0.32);
-            border-radius: 20px;
-            background: rgba(12, 17, 31, 0.92);
-            display: grid;
-            grid-template-columns: 320px 1fr;
-            overflow: hidden;
-            box-shadow: 0 22px 48px rgba(0, 0, 0, 0.48);
+        .cards.list-mode .card-name {
+            margin-top: 0;
+            font-size: 26px;
         }
 
-        .modal-cover {
-            min-height: 420px;
-            background-size: cover;
-            background-position: center;
+        .cards.list-mode .card-set {
+            font-size: 21px;
         }
 
-        .modal-content {
-            padding: 22px 24px;
+        @media (max-width: 1400px) {
+            .cards {
+                grid-template-columns: repeat(5, minmax(120px, 1fr));
+            }
         }
 
-        .close-btn {
-            background: transparent;
-            border: 0;
-            color: #dce8ff;
-            font-size: 22px;
-            float: right;
-            cursor: pointer;
-        }
-
-        .modal h2 {
-            margin-top: 16px;
-            margin-bottom: 8px;
-        }
-
-        .modal p {
-            color: #bdd0f6;
-            line-height: 1.75;
-            margin-bottom: 14px;
-        }
-
-        .detail-list {
-            margin-top: 10px;
-            display: grid;
-            gap: 8px;
-        }
-
-        .detail-item {
-            border: 1px solid rgba(136, 157, 201, 0.24);
-            border-radius: 10px;
-            padding: 10px 12px;
-            color: #d6e3ff;
-            background: rgba(12, 21, 38, 0.7);
-            font-size: 14px;
-        }
-
-        @media (max-width: 980px) {
-            .hero-inner {
+        @media (max-width: 1180px) {
+            .layout {
                 grid-template-columns: 1fr;
             }
 
-            .toolbar {
+            .sidebar {
+                border-right: 0;
+                border-bottom: 1px solid var(--line);
+            }
+
+            .topbar {
                 grid-template-columns: 1fr;
             }
 
-            .modal-body {
-                grid-template-columns: 1fr;
+            .view-switch {
+                justify-self: start;
+            }
+
+            .cards {
+                grid-template-columns: repeat(3, minmax(120px, 1fr));
+            }
+        }
+
+        @media (max-width: 760px) {
+            .cards {
+                grid-template-columns: repeat(2, minmax(120px, 1fr));
             }
         }
     </style>
 </head>
 <body>
-    <main class="page">
-        <section class="hero">
-            <div class="hero-inner">
-                <div>
-                    <span class="title-badge">SHANGHAI CULTURE & TOURISM · CARD ALBUM</span>
-                    <h1>上海文旅卡牌收藏</h1>
-                    <p class="subtitle">
-                        结合你提供的视觉方向：以图1氛围风格建立整体基调，采用图2的收藏页信息结构，并以图3与图4作为卡牌视觉模板。
-                        当前版本已预留参考图路径，替换本地图片后即可得到对应视觉。
-                    </p>
+    <div class="layout">
+        <aside class="sidebar">
+            <div class="brand">
+                <span class="brand-icon">沪</span>
+                <span>Shanghai Card Checker</span>
+            </div>
+            <ul class="menu">
+                <li><button class="active">Inicio</button></li>
+                <li><button>Interesado en comprar</button></li>
+                <li><button>Configuración</button></li>
+            </ul>
+        </aside>
+
+        <main class="content">
+            <header class="topbar">
+                <h1 class="title" id="titleText">Colección (32/102)</h1>
+
+                <div class="search-wrap">
+                    <input id="searchInput" type="text" placeholder="Buscar cartas">
+                    <button class="search-btn" id="searchBtn" aria-label="搜索">⌕</button>
                 </div>
-                <div class="meta">
-                    <div class="meta-card">
-                        <div class="meta-head"><span>收藏进度</span><strong id="progressText">8 / 12</strong></div>
-                        <div class="progress"><span id="progressBar"></span></div>
-                    </div>
-                    <div class="meta-card">
-                        <div class="meta-head"><span>今日新增</span><strong>+2 张</strong></div>
-                        <div style="color:var(--success);font-size:13px;">外滩历史建筑群 · 武康路风貌区</div>
-                    </div>
-                    <div class="meta-card">
-                        <div class="meta-head"><span>收集目标</span><strong style="color:var(--danger);">待解锁 4 张</strong></div>
-                        <div style="color:var(--text-secondary);font-size:13px;">完成 “申城夜游路线” 可解锁隐藏SR</div>
-                    </div>
+
+                <div class="view-switch">
+                    <button class="view-btn" data-view="list">☰ Lista</button>
+                    <button class="view-btn active" data-view="grid">▦ Cuadrícula</button>
                 </div>
-            </div>
-        </section>
+            </header>
 
-        <section class="toolbar">
-            <div class="chips" id="rarityChips">
-                <button class="chip active" data-rarity="ALL">全部</button>
-                <button class="chip" data-rarity="SSR">SSR</button>
-                <button class="chip" data-rarity="SR">SR</button>
-                <button class="chip" data-rarity="R">R</button>
-                <button class="chip" data-rarity="N">N</button>
-            </div>
-            <input class="search" id="searchInput" type="text" placeholder="搜索地标 / 区域 / 卡牌关键词">
-            <select class="sort" id="sortSelect" aria-label="排序方式">
-                <option value="rarity">按稀有度排序</option>
-                <option value="newest">按入手时间排序</option>
-                <option value="name">按名称排序</option>
-            </select>
-        </section>
-
-        <section class="grid" id="cardGrid"></section>
-    </main>
-
-    <aside class="modal" id="detailModal">
-        <div class="modal-body">
-            <div class="modal-cover" id="modalCover"></div>
-            <div class="modal-content">
-                <button class="close-btn" id="closeModal" aria-label="关闭">×</button>
-                <span class="title-badge" id="modalRarity">SR</span>
-                <h2 id="modalTitle">卡牌标题</h2>
-                <p id="modalDesc">卡牌描述内容</p>
-                <div class="detail-list" id="modalDetails"></div>
-            </div>
-        </div>
-    </aside>
+            <section id="cardGrid" class="cards"></section>
+        </main>
+    </div>
 
     <script>
-        /*
-          参考图替换说明：
-          - 图1（风格图）：assets/references/ref-style-01.jpg
-          - 图2（UI图）：assets/references/ref-ui-02.jpg
-          - 图3（卡牌设计）：assets/references/ref-card-03.jpg
-          - 图4（卡牌设计）：assets/references/ref-card-04.jpg
-          直接把对应文件放到该目录并保持文件名即可自动生效。
-        */
         const cards = [
-            {
-                name: "外滩万国建筑群",
-                district: "黄浦区",
-                route: "经典路线",
-                rarity: "SSR",
-                unlockedAt: "2026-04-05",
-                cover: "assets/references/ref-card-03.jpg",
-                desc: "海派建筑群的代表卡，记录近代城市风貌与滨江光影。",
-                detail: ["类型：建筑文脉", "推荐玩法：夜景打卡", "解锁方式：完成“浦江巡礼”任务链"]
-            },
-            {
-                name: "东方明珠广播电视塔",
-                district: "浦东新区",
-                route: "城市天际线",
-                rarity: "SR",
-                unlockedAt: "2026-04-01",
-                cover: "assets/references/ref-card-04.jpg",
-                desc: "上海天际线标志之一，城市记忆与现代都市精神的象征。",
-                detail: ["类型：现代地标", "推荐玩法：观景层AR拍照", "解锁方式：完成“陆家嘴三件套”挑战"]
-            },
-            {
-                name: "豫园九曲桥",
-                district: "黄浦区",
-                route: "江南古韵",
-                rarity: "SR",
-                unlockedAt: "2026-03-28",
-                cover: "assets/references/ref-card-03.jpg",
-                desc: "古典园林与城隍市井交融，展示上海历史文化底色。",
-                detail: ["类型：古典园林", "推荐玩法：非遗问答", "解锁方式：文博任务累计积分 80+"]
-            },
-            {
-                name: "武康大楼",
-                district: "徐汇区",
-                route: "梧桐街区",
-                rarity: "R",
-                unlockedAt: "2026-03-19",
-                cover: "assets/references/ref-card-04.jpg",
-                desc: "百年公寓建筑代表，见证上海都市生活方式的演变。",
-                detail: ["类型：历史建筑", "推荐玩法：建筑线稿临摹", "解锁方式：完成武康路线下定向"]
-            },
-            {
-                name: "上海中心大厦",
-                district: "浦东新区",
-                route: "城市天际线",
-                rarity: "R",
-                unlockedAt: "2026-03-12",
-                cover: "assets/references/ref-card-03.jpg",
-                desc: "超高层观景体验，俯瞰城市肌理与浦江水岸格局。",
-                detail: ["类型：现代地标", "推荐玩法：云端挑战", "解锁方式：完成观景问答 10/10"]
-            },
-            {
-                name: "龙华塔",
-                district: "徐汇区",
-                route: "古寺文化",
-                rarity: "N",
-                unlockedAt: "2026-03-03",
-                cover: "assets/references/ref-card-04.jpg",
-                desc: "千年古刹与古塔并存，呈现城市的历史纵深。",
-                detail: ["类型：宗教文化", "推荐玩法：塔影拼图", "解锁方式：首次到访自动点亮"]
-            },
-            {
-                name: "上海博物馆东馆",
-                district: "浦东新区",
-                route: "文博探索",
-                rarity: "N",
-                unlockedAt: "2026-02-24",
-                cover: "assets/references/ref-card-03.jpg",
-                desc: "当代博物馆空间与传统文物展陈的融合卡牌。",
-                detail: ["类型：文博场馆", "推荐玩法：馆藏线索寻宝", "解锁方式：完成首个展厅挑战"]
-            },
-            {
-                name: "北外滩滨江步道",
-                district: "虹口区",
-                route: "浦江漫游",
-                rarity: "N",
-                unlockedAt: "2026-02-10",
-                cover: "assets/references/ref-card-04.jpg",
-                desc: "滨江公共空间更新样本，适合慢行探索和城市观察。",
-                detail: ["类型：滨水空间", "推荐玩法：路线盖章", "解锁方式：累计步行里程达到 8km"]
-            }
+            { name: "外滩", set: "Huangpu 01", image: "assets/references/ref-card-03.jpg" },
+            { name: "武康", set: "Xuhui 04", image: "assets/references/ref-card-04.jpg", highlight: true },
+            { name: "豫园", set: "Huangpu 07", image: "assets/references/ref-card-03.jpg" },
+            { name: "陆家嘴", set: "Pudong 10", image: "assets/references/ref-card-04.jpg" },
+            { name: "静安寺", set: "Jingan 11", image: "assets/references/ref-card-03.jpg" },
+            { name: "徐家汇", set: "Xuhui 13", image: "assets/references/ref-card-04.jpg" },
+            { name: "外滩", set: "Huangpu 01", image: "assets/references/ref-card-03.jpg" },
+            { name: "武康", set: "Xuhui 04", image: "assets/references/ref-card-04.jpg" },
+            { name: "豫园", set: "Huangpu 07", image: "assets/references/ref-card-03.jpg" },
+            { name: "陆家嘴", set: "Pudong 10", image: "assets/references/ref-card-04.jpg" },
+            { name: "静安寺", set: "Jingan 11", image: "assets/references/ref-card-03.jpg" },
+            { name: "徐家汇", set: "Xuhui 13", image: "assets/references/ref-card-04.jpg" }
         ];
 
-        const rarityOrder = { SSR: 1, SR: 2, R: 3, N: 4 };
         const cardGrid = document.getElementById("cardGrid");
         const searchInput = document.getElementById("searchInput");
-        const sortSelect = document.getElementById("sortSelect");
-        const chips = Array.from(document.querySelectorAll(".chip"));
-        const detailModal = document.getElementById("detailModal");
-        const modalCover = document.getElementById("modalCover");
-        const modalRarity = document.getElementById("modalRarity");
-        const modalTitle = document.getElementById("modalTitle");
-        const modalDesc = document.getElementById("modalDesc");
-        const modalDetails = document.getElementById("modalDetails");
-        const closeModal = document.getElementById("closeModal");
-        const progressText = document.getElementById("progressText");
-        const progressBar = document.getElementById("progressBar");
+        const searchBtn = document.getElementById("searchBtn");
+        const viewButtons = [...document.querySelectorAll(".view-btn")];
+        const titleText = document.getElementById("titleText");
+        let currentView = "grid";
 
-        let activeRarity = "ALL";
-
-        function getRenderedCards() {
-            const keyword = searchInput.value.trim().toLowerCase();
-            let result = cards.filter((card) => {
-                const rarityMatched = activeRarity === "ALL" || card.rarity === activeRarity;
-                const textMatched =
-                    card.name.toLowerCase().includes(keyword) ||
-                    card.district.toLowerCase().includes(keyword) ||
-                    card.route.toLowerCase().includes(keyword);
-                return rarityMatched && textMatched;
-            });
-
-            const sorter = sortSelect.value;
-            if (sorter === "rarity") {
-                result = result.sort((a, b) => rarityOrder[a.rarity] - rarityOrder[b.rarity]);
-            } else if (sorter === "newest") {
-                result = result.sort((a, b) => (a.unlockedAt < b.unlockedAt ? 1 : -1));
-            } else if (sorter === "name") {
-                result = result.sort((a, b) => a.name.localeCompare(b.name, "zh-CN"));
-            }
-            return result;
-        }
-
-        function renderCards() {
-            const list = getRenderedCards();
+        function render(list) {
             cardGrid.innerHTML = "";
-
-            if (!list.length) {
-                const empty = document.createElement("div");
-                empty.className = "meta-card";
-                empty.style.gridColumn = "1 / -1";
-                empty.innerHTML = "未匹配到结果，请尝试其他关键词或筛选条件。";
-                cardGrid.appendChild(empty);
-                return;
-            }
+            titleText.textContent = `Colección (${list.length}/102)`;
 
             list.forEach((card) => {
-                const cardEl = document.createElement("article");
-                cardEl.className = "card";
-                cardEl.innerHTML = `
-                    <div class="card-cover" style="background-image:url('${card.cover}')">
-                        <div class="card-overlay"></div>
-                        <span class="tag-rarity tag-${card.rarity}">${card.rarity}</span>
-                        <div class="card-content">
-                            <div class="card-name">${card.name}</div>
-                            <div class="card-meta">
-                                <span>${card.district}</span>
-                                <span>${card.route}</span>
-                            </div>
-                        </div>
+                const el = document.createElement("article");
+                el.className = `card ${card.highlight ? "highlight" : ""}`;
+                el.innerHTML = `
+                    <div class="card-art" style="background-image: url('${card.image}')">
+                        ${card.highlight ? '<span class="dots">…</span>' : ""}
                     </div>
-                    <div class="card-footer">
-                        <span>入手时间：${card.unlockedAt}</span>
-                        <span>点击查看详情</span>
+                    <div>
+                        <div class="card-name">${card.name}</div>
+                        <div class="card-set">${card.set}</div>
                     </div>
                 `;
-
-                cardEl.addEventListener("click", () => openModal(card));
-                cardGrid.appendChild(cardEl);
+                cardGrid.appendChild(el);
             });
         }
 
-        function openModal(card) {
-            modalCover.style.backgroundImage = `url('${card.cover}')`;
-            modalRarity.textContent = card.rarity;
-            modalTitle.textContent = card.name;
-            modalDesc.textContent = card.desc;
-            modalDetails.innerHTML = card.detail
-                .map((item) => `<div class="detail-item">${item}</div>`)
-                .join("");
-            detailModal.classList.add("open");
-        }
-
-        function setProgress() {
-            const total = 12;
-            const owned = cards.length;
-            progressText.textContent = `${owned} / ${total}`;
-            progressBar.style.width = `${Math.round((owned / total) * 100)}%`;
-        }
-
-        chips.forEach((chip) => {
-            chip.addEventListener("click", () => {
-                chips.forEach((c) => c.classList.remove("active"));
-                chip.classList.add("active");
-                activeRarity = chip.dataset.rarity;
-                renderCards();
+        function doSearch() {
+            const keyword = searchInput.value.trim().toLowerCase();
+            const filtered = cards.filter((card) => {
+                return card.name.toLowerCase().includes(keyword) || card.set.toLowerCase().includes(keyword);
             });
-        });
+            render(filtered);
+        }
 
-        searchInput.addEventListener("input", renderCards);
-        sortSelect.addEventListener("change", renderCards);
-        closeModal.addEventListener("click", () => detailModal.classList.remove("open"));
-        detailModal.addEventListener("click", (event) => {
-            if (event.target === detailModal) {
-                detailModal.classList.remove("open");
+        searchInput.addEventListener("keydown", (event) => {
+            if (event.key === "Enter") {
+                doSearch();
             }
         });
+        searchBtn.addEventListener("click", doSearch);
 
-        setProgress();
-        renderCards();
+        viewButtons.forEach((button) => {
+            button.addEventListener("click", () => {
+                currentView = button.dataset.view;
+                viewButtons.forEach((btn) => btn.classList.remove("active"));
+                button.classList.add("active");
+                cardGrid.classList.toggle("list-mode", currentView === "list");
+            });
+        });
+
+        render(cards);
     </script>
 </body>
 </html>
