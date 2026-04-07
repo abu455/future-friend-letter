@@ -1,0 +1,402 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>上海文旅卡牌收藏</title>
+    <style>
+        :root {
+            --bg: #f5f7fb;
+            --panel: #ffffff;
+            --line: #e9edf5;
+            --text: #2a3444;
+            --muted: #8d98ab;
+            --brand: #1ec8ef;
+            --brand-strong: #05b1df;
+            --shadow: 0 8px 20px rgba(24, 39, 75, 0.08);
+            --radius: 10px;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            background: var(--bg);
+            color: var(--text);
+            font-family: "PingFang SC", "Microsoft YaHei", "Segoe UI", sans-serif;
+            min-height: 100vh;
+        }
+
+        .layout {
+            display: grid;
+            grid-template-columns: 220px 1fr;
+            min-height: 100vh;
+        }
+
+        .sidebar {
+            background: #fff;
+            border-right: 1px solid var(--line);
+            padding: 18px 12px;
+        }
+
+        .brand {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-weight: 700;
+            color: #4c576c;
+            margin-bottom: 14px;
+            padding: 0 8px;
+        }
+
+        .brand-icon {
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #62dfff, #19bee8);
+            color: #fff;
+            display: grid;
+            place-items: center;
+            font-size: 13px;
+            font-weight: 700;
+        }
+
+        .menu {
+            list-style: none;
+            display: grid;
+            gap: 6px;
+        }
+
+        .menu button {
+            width: 100%;
+            text-align: left;
+            border: 0;
+            border-radius: 8px;
+            background: transparent;
+            color: #92a0b7;
+            padding: 10px 12px;
+            font-size: 15px;
+            font-weight: 600;
+            cursor: pointer;
+        }
+
+        .menu button.active {
+            color: #2b3444;
+            background: #fff;
+            box-shadow: 0 3px 12px rgba(13, 29, 64, 0.08);
+            border: 1px solid #edf1f8;
+        }
+
+        .content {
+            padding: 14px 18px 26px;
+        }
+
+        .topbar {
+            display: grid;
+            grid-template-columns: auto minmax(200px, 430px) auto;
+            gap: 10px;
+            align-items: center;
+            margin-bottom: 12px;
+        }
+
+        .title {
+            font-size: 34px;
+            font-weight: 800;
+            letter-spacing: 0.2px;
+            color: #2d384d;
+        }
+
+        .search-wrap {
+            display: grid;
+            grid-template-columns: 1fr 40px;
+            background: #fff;
+            border: 1px solid var(--line);
+            border-radius: 8px;
+            overflow: hidden;
+        }
+
+        .search-wrap input {
+            border: 0;
+            outline: none;
+            padding: 10px 12px;
+            font-size: 14px;
+            color: #40506a;
+        }
+
+        .search-wrap input::placeholder {
+            color: #b0bbcd;
+        }
+
+        .search-btn {
+            border: 0;
+            background: var(--brand);
+            color: white;
+            cursor: pointer;
+            font-size: 17px;
+            font-weight: 700;
+        }
+
+        .view-switch {
+            justify-self: end;
+            display: flex;
+            gap: 8px;
+        }
+
+        .view-btn {
+            border: 0;
+            background: #9faac0;
+            color: #fff;
+            border-radius: 6px;
+            padding: 9px 14px;
+            font-size: 14px;
+            font-weight: 700;
+            cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .view-btn.active {
+            background: var(--brand);
+        }
+
+        .cards {
+            display: grid;
+            grid-template-columns: repeat(6, minmax(120px, 1fr));
+            gap: 12px;
+        }
+
+        .cards.list-mode {
+            grid-template-columns: 1fr;
+        }
+
+        .card {
+            background: #fff;
+            border: 1px solid #edf1f7;
+            border-radius: 8px;
+            padding: 8px;
+            box-shadow: 0 3px 10px rgba(29, 47, 83, 0.06);
+            cursor: pointer;
+        }
+
+        .card:hover {
+            box-shadow: var(--shadow);
+            transform: translateY(-1px);
+        }
+
+        .card-art {
+            position: relative;
+            border: 3px solid #efd12e;
+            border-radius: 4px;
+            background:
+                linear-gradient(130deg, rgba(87, 170, 255, 0.25), rgba(240, 245, 255, 0.2)),
+                #ccd6ea;
+            background-size: cover;
+            background-position: center;
+            padding-top: 140%;
+            overflow: hidden;
+        }
+
+        .card-art::after {
+            content: "";
+            position: absolute;
+            inset: 0;
+            border: 2px solid rgba(255, 255, 255, 0.32);
+            pointer-events: none;
+        }
+
+        .card.highlight .card-art::before {
+            content: "";
+            position: absolute;
+            inset: 0;
+            background: rgba(0, 0, 0, 0.5);
+            z-index: 2;
+        }
+
+        .card.highlight .dots {
+            position: absolute;
+            right: 8px;
+            bottom: 4px;
+            z-index: 3;
+            font-size: 22px;
+            color: #fff;
+        }
+
+        .card-name {
+            margin-top: 7px;
+            color: #2c3546;
+            font-weight: 800;
+            font-size: 30px;
+            line-height: 1.05;
+        }
+
+        .card-set {
+            color: #8a95a8;
+            font-weight: 700;
+            font-size: 24px;
+            margin-top: 2px;
+        }
+
+        .cards.list-mode .card {
+            display: grid;
+            grid-template-columns: 120px 1fr;
+            gap: 12px;
+            align-items: center;
+        }
+
+        .cards.list-mode .card .card-art {
+            padding-top: 160px;
+        }
+
+        .cards.list-mode .card-name {
+            margin-top: 0;
+            font-size: 26px;
+        }
+
+        .cards.list-mode .card-set {
+            font-size: 21px;
+        }
+
+        @media (max-width: 1400px) {
+            .cards {
+                grid-template-columns: repeat(5, minmax(120px, 1fr));
+            }
+        }
+
+        @media (max-width: 1180px) {
+            .layout {
+                grid-template-columns: 1fr;
+            }
+
+            .sidebar {
+                border-right: 0;
+                border-bottom: 1px solid var(--line);
+            }
+
+            .topbar {
+                grid-template-columns: 1fr;
+            }
+
+            .view-switch {
+                justify-self: start;
+            }
+
+            .cards {
+                grid-template-columns: repeat(3, minmax(120px, 1fr));
+            }
+        }
+
+        @media (max-width: 760px) {
+            .cards {
+                grid-template-columns: repeat(2, minmax(120px, 1fr));
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="layout">
+        <aside class="sidebar">
+            <div class="brand">
+                <span class="brand-icon">沪</span>
+                <span>Shanghai Card Checker</span>
+            </div>
+            <ul class="menu">
+                <li><button class="active">Inicio</button></li>
+                <li><button>Interesado en comprar</button></li>
+                <li><button>Configuración</button></li>
+            </ul>
+        </aside>
+
+        <main class="content">
+            <header class="topbar">
+                <h1 class="title" id="titleText">Colección (32/102)</h1>
+
+                <div class="search-wrap">
+                    <input id="searchInput" type="text" placeholder="Buscar cartas">
+                    <button class="search-btn" id="searchBtn" aria-label="搜索">⌕</button>
+                </div>
+
+                <div class="view-switch">
+                    <button class="view-btn" data-view="list">☰ Lista</button>
+                    <button class="view-btn active" data-view="grid">▦ Cuadrícula</button>
+                </div>
+            </header>
+
+            <section id="cardGrid" class="cards"></section>
+        </main>
+    </div>
+
+    <script>
+        const cards = [
+            { name: "外滩", set: "Huangpu 01", image: "assets/references/ref-card-03.jpg" },
+            { name: "武康", set: "Xuhui 04", image: "assets/references/ref-card-04.jpg", highlight: true },
+            { name: "豫园", set: "Huangpu 07", image: "assets/references/ref-card-03.jpg" },
+            { name: "陆家嘴", set: "Pudong 10", image: "assets/references/ref-card-04.jpg" },
+            { name: "静安寺", set: "Jingan 11", image: "assets/references/ref-card-03.jpg" },
+            { name: "徐家汇", set: "Xuhui 13", image: "assets/references/ref-card-04.jpg" },
+            { name: "外滩", set: "Huangpu 01", image: "assets/references/ref-card-03.jpg" },
+            { name: "武康", set: "Xuhui 04", image: "assets/references/ref-card-04.jpg" },
+            { name: "豫园", set: "Huangpu 07", image: "assets/references/ref-card-03.jpg" },
+            { name: "陆家嘴", set: "Pudong 10", image: "assets/references/ref-card-04.jpg" },
+            { name: "静安寺", set: "Jingan 11", image: "assets/references/ref-card-03.jpg" },
+            { name: "徐家汇", set: "Xuhui 13", image: "assets/references/ref-card-04.jpg" }
+        ];
+
+        const cardGrid = document.getElementById("cardGrid");
+        const searchInput = document.getElementById("searchInput");
+        const searchBtn = document.getElementById("searchBtn");
+        const viewButtons = [...document.querySelectorAll(".view-btn")];
+        const titleText = document.getElementById("titleText");
+        let currentView = "grid";
+
+        function render(list) {
+            cardGrid.innerHTML = "";
+            titleText.textContent = `Colección (${list.length}/102)`;
+
+            list.forEach((card) => {
+                const el = document.createElement("article");
+                el.className = `card ${card.highlight ? "highlight" : ""}`;
+                el.innerHTML = `
+                    <div class="card-art" style="background-image: url('${card.image}')">
+                        ${card.highlight ? '<span class="dots">…</span>' : ""}
+                    </div>
+                    <div>
+                        <div class="card-name">${card.name}</div>
+                        <div class="card-set">${card.set}</div>
+                    </div>
+                `;
+                cardGrid.appendChild(el);
+            });
+        }
+
+        function doSearch() {
+            const keyword = searchInput.value.trim().toLowerCase();
+            const filtered = cards.filter((card) => {
+                return card.name.toLowerCase().includes(keyword) || card.set.toLowerCase().includes(keyword);
+            });
+            render(filtered);
+        }
+
+        searchInput.addEventListener("keydown", (event) => {
+            if (event.key === "Enter") {
+                doSearch();
+            }
+        });
+        searchBtn.addEventListener("click", doSearch);
+
+        viewButtons.forEach((button) => {
+            button.addEventListener("click", () => {
+                currentView = button.dataset.view;
+                viewButtons.forEach((btn) => btn.classList.remove("active"));
+                button.classList.add("active");
+                cardGrid.classList.toggle("list-mode", currentView === "list");
+            });
+        });
+
+        render(cards);
+    </script>
+</body>
+</html>
