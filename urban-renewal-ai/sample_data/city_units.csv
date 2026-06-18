@@ -1,0 +1,501 @@
+unit_id,case_name,city,district,longitude,latitude,space_type,treat,update_year
+SHWB_001,Shanghai West Bund,Shanghai,Control Fringe,121.46860633537496,31.190545633585568,waterfront_core,0,2020
+SHWB_002,Shanghai West Bund,Shanghai,Core,121.44632061888495,31.181577052649654,waterfront_core,1,2020
+SHWB_003,Shanghai West Bund,Shanghai,Core,121.45136310994634,31.180098740366994,cultural_core,1,2020
+SHWB_004,Shanghai West Bund,Shanghai,Control Fringe,121.46117678921249,31.17338685378594,waterfront_core,0,2020
+SHWB_005,Shanghai West Bund,Shanghai,Core,121.46113846149908,31.17380955376686,cultural_core,1,2020
+SHWB_006,Shanghai West Bund,Shanghai,Core,121.4203532954944,31.189910878478052,industrial_reuse_area,1,2020
+SHWB_007,Shanghai West Bund,Shanghai,Control Fringe,121.45392251218642,31.199090409928406,residential_edge,0,2020
+SHWB_008,Shanghai West Bund,Shanghai,Core,121.45093087760927,31.17706501486706,waterfront_core,1,2020
+SHWB_009,Shanghai West Bund,Shanghai,Core,121.45726804858668,31.185441160171074,cultural_core,1,2020
+SHWB_010,Shanghai West Bund,Shanghai,Core,121.44039724526368,31.19360628333559,industrial_reuse_area,1,2020
+SHWB_011,Shanghai West Bund,Shanghai,Control Fringe,121.46223961741553,31.18614604030889,industrial_reuse_area,0,2020
+SHWB_012,Shanghai West Bund,Shanghai,Core,121.45950233660683,31.177190579590103,cultural_core,1,2020
+SHWB_013,Shanghai West Bund,Shanghai,Core,121.46327864766505,31.201921772658682,waterfront_core,1,2020
+SHWB_014,Shanghai West Bund,Shanghai,Control Fringe,121.44496512600996,31.200382934418617,industrial_reuse_area,0,2020
+SHWB_015,Shanghai West Bund,Shanghai,Control Fringe,121.46383163448832,31.192408557868013,cultural_core,0,2020
+SHWB_016,Shanghai West Bund,Shanghai,Core,121.43420077936916,31.19318566229223,cultural_core,1,2020
+SHWB_017,Shanghai West Bund,Shanghai,Core,121.45603594286477,31.171254001285522,industrial_reuse_area,1,2020
+SHWB_018,Shanghai West Bund,Shanghai,Core,121.45820634926424,31.214535411685183,cultural_core,1,2020
+SHWB_019,Shanghai West Bund,Shanghai,Core,121.46271593577094,31.182739043867223,cultural_core,1,2020
+SHWB_020,Shanghai West Bund,Shanghai,Core,121.43447115052852,31.20225989278798,waterfront_core,1,2020
+SHWB_021,Shanghai West Bund,Shanghai,Control Fringe,121.45600690922356,31.188739873044643,cultural_core,0,2020
+SHWB_022,Shanghai West Bund,Shanghai,Core,121.44925312703671,31.199260226803244,cultural_core,1,2020
+SHWB_023,Shanghai West Bund,Shanghai,Core,121.44801633057581,31.18882575220773,cultural_core,1,2020
+SHWB_024,Shanghai West Bund,Shanghai,Control Fringe,121.46397157660661,31.184098616850303,cultural_core,0,2020
+SHWB_025,Shanghai West Bund,Shanghai,Core,121.45358419825901,31.18691608208194,waterfront_core,1,2020
+SHWB_026,Shanghai West Bund,Shanghai,Core,121.45862502811924,31.16870325507274,industrial_reuse_area,1,2020
+SHWB_027,Shanghai West Bund,Shanghai,Core,121.44717927694106,31.175785235950148,waterfront_core,1,2020
+SHWB_028,Shanghai West Bund,Shanghai,Core,121.45519976859495,31.194581718903486,industrial_reuse_area,1,2020
+SHWB_029,Shanghai West Bund,Shanghai,Core,121.44312462570703,31.156753178393945,waterfront_core,1,2020
+SHWB_030,Shanghai West Bund,Shanghai,Control Fringe,121.45699718385717,31.180051842557383,cultural_core,0,2020
+SHWB_031,Shanghai West Bund,Shanghai,Control Fringe,121.45353652294718,31.192711274831442,industrial_reuse_area,0,2020
+SHWB_032,Shanghai West Bund,Shanghai,Control Fringe,121.44155327996116,31.17637481486167,industrial_reuse_area,0,2020
+SHWB_033,Shanghai West Bund,Shanghai,Control Fringe,121.4505412257199,31.177941076635843,industrial_reuse_area,0,2020
+SHWB_034,Shanghai West Bund,Shanghai,Core,121.43761077426727,31.18701346425507,waterfront_core,1,2020
+SHWB_035,Shanghai West Bund,Shanghai,Core,121.43436609758243,31.176443065471155,residential_edge,1,2020
+SHWB_036,Shanghai West Bund,Shanghai,Control Fringe,121.45036208907571,31.18035817619994,cultural_core,0,2020
+SHWB_037,Shanghai West Bund,Shanghai,Control Fringe,121.44204925345173,31.188976915473685,cultural_core,0,2020
+SHWB_038,Shanghai West Bund,Shanghai,Core,121.44500937491033,31.1909637571548,industrial_reuse_area,1,2020
+SHWB_039,Shanghai West Bund,Shanghai,Control Fringe,121.42188190246773,31.17457989121832,cultural_core,0,2020
+SHWB_040,Shanghai West Bund,Shanghai,Core,121.4550687977202,31.17365525652627,industrial_reuse_area,1,2020
+SHWB_041,Shanghai West Bund,Shanghai,Control Fringe,121.45576339431727,31.183229591731966,industrial_reuse_area,0,2020
+SHWB_042,Shanghai West Bund,Shanghai,Core,121.43333847555364,31.185663321770484,waterfront_core,1,2020
+SHWB_043,Shanghai West Bund,Shanghai,Core,121.45420802457163,31.167312537719017,waterfront_core,1,2020
+SHWB_044,Shanghai West Bund,Shanghai,Core,121.44405499550508,31.189055951708678,waterfront_core,1,2020
+SHWB_045,Shanghai West Bund,Shanghai,Core,121.46522804325205,31.19090105567679,industrial_reuse_area,1,2020
+SHWB_046,Shanghai West Bund,Shanghai,Core,121.45458443098632,31.17898429389744,waterfront_core,1,2020
+SHWB_047,Shanghai West Bund,Shanghai,Core,121.46171366093151,31.182585060853338,industrial_reuse_area,1,2020
+SHWB_048,Shanghai West Bund,Shanghai,Control Fringe,121.45106252547414,31.196997370171662,cultural_core,0,2020
+SHWB_049,Shanghai West Bund,Shanghai,Control Fringe,121.44519940440097,31.182387467045128,waterfront_core,0,2020
+SHWB_050,Shanghai West Bund,Shanghai,Core,121.44588799624364,31.17413389228345,cultural_core,1,2020
+SHWB_051,Shanghai West Bund,Shanghai,Core,121.4384623518712,31.203390456415693,cultural_core,1,2020
+SHWB_052,Shanghai West Bund,Shanghai,Control Fringe,121.45714821616667,31.18189854482975,waterfront_core,0,2020
+SHWB_053,Shanghai West Bund,Shanghai,Core,121.4367940403271,31.193552327541685,residential_edge,1,2020
+SHWB_054,Shanghai West Bund,Shanghai,Core,121.45398743271174,31.195762782999264,industrial_reuse_area,1,2020
+SHWB_055,Shanghai West Bund,Shanghai,Control Fringe,121.44625666161762,31.193881758088537,industrial_reuse_area,0,2020
+SHWB_056,Shanghai West Bund,Shanghai,Core,121.44632495141579,31.186672318538424,waterfront_core,1,2020
+SHWB_057,Shanghai West Bund,Shanghai,Core,121.44811103515862,31.190163557880684,cultural_core,1,2020
+SHWB_058,Shanghai West Bund,Shanghai,Core,121.46369083351725,31.186566557457162,waterfront_core,1,2020
+SHWB_059,Shanghai West Bund,Shanghai,Core,121.45060426478038,31.188609231580973,cultural_core,1,2020
+SHWB_060,Shanghai West Bund,Shanghai,Control Fringe,121.45905361940744,31.19721550876392,residential_edge,0,2020
+SHWB_061,Shanghai West Bund,Shanghai,Core,121.43815749318468,31.178760693028316,residential_edge,1,2020
+SHWB_062,Shanghai West Bund,Shanghai,Control Fringe,121.46410169262025,31.18391047893063,residential_edge,0,2020
+SHWB_063,Shanghai West Bund,Shanghai,Core,121.44442428535943,31.1918164958454,cultural_core,1,2020
+SHWB_064,Shanghai West Bund,Shanghai,Core,121.4568677576054,31.184100850631783,industrial_reuse_area,1,2020
+SHWB_065,Shanghai West Bund,Shanghai,Core,121.45201995171301,31.19389322584332,residential_edge,1,2020
+SHWB_066,Shanghai West Bund,Shanghai,Core,121.44910100460652,31.183654153805488,cultural_core,1,2020
+SHWB_067,Shanghai West Bund,Shanghai,Core,121.44578767002409,31.17860437752076,waterfront_core,1,2020
+SHWB_068,Shanghai West Bund,Shanghai,Core,121.4473561522037,31.173449793902318,waterfront_core,1,2020
+SHWB_069,Shanghai West Bund,Shanghai,Core,121.45199817300741,31.19502844562949,industrial_reuse_area,1,2020
+SHWB_070,Shanghai West Bund,Shanghai,Core,121.44177056380693,31.17589127852347,waterfront_core,1,2020
+SHWB_071,Shanghai West Bund,Shanghai,Core,121.41928193852742,31.19489995854261,residential_edge,1,2020
+SHWB_072,Shanghai West Bund,Shanghai,Core,121.44988282380083,31.203534188963694,waterfront_core,1,2020
+SHWB_073,Shanghai West Bund,Shanghai,Core,121.43995943643361,31.179640317287067,cultural_core,1,2020
+SHWB_074,Shanghai West Bund,Shanghai,Core,121.44026122212276,31.186821640480666,residential_edge,1,2020
+SHWB_075,Shanghai West Bund,Shanghai,Core,121.45722712336082,31.197382336330868,industrial_reuse_area,1,2020
+SHWB_076,Shanghai West Bund,Shanghai,Core,121.43270388196468,31.196389042888224,industrial_reuse_area,1,2020
+SHWB_077,Shanghai West Bund,Shanghai,Core,121.44688973233613,31.178629833162113,residential_edge,1,2020
+SHWB_078,Shanghai West Bund,Shanghai,Core,121.44560182054326,31.1698323745261,industrial_reuse_area,1,2020
+SHWB_079,Shanghai West Bund,Shanghai,Core,121.45530493203577,31.19120955022628,waterfront_core,1,2020
+SHWB_080,Shanghai West Bund,Shanghai,Control Fringe,121.44567982264238,31.18531090476746,waterfront_core,0,2020
+SHWB_081,Shanghai West Bund,Shanghai,Core,121.45701589228283,31.18835817153906,waterfront_core,1,2020
+SHWB_082,Shanghai West Bund,Shanghai,Core,121.45784619366468,31.194318018283376,waterfront_core,1,2020
+SHWB_083,Shanghai West Bund,Shanghai,Core,121.45812501949062,31.17075424002122,industrial_reuse_area,1,2020
+SHWB_084,Shanghai West Bund,Shanghai,Control Fringe,121.4469008249246,31.186120422901737,waterfront_core,0,2020
+SHWB_085,Shanghai West Bund,Shanghai,Control Fringe,121.45365378643974,31.17685464732415,waterfront_core,0,2020
+SHWB_086,Shanghai West Bund,Shanghai,Core,121.4576385465293,31.20467069931657,cultural_core,1,2020
+SHWB_087,Shanghai West Bund,Shanghai,Core,121.44839240097677,31.182844851767054,industrial_reuse_area,1,2020
+SHWB_088,Shanghai West Bund,Shanghai,Control Fringe,121.46430061804317,31.18808784496495,industrial_reuse_area,0,2020
+SHWB_089,Shanghai West Bund,Shanghai,Core,121.47752404978907,31.18712650109044,waterfront_core,1,2020
+SHWB_090,Shanghai West Bund,Shanghai,Control Fringe,121.47349985926857,31.185592622982934,cultural_core,0,2020
+SHWB_091,Shanghai West Bund,Shanghai,Core,121.45765249498814,31.184055968970767,waterfront_core,1,2020
+SHWB_092,Shanghai West Bund,Shanghai,Control Fringe,121.45486585886498,31.17892100866503,waterfront_core,0,2020
+SHWB_093,Shanghai West Bund,Shanghai,Core,121.4401868356484,31.172192146055046,waterfront_core,1,2020
+SHWB_094,Shanghai West Bund,Shanghai,Control Fringe,121.45269910561493,31.17307313151482,waterfront_core,0,2020
+SHWB_095,Shanghai West Bund,Shanghai,Core,121.4790269438696,31.179438528769,waterfront_core,1,2020
+SHWB_096,Shanghai West Bund,Shanghai,Control Fringe,121.46597351081464,31.189461672084075,cultural_core,0,2020
+SHWB_097,Shanghai West Bund,Shanghai,Control Fringe,121.44649544560205,31.185295623424622,residential_edge,0,2020
+SHWB_098,Shanghai West Bund,Shanghai,Core,121.43990841669297,31.193983227751808,waterfront_core,1,2020
+SHWB_099,Shanghai West Bund,Shanghai,Core,121.44075470831844,31.19399615404271,waterfront_core,1,2020
+SHWB_100,Shanghai West Bund,Shanghai,Core,121.43675737468119,31.189195323169265,waterfront_core,1,2020
+SHWB_101,Shanghai West Bund,Shanghai,Core,121.44800465477799,31.17126234404477,residential_edge,1,2020
+SHWB_102,Shanghai West Bund,Shanghai,Core,121.44407473101055,31.182118439751093,cultural_core,1,2020
+SHWB_103,Shanghai West Bund,Shanghai,Core,121.45182563107076,31.173747675865048,waterfront_core,1,2020
+SHWB_104,Shanghai West Bund,Shanghai,Core,121.44534688472596,31.184859347304215,cultural_core,1,2020
+SHWB_105,Shanghai West Bund,Shanghai,Control Fringe,121.44687111517253,31.189634879075218,waterfront_core,0,2020
+SHWB_106,Shanghai West Bund,Shanghai,Core,121.45678903199587,31.165328085041494,waterfront_core,1,2020
+SHWB_107,Shanghai West Bund,Shanghai,Core,121.45794757347956,31.191894585584684,industrial_reuse_area,1,2020
+SHWB_108,Shanghai West Bund,Shanghai,Control Fringe,121.45213610816413,31.182022321194033,waterfront_core,0,2020
+SHWB_109,Shanghai West Bund,Shanghai,Control Fringe,121.47198468279129,31.177801238102962,residential_edge,0,2020
+SHWB_110,Shanghai West Bund,Shanghai,Core,121.47155552471183,31.16269374760004,industrial_reuse_area,1,2020
+SHWB_111,Shanghai West Bund,Shanghai,Core,121.4554718073062,31.173792078197234,industrial_reuse_area,1,2020
+SHWB_112,Shanghai West Bund,Shanghai,Core,121.46737027892323,31.167921378522326,waterfront_core,1,2020
+SHWB_113,Shanghai West Bund,Shanghai,Core,121.45402677694787,31.18571786312415,waterfront_core,1,2020
+SHWB_114,Shanghai West Bund,Shanghai,Core,121.45908321278947,31.191955276418952,waterfront_core,1,2020
+SHWB_115,Shanghai West Bund,Shanghai,Core,121.43906304810969,31.18605818207239,cultural_core,1,2020
+SHWB_116,Shanghai West Bund,Shanghai,Core,121.44192925711586,31.190357001705408,waterfront_core,1,2020
+SHWB_117,Shanghai West Bund,Shanghai,Core,121.45510490173051,31.199203560425477,residential_edge,1,2020
+SHWB_118,Shanghai West Bund,Shanghai,Core,121.44808737873079,31.16735300374483,cultural_core,1,2020
+SHWB_119,Shanghai West Bund,Shanghai,Core,121.4600927284684,31.182253858304854,waterfront_core,1,2020
+SHWB_120,Shanghai West Bund,Shanghai,Control Fringe,121.4473112796123,31.18452732759545,cultural_core,0,2020
+SHWB_121,Shanghai West Bund,Shanghai,Core,121.44169915440747,31.189428830967046,industrial_reuse_area,1,2020
+SHWB_122,Shanghai West Bund,Shanghai,Core,121.43927753304442,31.18440349460751,waterfront_core,1,2020
+SHWB_123,Shanghai West Bund,Shanghai,Control Fringe,121.455908298941,31.18861521400726,industrial_reuse_area,0,2020
+SHWB_124,Shanghai West Bund,Shanghai,Core,121.46156450303829,31.181528986308066,waterfront_core,1,2020
+SHWB_125,Shanghai West Bund,Shanghai,Control Fringe,121.45138113893523,31.189203871497906,cultural_core,0,2020
+SHWB_126,Shanghai West Bund,Shanghai,Core,121.44558727052838,31.187877592952884,cultural_core,1,2020
+SHWB_127,Shanghai West Bund,Shanghai,Core,121.45401600014435,31.202877687298464,cultural_core,1,2020
+SHWB_128,Shanghai West Bund,Shanghai,Core,121.45624960647208,31.188600771989933,cultural_core,1,2020
+SHWB_129,Shanghai West Bund,Shanghai,Core,121.47781506529279,31.176287488582716,cultural_core,1,2020
+SHWB_130,Shanghai West Bund,Shanghai,Core,121.43798316570712,31.17063514159574,waterfront_core,1,2020
+SHWB_131,Shanghai West Bund,Shanghai,Control Fringe,121.44574910650105,31.19432287911512,industrial_reuse_area,0,2020
+SHWB_132,Shanghai West Bund,Shanghai,Core,121.44913234093436,31.161446192821117,cultural_core,1,2020
+SHWB_133,Shanghai West Bund,Shanghai,Core,121.46226715986488,31.18303401462491,industrial_reuse_area,1,2020
+SHWB_134,Shanghai West Bund,Shanghai,Control Fringe,121.46707137638637,31.19324466092789,industrial_reuse_area,0,2020
+SHWB_135,Shanghai West Bund,Shanghai,Control Fringe,121.44227717834086,31.180750430274028,waterfront_core,0,2020
+SHWB_136,Shanghai West Bund,Shanghai,Control Fringe,121.43311286590368,31.19158636098484,waterfront_core,0,2020
+SHWB_137,Shanghai West Bund,Shanghai,Core,121.42647951160136,31.193637580631673,waterfront_core,1,2020
+SHWB_138,Shanghai West Bund,Shanghai,Core,121.43784514235571,31.179652564472732,cultural_core,1,2020
+SHWB_139,Shanghai West Bund,Shanghai,Core,121.45163283165522,31.206790788788343,waterfront_core,1,2020
+SHWB_140,Shanghai West Bund,Shanghai,Core,121.43733889163477,31.193337100462333,cultural_core,1,2020
+SHWB_141,Shanghai West Bund,Shanghai,Core,121.45727282604065,31.1826073021411,cultural_core,1,2020
+SHWB_142,Shanghai West Bund,Shanghai,Control Fringe,121.46555579120187,31.166875790491833,industrial_reuse_area,0,2020
+SHWB_143,Shanghai West Bund,Shanghai,Control Fringe,121.45219370199807,31.18387698532886,waterfront_core,0,2020
+SHWB_144,Shanghai West Bund,Shanghai,Core,121.45521476583139,31.177069109814582,cultural_core,1,2020
+SHWB_145,Shanghai West Bund,Shanghai,Core,121.47529449648286,31.189511690031136,waterfront_core,1,2020
+SHWB_146,Shanghai West Bund,Shanghai,Core,121.45091740969208,31.18904313671078,waterfront_core,1,2020
+SHWB_147,Shanghai West Bund,Shanghai,Control Fringe,121.4600192256285,31.176861013633086,industrial_reuse_area,0,2020
+SHWB_148,Shanghai West Bund,Shanghai,Control Fringe,121.45502800292992,31.16998416430419,cultural_core,0,2020
+SHWB_149,Shanghai West Bund,Shanghai,Core,121.45956566971775,31.179326836231255,waterfront_core,1,2020
+SHWB_150,Shanghai West Bund,Shanghai,Core,121.44716899817054,31.183077278996898,waterfront_core,1,2020
+SHWB_151,Shanghai West Bund,Shanghai,Control Fringe,121.43085590692502,31.198554435940814,industrial_reuse_area,0,2020
+SHWB_152,Shanghai West Bund,Shanghai,Control Fringe,121.46752958858654,31.1782698128242,waterfront_core,0,2020
+SHWB_153,Shanghai West Bund,Shanghai,Core,121.46616354494347,31.175004041600445,waterfront_core,1,2020
+SHWB_154,Shanghai West Bund,Shanghai,Control Fringe,121.45991832217744,31.195764726705253,industrial_reuse_area,0,2020
+SHWB_155,Shanghai West Bund,Shanghai,Core,121.4652116946144,31.18595886600075,industrial_reuse_area,1,2020
+SHWB_156,Shanghai West Bund,Shanghai,Control Fringe,121.44185232882046,31.178875778691424,industrial_reuse_area,0,2020
+SHWB_157,Shanghai West Bund,Shanghai,Core,121.44374756835013,31.17537836143239,cultural_core,1,2020
+SHWB_158,Shanghai West Bund,Shanghai,Control Fringe,121.43653293298898,31.178853298351402,waterfront_core,0,2020
+SHWB_159,Shanghai West Bund,Shanghai,Control Fringe,121.46635359911487,31.182368676037253,cultural_core,0,2020
+SHWB_160,Shanghai West Bund,Shanghai,Core,121.44765605592396,31.178807577831027,industrial_reuse_area,1,2020
+SHWB_161,Shanghai West Bund,Shanghai,Core,121.4466233992378,31.17285798845273,waterfront_core,1,2020
+SHWB_162,Shanghai West Bund,Shanghai,Control Fringe,121.46174810442368,31.191930752019157,residential_edge,0,2020
+SHWB_163,Shanghai West Bund,Shanghai,Core,121.4545738593997,31.185296977692147,waterfront_core,1,2020
+SHWB_164,Shanghai West Bund,Shanghai,Core,121.4742447085954,31.184734104648143,cultural_core,1,2020
+SHWB_165,Shanghai West Bund,Shanghai,Control Fringe,121.47780665196412,31.191978590904572,residential_edge,0,2020
+SHWB_166,Shanghai West Bund,Shanghai,Core,121.45453494562278,31.18210974378463,cultural_core,1,2020
+SHWB_167,Shanghai West Bund,Shanghai,Core,121.43551189499516,31.17821421991419,waterfront_core,1,2020
+SHWB_168,Shanghai West Bund,Shanghai,Core,121.45066931877925,31.198041351675087,industrial_reuse_area,1,2020
+SHWB_169,Shanghai West Bund,Shanghai,Control Fringe,121.42589173658916,31.17990677268711,waterfront_core,0,2020
+SHWB_170,Shanghai West Bund,Shanghai,Core,121.47201141665025,31.186446790060668,cultural_core,1,2020
+SHWB_171,Shanghai West Bund,Shanghai,Core,121.45700890995107,31.199370963474014,residential_edge,1,2020
+SHWB_172,Shanghai West Bund,Shanghai,Core,121.45459757213794,31.17581383663032,waterfront_core,1,2020
+SHWB_173,Shanghai West Bund,Shanghai,Core,121.45205558563005,31.188249036411055,waterfront_core,1,2020
+SHWB_174,Shanghai West Bund,Shanghai,Control Fringe,121.45879288699649,31.171355095328273,cultural_core,0,2020
+SHWB_175,Shanghai West Bund,Shanghai,Core,121.46657593351287,31.18041197798485,industrial_reuse_area,1,2020
+SHWB_176,Shanghai West Bund,Shanghai,Core,121.44781130471375,31.182638954843007,waterfront_core,1,2020
+SHWB_177,Shanghai West Bund,Shanghai,Core,121.4480556851467,31.184982066423448,residential_edge,1,2020
+SHWB_178,Shanghai West Bund,Shanghai,Core,121.44348030145187,31.196664195084562,waterfront_core,1,2020
+SHWB_179,Shanghai West Bund,Shanghai,Core,121.4466103261044,31.17622355510592,waterfront_core,1,2020
+SHWB_180,Shanghai West Bund,Shanghai,Control Fringe,121.44880499619357,31.19163985170306,industrial_reuse_area,0,2020
+SHWB_181,Shanghai West Bund,Shanghai,Core,121.46449487827627,31.20511971991806,residential_edge,1,2020
+SHWB_182,Shanghai West Bund,Shanghai,Control Fringe,121.45796046769836,31.158717723238414,cultural_core,0,2020
+SHWB_183,Shanghai West Bund,Shanghai,Core,121.46273979819924,31.184486919411466,cultural_core,1,2020
+SHWB_184,Shanghai West Bund,Shanghai,Control Fringe,121.46060975450622,31.192028459944957,cultural_core,0,2020
+SHWB_185,Shanghai West Bund,Shanghai,Core,121.43083238550452,31.1964705833207,industrial_reuse_area,1,2020
+SHWB_186,Shanghai West Bund,Shanghai,Control Fringe,121.45882499341592,31.182019738412396,residential_edge,0,2020
+SHWB_187,Shanghai West Bund,Shanghai,Control Fringe,121.44908725607124,31.18192182153361,industrial_reuse_area,0,2020
+SHWB_188,Shanghai West Bund,Shanghai,Control Fringe,121.4558522514528,31.175342463389192,industrial_reuse_area,0,2020
+SHWB_189,Shanghai West Bund,Shanghai,Core,121.44836080596608,31.17040968284376,industrial_reuse_area,1,2020
+SHWB_190,Shanghai West Bund,Shanghai,Control Fringe,121.44578104336954,31.189817382307872,waterfront_core,0,2020
+SHWB_191,Shanghai West Bund,Shanghai,Core,121.465215975087,31.182764417079166,cultural_core,1,2020
+SHWB_192,Shanghai West Bund,Shanghai,Core,121.45545451063306,31.168149251667035,residential_edge,1,2020
+SHWB_193,Shanghai West Bund,Shanghai,Core,121.44689205914288,31.18762159594242,industrial_reuse_area,1,2020
+SHWB_194,Shanghai West Bund,Shanghai,Core,121.4453446399417,31.188164449517366,cultural_core,1,2020
+SHWB_195,Shanghai West Bund,Shanghai,Control Fringe,121.45301894347584,31.195360486487345,residential_edge,0,2020
+SHWB_196,Shanghai West Bund,Shanghai,Core,121.44347327716875,31.189112819370695,cultural_core,1,2020
+SHWB_197,Shanghai West Bund,Shanghai,Core,121.45689256370923,31.183798520844938,residential_edge,1,2020
+SHWB_198,Shanghai West Bund,Shanghai,Control Fringe,121.44972244271746,31.185450840058436,waterfront_core,0,2020
+SHWB_199,Shanghai West Bund,Shanghai,Core,121.43328628532457,31.179252965914422,industrial_reuse_area,1,2020
+SHWB_200,Shanghai West Bund,Shanghai,Core,121.44778086448868,31.179368282987063,waterfront_core,1,2020
+SHWB_201,Shanghai West Bund,Shanghai,Core,121.45361824118271,31.186359392985896,residential_edge,1,2020
+SHWB_202,Shanghai West Bund,Shanghai,Control Fringe,121.45220765524559,31.192827093251434,cultural_core,0,2020
+SHWB_203,Shanghai West Bund,Shanghai,Core,121.4630688080859,31.19142990653026,industrial_reuse_area,1,2020
+SHWB_204,Shanghai West Bund,Shanghai,Core,121.45239677956582,31.196986498811942,waterfront_core,1,2020
+SHWB_205,Shanghai West Bund,Shanghai,Core,121.44215761197151,31.17856694484575,industrial_reuse_area,1,2020
+SHWB_206,Shanghai West Bund,Shanghai,Core,121.44511610848278,31.163000698076395,waterfront_core,1,2020
+SHWB_207,Shanghai West Bund,Shanghai,Control Fringe,121.43309009118099,31.171833519888995,cultural_core,0,2020
+SHWB_208,Shanghai West Bund,Shanghai,Core,121.45617214365748,31.17441448842413,cultural_core,1,2020
+SHWB_209,Shanghai West Bund,Shanghai,Control Fringe,121.4365724552503,31.189697372053864,waterfront_core,0,2020
+SHWB_210,Shanghai West Bund,Shanghai,Control Fringe,121.45228801421304,31.195915165883584,industrial_reuse_area,0,2020
+SHWB_211,Shanghai West Bund,Shanghai,Core,121.44304523646231,31.192956297378966,waterfront_core,1,2020
+SHWB_212,Shanghai West Bund,Shanghai,Core,121.44708325788066,31.190796848732326,industrial_reuse_area,1,2020
+SHWB_213,Shanghai West Bund,Shanghai,Control Fringe,121.46475747940616,31.18486589368935,cultural_core,0,2020
+SHWB_214,Shanghai West Bund,Shanghai,Core,121.46261233175966,31.189386759284446,waterfront_core,1,2020
+SHWB_215,Shanghai West Bund,Shanghai,Core,121.44414827990235,31.1796855833747,industrial_reuse_area,1,2020
+SHWB_216,Shanghai West Bund,Shanghai,Core,121.45832038260191,31.183768711318127,waterfront_core,1,2020
+SHWB_217,Shanghai West Bund,Shanghai,Core,121.43075512916074,31.178103774148482,residential_edge,1,2020
+SHWB_218,Shanghai West Bund,Shanghai,Control Fringe,121.44215984942538,31.18170061806734,waterfront_core,0,2020
+SHWB_219,Shanghai West Bund,Shanghai,Control Fringe,121.45826485617609,31.17040553282429,waterfront_core,0,2020
+SHWB_220,Shanghai West Bund,Shanghai,Control Fringe,121.44575335241026,31.19609529739921,waterfront_core,0,2020
+SHWB_221,Shanghai West Bund,Shanghai,Core,121.46010509622825,31.180521421164453,industrial_reuse_area,1,2020
+SHWB_222,Shanghai West Bund,Shanghai,Core,121.45174255617881,31.166608830829244,cultural_core,1,2020
+SHWB_223,Shanghai West Bund,Shanghai,Core,121.46632658539585,31.19683061592174,waterfront_core,1,2020
+SHWB_224,Shanghai West Bund,Shanghai,Core,121.46709531937407,31.17229537300106,waterfront_core,1,2020
+SHWB_225,Shanghai West Bund,Shanghai,Core,121.44131692011425,31.17923861905026,cultural_core,1,2020
+SHWB_226,Shanghai West Bund,Shanghai,Core,121.4469887726522,31.198926425126302,waterfront_core,1,2020
+SHWB_227,Shanghai West Bund,Shanghai,Control Fringe,121.46607979428234,31.18493550238873,residential_edge,0,2020
+SHWB_228,Shanghai West Bund,Shanghai,Core,121.46201935696816,31.183116959051034,industrial_reuse_area,1,2020
+SHWB_229,Shanghai West Bund,Shanghai,Core,121.43399759653879,31.188211137394735,industrial_reuse_area,1,2020
+SHWB_230,Shanghai West Bund,Shanghai,Control Fringe,121.45657226296568,31.19944170775484,cultural_core,0,2020
+SHWB_231,Shanghai West Bund,Shanghai,Core,121.4538507185042,31.16811837535963,residential_edge,1,2020
+SHWB_232,Shanghai West Bund,Shanghai,Control Fringe,121.46087003253444,31.193498283615064,cultural_core,0,2020
+SHWB_233,Shanghai West Bund,Shanghai,Control Fringe,121.46484200008494,31.18580651317817,waterfront_core,0,2020
+SHWB_234,Shanghai West Bund,Shanghai,Control Fringe,121.45865645924039,31.17698451373233,cultural_core,0,2020
+SHWB_235,Shanghai West Bund,Shanghai,Core,121.43916746716204,31.17277813262044,waterfront_core,1,2020
+SHWB_236,Shanghai West Bund,Shanghai,Core,121.43423041546838,31.19130983000958,industrial_reuse_area,1,2020
+SHWB_237,Shanghai West Bund,Shanghai,Core,121.46143173960985,31.173156467803008,industrial_reuse_area,1,2020
+SHWB_238,Shanghai West Bund,Shanghai,Core,121.46545580211952,31.18703295254174,residential_edge,1,2020
+SHWB_239,Shanghai West Bund,Shanghai,Core,121.4327729141171,31.18945596339352,cultural_core,1,2020
+SHWB_240,Shanghai West Bund,Shanghai,Control Fringe,121.42884725802959,31.190419985048045,residential_edge,0,2020
+SHWB_241,Shanghai West Bund,Shanghai,Core,121.4552327639197,31.171734326963023,waterfront_core,1,2020
+SHWB_242,Shanghai West Bund,Shanghai,Core,121.44681623679317,31.169763010447788,waterfront_core,1,2020
+SHWB_243,Shanghai West Bund,Shanghai,Control Fringe,121.43534569805635,31.176242660204693,waterfront_core,0,2020
+SHWB_244,Shanghai West Bund,Shanghai,Control Fringe,121.477680871468,31.177554728583484,residential_edge,0,2020
+SHWB_245,Shanghai West Bund,Shanghai,Core,121.44154061138708,31.17960195603852,residential_edge,1,2020
+SHWB_246,Shanghai West Bund,Shanghai,Core,121.44513442887408,31.190374159743996,residential_edge,1,2020
+SHWB_247,Shanghai West Bund,Shanghai,Core,121.44720229929503,31.201208343723284,cultural_core,1,2020
+SHWB_248,Shanghai West Bund,Shanghai,Core,121.4794253999762,31.19245725886449,cultural_core,1,2020
+SHWB_249,Shanghai West Bund,Shanghai,Core,121.44956377738468,31.1891479974588,cultural_core,1,2020
+SHWB_250,Shanghai West Bund,Shanghai,Core,121.43889355921765,31.186519252013518,cultural_core,1,2020
+SHWB_251,Shanghai West Bund,Shanghai,Core,121.41800946486659,31.181566917015783,waterfront_core,1,2020
+SHWB_252,Shanghai West Bund,Shanghai,Core,121.46305433986639,31.175490414160524,waterfront_core,1,2020
+SHWB_253,Shanghai West Bund,Shanghai,Core,121.4573317343298,31.180652155518505,industrial_reuse_area,1,2020
+SHWB_254,Shanghai West Bund,Shanghai,Control Fringe,121.4454283992012,31.18306299033457,waterfront_core,0,2020
+SHWB_255,Shanghai West Bund,Shanghai,Core,121.44926751540999,31.196801311217126,residential_edge,1,2020
+SHWB_256,Shanghai West Bund,Shanghai,Core,121.46714856618588,31.195726151030986,industrial_reuse_area,1,2020
+SHWB_257,Shanghai West Bund,Shanghai,Core,121.4530413213555,31.182063049174573,industrial_reuse_area,1,2020
+SHWB_258,Shanghai West Bund,Shanghai,Control Fringe,121.43734866796453,31.183148057091223,waterfront_core,0,2020
+SHWB_259,Shanghai West Bund,Shanghai,Core,121.4541584835508,31.182313408287932,waterfront_core,1,2020
+SHWB_260,Shanghai West Bund,Shanghai,Core,121.44267876205156,31.18779171258409,industrial_reuse_area,1,2020
+SHWB_261,Shanghai West Bund,Shanghai,Core,121.44434675810263,31.19375121484705,waterfront_core,1,2020
+SHWB_262,Shanghai West Bund,Shanghai,Core,121.43628670192506,31.181956565544613,industrial_reuse_area,1,2020
+SHWB_263,Shanghai West Bund,Shanghai,Core,121.47185301215829,31.183357774273407,cultural_core,1,2020
+SHWB_264,Shanghai West Bund,Shanghai,Control Fringe,121.4540861912221,31.171805926048144,waterfront_core,0,2020
+SHWB_265,Shanghai West Bund,Shanghai,Core,121.45296353994999,31.154057732242347,waterfront_core,1,2020
+SHWB_266,Shanghai West Bund,Shanghai,Core,121.45429055781516,31.188844273175818,industrial_reuse_area,1,2020
+SHWB_267,Shanghai West Bund,Shanghai,Control Fringe,121.43886532330201,31.187902574412245,waterfront_core,0,2020
+SHWB_268,Shanghai West Bund,Shanghai,Control Fringe,121.43870981510213,31.198792834697684,waterfront_core,0,2020
+SHWB_269,Shanghai West Bund,Shanghai,Control Fringe,121.44051973285497,31.18755081106685,industrial_reuse_area,0,2020
+SHWB_270,Shanghai West Bund,Shanghai,Control Fringe,121.46495813477586,31.18383426808737,industrial_reuse_area,0,2020
+SHWB_271,Shanghai West Bund,Shanghai,Control Fringe,121.47153382442555,31.18336718469259,waterfront_core,0,2020
+SHWB_272,Shanghai West Bund,Shanghai,Core,121.43283324925389,31.176274683934707,industrial_reuse_area,1,2020
+SHWB_273,Shanghai West Bund,Shanghai,Control Fringe,121.44716845842231,31.2009208578497,waterfront_core,0,2020
+SHWB_274,Shanghai West Bund,Shanghai,Core,121.46021128450532,31.179271284015705,waterfront_core,1,2020
+SHWB_275,Shanghai West Bund,Shanghai,Core,121.45764476217242,31.186144894348363,waterfront_core,1,2020
+SHWB_276,Shanghai West Bund,Shanghai,Control Fringe,121.46101173891105,31.181856049904788,industrial_reuse_area,0,2020
+SHWB_277,Shanghai West Bund,Shanghai,Control Fringe,121.4422386165324,31.189637513564364,industrial_reuse_area,0,2020
+SHWB_278,Shanghai West Bund,Shanghai,Core,121.45343909911757,31.174107033127967,industrial_reuse_area,1,2020
+SHWB_279,Shanghai West Bund,Shanghai,Core,121.44264520117498,31.148218786752008,industrial_reuse_area,1,2020
+SHWB_280,Shanghai West Bund,Shanghai,Control Fringe,121.44836740017485,31.181973737138797,cultural_core,0,2020
+SHWB_281,Shanghai West Bund,Shanghai,Core,121.4436461412105,31.19286943062733,industrial_reuse_area,1,2020
+SHWB_282,Shanghai West Bund,Shanghai,Core,121.45911939213073,31.18031900281468,industrial_reuse_area,1,2020
+SHWB_283,Shanghai West Bund,Shanghai,Core,121.46125185362031,31.184001937088226,residential_edge,1,2020
+SHWB_284,Shanghai West Bund,Shanghai,Control Fringe,121.44843461914202,31.192700610695795,industrial_reuse_area,0,2020
+SHWB_285,Shanghai West Bund,Shanghai,Control Fringe,121.44071271196766,31.187787238815577,cultural_core,0,2020
+SHWB_286,Shanghai West Bund,Shanghai,Control Fringe,121.43407487163725,31.17482347758182,cultural_core,0,2020
+SHWB_287,Shanghai West Bund,Shanghai,Core,121.44718440161681,31.180698850836855,waterfront_core,1,2020
+SHWB_288,Shanghai West Bund,Shanghai,Control Fringe,121.44144021911544,31.190351758735556,cultural_core,0,2020
+SHWB_289,Shanghai West Bund,Shanghai,Control Fringe,121.44892933092888,31.180992588669056,cultural_core,0,2020
+SHWB_290,Shanghai West Bund,Shanghai,Core,121.446477762744,31.171697789057703,waterfront_core,1,2020
+SHWB_291,Shanghai West Bund,Shanghai,Core,121.4449603973863,31.17660503068003,waterfront_core,1,2020
+SHWB_292,Shanghai West Bund,Shanghai,Core,121.44389247238902,31.19402557356346,waterfront_core,1,2020
+SHWB_293,Shanghai West Bund,Shanghai,Control Fringe,121.45006400171917,31.187474758676863,cultural_core,0,2020
+SHWB_294,Shanghai West Bund,Shanghai,Core,121.45175990027423,31.17427747684281,waterfront_core,1,2020
+SHWB_295,Shanghai West Bund,Shanghai,Core,121.47186691073327,31.199859659371004,industrial_reuse_area,1,2020
+SHWB_296,Shanghai West Bund,Shanghai,Core,121.44526307846043,31.185294652246142,waterfront_core,1,2020
+SHWB_297,Shanghai West Bund,Shanghai,Core,121.43691164291168,31.183328329000485,industrial_reuse_area,1,2020
+SHWB_298,Shanghai West Bund,Shanghai,Core,121.45636452336508,31.185385334097468,waterfront_core,1,2020
+SHWB_299,Shanghai West Bund,Shanghai,Core,121.4531346350359,31.175159786579545,waterfront_core,1,2020
+SHWB_300,Shanghai West Bund,Shanghai,Control Fringe,121.45311860029625,31.187635352046076,cultural_core,0,2020
+QZSTM_001,Quzhou Shuitingmen Historical District,Quzhou,Core,118.86784046162113,28.967395400791506,tourism_core,1,2020
+QZSTM_002,Quzhou Shuitingmen Historical District,Quzhou,Core,118.84754648553695,28.950168796336328,local_life_area,1,2020
+QZSTM_003,Quzhou Shuitingmen Historical District,Quzhou,Core,118.85266519912027,28.970455933325805,tourism_core,1,2020
+QZSTM_004,Quzhou Shuitingmen Historical District,Quzhou,Core,118.86453567665862,28.97390409994557,tourism_core,1,2020
+QZSTM_005,Quzhou Shuitingmen Historical District,Quzhou,Core,118.86911800030812,28.97911488617628,tourism_core,1,2020
+QZSTM_006,Quzhou Shuitingmen Historical District,Quzhou,Core,118.88699729059654,28.96551595571874,heritage_core,1,2020
+QZSTM_007,Quzhou Shuitingmen Historical District,Quzhou,Core,118.86867707582142,28.97916505676696,tourism_core,1,2020
+QZSTM_008,Quzhou Shuitingmen Historical District,Quzhou,Core,118.85606120078523,28.967512660077958,tourism_core,1,2020
+QZSTM_009,Quzhou Shuitingmen Historical District,Quzhou,Core,118.85622971225116,28.975833985316086,local_life_area,1,2020
+QZSTM_010,Quzhou Shuitingmen Historical District,Quzhou,Core,118.85748574899885,28.97576785340576,local_life_area,1,2020
+QZSTM_011,Quzhou Shuitingmen Historical District,Quzhou,Core,118.8536683493556,28.982193798393055,heritage_core,1,2020
+QZSTM_012,Quzhou Shuitingmen Historical District,Quzhou,Core,118.87191523247381,28.968037175623287,cultural_core,1,2020
+QZSTM_013,Quzhou Shuitingmen Historical District,Quzhou,Control Fringe,118.88041674164138,28.956653315378553,tourism_core,0,2020
+QZSTM_014,Quzhou Shuitingmen Historical District,Quzhou,Control Fringe,118.87310714205593,28.959536549704946,tourism_core,0,2020
+QZSTM_015,Quzhou Shuitingmen Historical District,Quzhou,Core,118.86188114913226,28.97584826790305,tourism_core,1,2020
+QZSTM_016,Quzhou Shuitingmen Historical District,Quzhou,Core,118.8449295654703,28.974744259383034,tourism_core,1,2020
+QZSTM_017,Quzhou Shuitingmen Historical District,Quzhou,Control Fringe,118.87009152038011,28.96190485057781,tourism_core,0,2020
+QZSTM_018,Quzhou Shuitingmen Historical District,Quzhou,Core,118.86738970118508,28.982522677788623,local_life_area,1,2020
+QZSTM_019,Quzhou Shuitingmen Historical District,Quzhou,Core,118.8640106218743,28.9724964466523,heritage_core,1,2020
+QZSTM_020,Quzhou Shuitingmen Historical District,Quzhou,Core,118.86315430816799,28.982208310013117,heritage_core,1,2020
+QZSTM_021,Quzhou Shuitingmen Historical District,Quzhou,Core,118.86416122404033,28.9616705388569,local_life_area,1,2020
+QZSTM_022,Quzhou Shuitingmen Historical District,Quzhou,Control Fringe,118.84507037978952,28.96774076038913,tourism_core,0,2020
+QZSTM_023,Quzhou Shuitingmen Historical District,Quzhou,Core,118.83457835031798,28.975526534673676,tourism_core,1,2020
+QZSTM_024,Quzhou Shuitingmen Historical District,Quzhou,Core,118.87625570709781,28.954975894394284,tourism_core,1,2020
+QZSTM_025,Quzhou Shuitingmen Historical District,Quzhou,Core,118.85629892622384,28.961411897900398,cultural_core,1,2020
+QZSTM_026,Quzhou Shuitingmen Historical District,Quzhou,Core,118.88481134068664,28.97848946678902,local_life_area,1,2020
+QZSTM_027,Quzhou Shuitingmen Historical District,Quzhou,Control Fringe,118.85175659115151,28.968761425165503,tourism_core,0,2020
+QZSTM_028,Quzhou Shuitingmen Historical District,Quzhou,Control Fringe,118.88043589609057,28.95095766485685,heritage_core,0,2020
+QZSTM_029,Quzhou Shuitingmen Historical District,Quzhou,Core,118.87179498187074,28.982410876741866,heritage_core,1,2020
+QZSTM_030,Quzhou Shuitingmen Historical District,Quzhou,Core,118.87361323825101,28.977340406508294,cultural_core,1,2020
+QZSTM_031,Quzhou Shuitingmen Historical District,Quzhou,Control Fringe,118.87594234185752,28.975091409610755,cultural_core,0,2020
+QZSTM_032,Quzhou Shuitingmen Historical District,Quzhou,Core,118.84406295795361,28.95900272204606,cultural_core,1,2020
+QZSTM_033,Quzhou Shuitingmen Historical District,Quzhou,Core,118.89509623617512,28.980806451057585,local_life_area,1,2020
+QZSTM_034,Quzhou Shuitingmen Historical District,Quzhou,Core,118.85508340086311,28.981505978929516,tourism_core,1,2020
+QZSTM_035,Quzhou Shuitingmen Historical District,Quzhou,Core,118.85813035675814,28.971064995688437,tourism_core,1,2020
+QZSTM_036,Quzhou Shuitingmen Historical District,Quzhou,Core,118.861595125096,28.985197851378395,cultural_core,1,2020
+QZSTM_037,Quzhou Shuitingmen Historical District,Quzhou,Core,118.87858238245205,28.973811004603526,heritage_core,1,2020
+QZSTM_038,Quzhou Shuitingmen Historical District,Quzhou,Core,118.8547493462574,28.961242999178552,local_life_area,1,2020
+QZSTM_039,Quzhou Shuitingmen Historical District,Quzhou,Core,118.87403286776491,28.968318823906426,tourism_core,1,2020
+QZSTM_040,Quzhou Shuitingmen Historical District,Quzhou,Core,118.88330569911908,28.981691062487833,tourism_core,1,2020
+QZSTM_041,Quzhou Shuitingmen Historical District,Quzhou,Control Fringe,118.83388567162814,28.97897062825481,tourism_core,0,2020
+QZSTM_042,Quzhou Shuitingmen Historical District,Quzhou,Control Fringe,118.87030391569994,28.978102617020983,tourism_core,0,2020
+QZSTM_043,Quzhou Shuitingmen Historical District,Quzhou,Control Fringe,118.88603769188121,28.974792437432246,local_life_area,0,2020
+QZSTM_044,Quzhou Shuitingmen Historical District,Quzhou,Control Fringe,118.85078351390935,28.947728129057438,heritage_core,0,2020
+QZSTM_045,Quzhou Shuitingmen Historical District,Quzhou,Core,118.86627482054051,28.977903241443833,heritage_core,1,2020
+QZSTM_046,Quzhou Shuitingmen Historical District,Quzhou,Core,118.87165424723283,28.9634957483141,tourism_core,1,2020
+QZSTM_047,Quzhou Shuitingmen Historical District,Quzhou,Control Fringe,118.8707878465581,28.972538261048747,local_life_area,0,2020
+QZSTM_048,Quzhou Shuitingmen Historical District,Quzhou,Core,118.85438431899951,28.970187122164827,cultural_core,1,2020
+QZSTM_049,Quzhou Shuitingmen Historical District,Quzhou,Core,118.85861650766374,28.96183209518302,tourism_core,1,2020
+QZSTM_050,Quzhou Shuitingmen Historical District,Quzhou,Core,118.86643862127843,28.95915615444417,heritage_core,1,2020
+QZSTM_051,Quzhou Shuitingmen Historical District,Quzhou,Control Fringe,118.86134174154563,28.96023652644611,tourism_core,0,2020
+QZSTM_052,Quzhou Shuitingmen Historical District,Quzhou,Core,118.87574384206353,28.978289090812304,tourism_core,1,2020
+QZSTM_053,Quzhou Shuitingmen Historical District,Quzhou,Core,118.85857527630758,28.968320753700002,tourism_core,1,2020
+QZSTM_054,Quzhou Shuitingmen Historical District,Quzhou,Core,118.86930571366355,28.974772824061418,cultural_core,1,2020
+QZSTM_055,Quzhou Shuitingmen Historical District,Quzhou,Core,118.8558567077257,28.98058480671938,tourism_core,1,2020
+QZSTM_056,Quzhou Shuitingmen Historical District,Quzhou,Control Fringe,118.87091540731737,28.964291601334654,local_life_area,0,2020
+QZSTM_057,Quzhou Shuitingmen Historical District,Quzhou,Core,118.85517338172524,28.979560423582615,heritage_core,1,2020
+QZSTM_058,Quzhou Shuitingmen Historical District,Quzhou,Control Fringe,118.86102178364888,28.970474898877395,tourism_core,0,2020
+QZSTM_059,Quzhou Shuitingmen Historical District,Quzhou,Control Fringe,118.87738811768381,28.972403811803925,local_life_area,0,2020
+QZSTM_060,Quzhou Shuitingmen Historical District,Quzhou,Core,118.84286659934864,28.97657863575285,tourism_core,1,2020
+QZSTM_061,Quzhou Shuitingmen Historical District,Quzhou,Control Fringe,118.86950651209402,28.9709039051509,tourism_core,0,2020
+QZSTM_062,Quzhou Shuitingmen Historical District,Quzhou,Core,118.84273321332277,28.98455474065132,tourism_core,1,2020
+QZSTM_063,Quzhou Shuitingmen Historical District,Quzhou,Core,118.86254154331559,28.97158128287749,local_life_area,1,2020
+QZSTM_064,Quzhou Shuitingmen Historical District,Quzhou,Control Fringe,118.84092175756761,28.964217761247752,tourism_core,0,2020
+QZSTM_065,Quzhou Shuitingmen Historical District,Quzhou,Control Fringe,118.84381606097752,28.98570242801308,cultural_core,0,2020
+QZSTM_066,Quzhou Shuitingmen Historical District,Quzhou,Core,118.88276410749955,28.97642283936095,cultural_core,1,2020
+QZSTM_067,Quzhou Shuitingmen Historical District,Quzhou,Core,118.87453891755848,28.977629261160807,local_life_area,1,2020
+QZSTM_068,Quzhou Shuitingmen Historical District,Quzhou,Core,118.83932547917333,28.96499050999849,heritage_core,1,2020
+QZSTM_069,Quzhou Shuitingmen Historical District,Quzhou,Core,118.86236371483125,28.95468571966017,heritage_core,1,2020
+QZSTM_070,Quzhou Shuitingmen Historical District,Quzhou,Core,118.87120626408793,28.97310225754994,cultural_core,1,2020
+QZSTM_071,Quzhou Shuitingmen Historical District,Quzhou,Core,118.84266535163358,28.971125529498977,heritage_core,1,2020
+QZSTM_072,Quzhou Shuitingmen Historical District,Quzhou,Core,118.87169076085002,28.971018239399275,cultural_core,1,2020
+QZSTM_073,Quzhou Shuitingmen Historical District,Quzhou,Core,118.86727391389064,28.974923816699828,cultural_core,1,2020
+QZSTM_074,Quzhou Shuitingmen Historical District,Quzhou,Control Fringe,118.88290148350532,28.96030654442257,heritage_core,0,2020
+QZSTM_075,Quzhou Shuitingmen Historical District,Quzhou,Core,118.88889839443416,28.97640649985153,local_life_area,1,2020
+QZSTM_076,Quzhou Shuitingmen Historical District,Quzhou,Control Fringe,118.86983227544229,28.971634131489242,tourism_core,0,2020
+QZSTM_077,Quzhou Shuitingmen Historical District,Quzhou,Core,118.86462949395589,28.96470655782852,heritage_core,1,2020
+QZSTM_078,Quzhou Shuitingmen Historical District,Quzhou,Core,118.8613213753605,28.95632486886131,cultural_core,1,2020
+QZSTM_079,Quzhou Shuitingmen Historical District,Quzhou,Core,118.87726049341012,28.984689236024636,tourism_core,1,2020
+QZSTM_080,Quzhou Shuitingmen Historical District,Quzhou,Core,118.86707431650916,28.981289890752322,heritage_core,1,2020
+QZSTM_081,Quzhou Shuitingmen Historical District,Quzhou,Core,118.8430404897261,28.970632044431166,heritage_core,1,2020
+QZSTM_082,Quzhou Shuitingmen Historical District,Quzhou,Core,118.85539386330402,28.96403658237283,tourism_core,1,2020
+QZSTM_083,Quzhou Shuitingmen Historical District,Quzhou,Core,118.87589547294778,28.98757597382908,cultural_core,1,2020
+QZSTM_084,Quzhou Shuitingmen Historical District,Quzhou,Core,118.85562291480397,28.96717939740997,heritage_core,1,2020
+QZSTM_085,Quzhou Shuitingmen Historical District,Quzhou,Core,118.89051954792086,28.99907737967255,cultural_core,1,2020
+QZSTM_086,Quzhou Shuitingmen Historical District,Quzhou,Core,118.87097369790283,28.978017347903656,heritage_core,1,2020
+QZSTM_087,Quzhou Shuitingmen Historical District,Quzhou,Core,118.85104322714555,28.97524512749521,heritage_core,1,2020
+QZSTM_088,Quzhou Shuitingmen Historical District,Quzhou,Core,118.8628365492349,28.985747185103207,local_life_area,1,2020
+QZSTM_089,Quzhou Shuitingmen Historical District,Quzhou,Core,118.86742749776745,28.968718318103747,heritage_core,1,2020
+QZSTM_090,Quzhou Shuitingmen Historical District,Quzhou,Core,118.85935920778066,28.976441152634177,tourism_core,1,2020
+QZSTM_091,Quzhou Shuitingmen Historical District,Quzhou,Control Fringe,118.86654112490545,28.982108541694704,heritage_core,0,2020
+QZSTM_092,Quzhou Shuitingmen Historical District,Quzhou,Core,118.86104311514441,28.976360110193053,tourism_core,1,2020
+QZSTM_093,Quzhou Shuitingmen Historical District,Quzhou,Core,118.85650007583646,28.97205153896073,cultural_core,1,2020
+QZSTM_094,Quzhou Shuitingmen Historical District,Quzhou,Control Fringe,118.85016438968854,28.975062489451656,tourism_core,0,2020
+QZSTM_095,Quzhou Shuitingmen Historical District,Quzhou,Core,118.85335096811575,28.962144605389387,heritage_core,1,2020
+QZSTM_096,Quzhou Shuitingmen Historical District,Quzhou,Control Fringe,118.8829957699622,28.98014782723733,local_life_area,0,2020
+QZSTM_097,Quzhou Shuitingmen Historical District,Quzhou,Core,118.87444020979697,28.967097355349516,local_life_area,1,2020
+QZSTM_098,Quzhou Shuitingmen Historical District,Quzhou,Core,118.84768641033187,28.966370216330503,cultural_core,1,2020
+QZSTM_099,Quzhou Shuitingmen Historical District,Quzhou,Core,118.86072187188196,28.952695173962404,local_life_area,1,2020
+QZSTM_100,Quzhou Shuitingmen Historical District,Quzhou,Core,118.87995305859927,28.964813361152387,tourism_core,1,2020
+QZSTM_101,Quzhou Shuitingmen Historical District,Quzhou,Core,118.85838748711579,28.98419474283745,heritage_core,1,2020
+QZSTM_102,Quzhou Shuitingmen Historical District,Quzhou,Control Fringe,118.87784745059474,28.987135532953708,heritage_core,0,2020
+QZSTM_103,Quzhou Shuitingmen Historical District,Quzhou,Core,118.85557333076585,28.960996983487334,heritage_core,1,2020
+QZSTM_104,Quzhou Shuitingmen Historical District,Quzhou,Control Fringe,118.85631730651262,28.968105397444038,tourism_core,0,2020
+QZSTM_105,Quzhou Shuitingmen Historical District,Quzhou,Core,118.87261486702654,28.963029992618143,tourism_core,1,2020
+QZSTM_106,Quzhou Shuitingmen Historical District,Quzhou,Control Fringe,118.87389734320176,28.968620925052335,local_life_area,0,2020
+QZSTM_107,Quzhou Shuitingmen Historical District,Quzhou,Core,118.85229561860795,28.974512334789516,tourism_core,1,2020
+QZSTM_108,Quzhou Shuitingmen Historical District,Quzhou,Core,118.85047844155247,28.97192147828029,tourism_core,1,2020
+QZSTM_109,Quzhou Shuitingmen Historical District,Quzhou,Core,118.8667694350577,28.975224515956782,local_life_area,1,2020
+QZSTM_110,Quzhou Shuitingmen Historical District,Quzhou,Core,118.86100436931376,28.97326006314779,heritage_core,1,2020
+QZSTM_111,Quzhou Shuitingmen Historical District,Quzhou,Core,118.86598563266362,28.95131788699541,tourism_core,1,2020
+QZSTM_112,Quzhou Shuitingmen Historical District,Quzhou,Core,118.8678140661817,28.962247650533858,cultural_core,1,2020
+QZSTM_113,Quzhou Shuitingmen Historical District,Quzhou,Core,118.87601687991736,28.969277244515606,heritage_core,1,2020
+QZSTM_114,Quzhou Shuitingmen Historical District,Quzhou,Control Fringe,118.84304235057498,28.96817980364457,heritage_core,0,2020
+QZSTM_115,Quzhou Shuitingmen Historical District,Quzhou,Core,118.87449505456577,28.96395069762644,tourism_core,1,2020
+QZSTM_116,Quzhou Shuitingmen Historical District,Quzhou,Core,118.84524354099321,28.962291179721994,cultural_core,1,2020
+QZSTM_117,Quzhou Shuitingmen Historical District,Quzhou,Core,118.85847187848401,28.97569872284611,tourism_core,1,2020
+QZSTM_118,Quzhou Shuitingmen Historical District,Quzhou,Core,118.86649267908447,28.98187387198655,tourism_core,1,2020
+QZSTM_119,Quzhou Shuitingmen Historical District,Quzhou,Control Fringe,118.85547905245723,28.96969670426141,tourism_core,0,2020
+QZSTM_120,Quzhou Shuitingmen Historical District,Quzhou,Core,118.85248427202751,28.964123628126053,heritage_core,1,2020
+QZSTM_121,Quzhou Shuitingmen Historical District,Quzhou,Core,118.86249990603187,28.986249733100568,heritage_core,1,2020
+QZSTM_122,Quzhou Shuitingmen Historical District,Quzhou,Core,118.85607622878663,28.969319620932,local_life_area,1,2020
+QZSTM_123,Quzhou Shuitingmen Historical District,Quzhou,Control Fringe,118.85756240437321,28.975508142292394,heritage_core,0,2020
+QZSTM_124,Quzhou Shuitingmen Historical District,Quzhou,Core,118.86440870155018,28.97100923711496,tourism_core,1,2020
+QZSTM_125,Quzhou Shuitingmen Historical District,Quzhou,Control Fringe,118.86495968886447,28.944650951064354,tourism_core,0,2020
+QZSTM_126,Quzhou Shuitingmen Historical District,Quzhou,Core,118.84732099028271,28.971387231244996,local_life_area,1,2020
+QZSTM_127,Quzhou Shuitingmen Historical District,Quzhou,Core,118.86496512625666,28.95429175558621,tourism_core,1,2020
+QZSTM_128,Quzhou Shuitingmen Historical District,Quzhou,Core,118.85751946324486,28.966726722172314,tourism_core,1,2020
+QZSTM_129,Quzhou Shuitingmen Historical District,Quzhou,Core,118.86735506842116,28.967621174831258,local_life_area,1,2020
+QZSTM_130,Quzhou Shuitingmen Historical District,Quzhou,Control Fringe,118.86313471242033,28.978925543145085,heritage_core,0,2020
+QZSTM_131,Quzhou Shuitingmen Historical District,Quzhou,Control Fringe,118.87611421451113,28.96750205007377,local_life_area,0,2020
+QZSTM_132,Quzhou Shuitingmen Historical District,Quzhou,Core,118.84748048448493,28.9663011175165,tourism_core,1,2020
+QZSTM_133,Quzhou Shuitingmen Historical District,Quzhou,Core,118.86880905107341,28.978865907264872,local_life_area,1,2020
+QZSTM_134,Quzhou Shuitingmen Historical District,Quzhou,Core,118.85465644053602,28.977746007011802,heritage_core,1,2020
+QZSTM_135,Quzhou Shuitingmen Historical District,Quzhou,Core,118.8569318062575,28.99313472628356,local_life_area,1,2020
+QZSTM_136,Quzhou Shuitingmen Historical District,Quzhou,Core,118.8692964548678,28.978753643145165,heritage_core,1,2020
+QZSTM_137,Quzhou Shuitingmen Historical District,Quzhou,Core,118.8501494659255,28.970669119167784,local_life_area,1,2020
+QZSTM_138,Quzhou Shuitingmen Historical District,Quzhou,Core,118.85140200098964,28.974697342181774,heritage_core,1,2020
+QZSTM_139,Quzhou Shuitingmen Historical District,Quzhou,Control Fringe,118.85381900443662,28.98670691419897,local_life_area,0,2020
+QZSTM_140,Quzhou Shuitingmen Historical District,Quzhou,Control Fringe,118.86536691626128,28.96721440025021,tourism_core,0,2020
+QZSTM_141,Quzhou Shuitingmen Historical District,Quzhou,Core,118.85178652354377,28.977052153233437,tourism_core,1,2020
+QZSTM_142,Quzhou Shuitingmen Historical District,Quzhou,Control Fringe,118.87234618583123,28.9578747314391,heritage_core,0,2020
+QZSTM_143,Quzhou Shuitingmen Historical District,Quzhou,Core,118.87631434135864,28.97921941201769,cultural_core,1,2020
+QZSTM_144,Quzhou Shuitingmen Historical District,Quzhou,Core,118.86912686084234,28.974968120912504,local_life_area,1,2020
+QZSTM_145,Quzhou Shuitingmen Historical District,Quzhou,Control Fringe,118.85982503919347,28.965100997782045,heritage_core,0,2020
+QZSTM_146,Quzhou Shuitingmen Historical District,Quzhou,Control Fringe,118.85037252779208,28.97566630247272,heritage_core,0,2020
+QZSTM_147,Quzhou Shuitingmen Historical District,Quzhou,Control Fringe,118.87590882194066,28.972350270048928,tourism_core,0,2020
+QZSTM_148,Quzhou Shuitingmen Historical District,Quzhou,Control Fringe,118.85824424609442,28.979595318948817,tourism_core,0,2020
+QZSTM_149,Quzhou Shuitingmen Historical District,Quzhou,Core,118.86547420482857,28.965840970893975,tourism_core,1,2020
+QZSTM_150,Quzhou Shuitingmen Historical District,Quzhou,Core,118.85865468725689,28.946687673011084,heritage_core,1,2020
+QZSTM_151,Quzhou Shuitingmen Historical District,Quzhou,Control Fringe,118.8415856100886,28.968135091029225,local_life_area,0,2020
+QZSTM_152,Quzhou Shuitingmen Historical District,Quzhou,Core,118.87988599924833,28.96880276323195,local_life_area,1,2020
+QZSTM_153,Quzhou Shuitingmen Historical District,Quzhou,Control Fringe,118.8664408255116,28.989574021566597,heritage_core,0,2020
+QZSTM_154,Quzhou Shuitingmen Historical District,Quzhou,Control Fringe,118.86063262045425,28.964865677423408,cultural_core,0,2020
+QZSTM_155,Quzhou Shuitingmen Historical District,Quzhou,Control Fringe,118.85872650583266,28.964806341338356,local_life_area,0,2020
+QZSTM_156,Quzhou Shuitingmen Historical District,Quzhou,Core,118.8564556392882,28.966215795272372,heritage_core,1,2020
+QZSTM_157,Quzhou Shuitingmen Historical District,Quzhou,Core,118.85931643769361,28.966057155589137,tourism_core,1,2020
+QZSTM_158,Quzhou Shuitingmen Historical District,Quzhou,Core,118.86852314878908,28.971010002844462,tourism_core,1,2020
+QZSTM_159,Quzhou Shuitingmen Historical District,Quzhou,Core,118.85580276519319,28.97525080086166,heritage_core,1,2020
+QZSTM_160,Quzhou Shuitingmen Historical District,Quzhou,Control Fringe,118.88095226718725,28.98560178606908,local_life_area,0,2020
+QZSTM_161,Quzhou Shuitingmen Historical District,Quzhou,Core,118.87141241380502,28.977258113251885,local_life_area,1,2020
+QZSTM_162,Quzhou Shuitingmen Historical District,Quzhou,Core,118.88397153626781,28.975570536445698,tourism_core,1,2020
+QZSTM_163,Quzhou Shuitingmen Historical District,Quzhou,Core,118.85012409323295,28.979590473389607,tourism_core,1,2020
+QZSTM_164,Quzhou Shuitingmen Historical District,Quzhou,Control Fringe,118.85999752248178,28.975389898992788,tourism_core,0,2020
+QZSTM_165,Quzhou Shuitingmen Historical District,Quzhou,Core,118.85807599731989,28.96195909235802,tourism_core,1,2020
+QZSTM_166,Quzhou Shuitingmen Historical District,Quzhou,Control Fringe,118.8615805883875,28.96241170137809,cultural_core,0,2020
+QZSTM_167,Quzhou Shuitingmen Historical District,Quzhou,Control Fringe,118.8612628664034,28.97285635932746,heritage_core,0,2020
+QZSTM_168,Quzhou Shuitingmen Historical District,Quzhou,Core,118.874721842912,28.961903691603528,cultural_core,1,2020
+QZSTM_169,Quzhou Shuitingmen Historical District,Quzhou,Control Fringe,118.84731548642807,28.97083839646487,tourism_core,0,2020
+QZSTM_170,Quzhou Shuitingmen Historical District,Quzhou,Control Fringe,118.8652855468566,28.983326721656308,heritage_core,0,2020
+QZSTM_171,Quzhou Shuitingmen Historical District,Quzhou,Control Fringe,118.85995608097241,28.952904337917747,heritage_core,0,2020
+QZSTM_172,Quzhou Shuitingmen Historical District,Quzhou,Core,118.88543816583763,28.97022195979542,tourism_core,1,2020
+QZSTM_173,Quzhou Shuitingmen Historical District,Quzhou,Core,118.86635331559442,28.969186945592547,tourism_core,1,2020
+QZSTM_174,Quzhou Shuitingmen Historical District,Quzhou,Core,118.84697270386215,28.968352537840406,local_life_area,1,2020
+QZSTM_175,Quzhou Shuitingmen Historical District,Quzhou,Core,118.86394705815533,28.98128746109647,heritage_core,1,2020
+QZSTM_176,Quzhou Shuitingmen Historical District,Quzhou,Control Fringe,118.87078148427894,28.95452734549878,cultural_core,0,2020
+QZSTM_177,Quzhou Shuitingmen Historical District,Quzhou,Control Fringe,118.86741122282113,28.985085009139038,heritage_core,0,2020
+QZSTM_178,Quzhou Shuitingmen Historical District,Quzhou,Core,118.86135704916029,28.96396377088974,heritage_core,1,2020
+QZSTM_179,Quzhou Shuitingmen Historical District,Quzhou,Core,118.85957598388875,28.951321214306297,local_life_area,1,2020
+QZSTM_180,Quzhou Shuitingmen Historical District,Quzhou,Core,118.85079255950546,28.974272772439942,cultural_core,1,2020
+QZSTM_181,Quzhou Shuitingmen Historical District,Quzhou,Control Fringe,118.87339478527245,28.984013799289347,local_life_area,0,2020
+QZSTM_182,Quzhou Shuitingmen Historical District,Quzhou,Core,118.86677362152342,28.97699428984098,local_life_area,1,2020
+QZSTM_183,Quzhou Shuitingmen Historical District,Quzhou,Core,118.87719700470514,28.96351593844325,heritage_core,1,2020
+QZSTM_184,Quzhou Shuitingmen Historical District,Quzhou,Core,118.8528024783971,28.970871787668788,heritage_core,1,2020
+QZSTM_185,Quzhou Shuitingmen Historical District,Quzhou,Core,118.86626260447822,28.980466673552556,heritage_core,1,2020
+QZSTM_186,Quzhou Shuitingmen Historical District,Quzhou,Core,118.84540418854114,28.96105963043973,local_life_area,1,2020
+QZSTM_187,Quzhou Shuitingmen Historical District,Quzhou,Control Fringe,118.8441800886921,28.979514705264975,heritage_core,0,2020
+QZSTM_188,Quzhou Shuitingmen Historical District,Quzhou,Core,118.8706402450285,28.947170177461317,heritage_core,1,2020
+QZSTM_189,Quzhou Shuitingmen Historical District,Quzhou,Core,118.86094289620057,28.974503792956646,local_life_area,1,2020
+QZSTM_190,Quzhou Shuitingmen Historical District,Quzhou,Core,118.85907312940698,28.965618108247654,local_life_area,1,2020
+QZSTM_191,Quzhou Shuitingmen Historical District,Quzhou,Control Fringe,118.86452446171872,28.973798311902467,cultural_core,0,2020
+QZSTM_192,Quzhou Shuitingmen Historical District,Quzhou,Control Fringe,118.85336223870922,28.96219604910237,tourism_core,0,2020
+QZSTM_193,Quzhou Shuitingmen Historical District,Quzhou,Core,118.8802267275747,28.952317203753196,heritage_core,1,2020
+QZSTM_194,Quzhou Shuitingmen Historical District,Quzhou,Control Fringe,118.84570552470203,28.961120997653854,cultural_core,0,2020
+QZSTM_195,Quzhou Shuitingmen Historical District,Quzhou,Control Fringe,118.83791840082775,28.95673788324979,heritage_core,0,2020
+QZSTM_196,Quzhou Shuitingmen Historical District,Quzhou,Control Fringe,118.84983566759443,28.97609868084212,local_life_area,0,2020
+QZSTM_197,Quzhou Shuitingmen Historical District,Quzhou,Core,118.87413324167053,28.97115163479151,local_life_area,1,2020
+QZSTM_198,Quzhou Shuitingmen Historical District,Quzhou,Control Fringe,118.8677677061427,28.965276869616957,tourism_core,0,2020
+QZSTM_199,Quzhou Shuitingmen Historical District,Quzhou,Control Fringe,118.86297544082521,28.978791512476718,cultural_core,0,2020
+QZSTM_200,Quzhou Shuitingmen Historical District,Quzhou,Control Fringe,118.86707522829552,28.982120477362688,local_life_area,0,2020

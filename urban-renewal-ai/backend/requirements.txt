@@ -1,0 +1,13 @@
+fastapi
+uvicorn[standard]
+python-multipart
+pandas
+numpy
+scikit-learn
+statsmodels
+scipy
+joblib
+xgboost
+lightgbm
+shap
+geopandas
