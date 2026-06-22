@@ -1,0 +1,8 @@
+__pycache__/
+*.py[cod]
+.pytest_cache/
+data/calibration/*.json
+data/reports/*
+!data/reports/.gitkeep
+data/logs/*
+!data/logs/.gitkeep
