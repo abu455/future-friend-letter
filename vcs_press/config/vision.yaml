@@ -1,0 +1,10 @@
+vision:
+  matcher: mock_deep
+  fallback_matcher: orb
+  confidence_threshold: 0.75
+  inlier_ratio_threshold: 0.40
+  residual_error_threshold_mm: 0.20
+  preprocessing:
+    denoise: true
+    clahe: true
+    suppress_glare: true

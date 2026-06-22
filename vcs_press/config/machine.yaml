@@ -1,0 +1,28 @@
+machine:
+  name: "VCS-Press-Prototype"
+  type: "soft_material_cutting_press"
+  working_area_mm:
+    width: 1600
+    height: 1200
+  max_compensation_mm:
+    x: 5.0
+    y: 5.0
+    feed: 10.0
+  max_theta_deg: 2.0
+  target_accuracy_mm: 0.10
+  calibration_points: 4
+  punch_reference_hole_diameter_mm: 3.0
+
+vision:
+  confidence_threshold: 0.75
+  inlier_ratio_threshold: 0.40
+  residual_error_threshold_mm: 0.20
+  max_local_deformation_mm: 1.00
+  grid_size:
+    x: 20
+    y: 20
+
+online_learning:
+  alpha: 0.10
+  window_size: 50
+  outlier_sigma: 3.0

@@ -1,0 +1,6 @@
+safety:
+  max_consecutive_ng: 3
+  require_calibration: true
+  require_cad_loaded: true
+  reject_on_light_fault: true
+  reject_on_camera_offline: true
