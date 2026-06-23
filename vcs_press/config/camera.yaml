@@ -1,0 +1,9 @@
+camera:
+  mode: simulated
+  camera_id: simulated-main
+  width: 640
+  height: 480
+  exposure_us: 5000
+  gain: 1.0
+  fps: 10
+  simulated_image_dir: data/samples

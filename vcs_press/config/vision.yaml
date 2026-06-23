@@ -1,0 +1,16 @@
+vision:
+  matcher: mock_deep
+  # Set matcher to superpoint_lightglue after installing requirements-lightglue.txt.
+  lightglue:
+    max_num_keypoints: 2048
+    match_threshold: 0.1
+    device: auto
+    fallback: orb
+  fallback_matcher: orb
+  confidence_threshold: 0.75
+  inlier_ratio_threshold: 0.40
+  residual_error_threshold_mm: 0.20
+  preprocessing:
+    denoise: true
+    clahe: true
+    suppress_glare: true

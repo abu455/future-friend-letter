@@ -1,0 +1,14 @@
+materials:
+  default:
+    name: soft_material_generic
+    max_local_deformation_mm: 1.0
+    reflectivity: medium
+    texture: variable
+  leather:
+    max_local_deformation_mm: 0.8
+    reflectivity: high
+    texture: natural
+  eva:
+    max_local_deformation_mm: 1.2
+    reflectivity: low
+    texture: low

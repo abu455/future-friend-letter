@@ -1,0 +1,9 @@
+job:
+  current_job_id: demo_job
+  source_type: template
+  dxf_path: data/jobs/demo.dxf
+  units: mm
+  layers:
+    cut: CUT
+    holes: HOLE
+    alignment: ALIGN
