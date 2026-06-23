@@ -18,7 +18,9 @@ class SimulatedPLC(PLCBase):
         return self.status
 
     def write_compensation(self, payload: dict) -> None:
-        self.status.last_compensation = payload
+        self.status.last_compensation = dict(payload)
+        self.status.last_compensation["allow_punch"] = bool(payload.get("allow_punch", False))
+        self.allow_punch = self.status.last_compensation["allow_punch"]
 
     def write_allow_punch(self, allow: bool) -> None:
         self.allow_punch = bool(allow)

@@ -20,7 +20,7 @@ class MockDeepMatcher(FeatureMatcher):
         hom = np.vstack([transform, [0.0, 0.0, 1.0]])
         residual = float(np.mean(np.linalg.norm(apply_transform(src, transform) - dst, axis=1)))
         vis = np.hstack([template_image, current_image])
-        for p, q in zip(src.astype(int), dst.astype(int)):
+        for p, q in zip(src.astype(int), dst.astype(int), strict=False):
             q2 = (int(q[0] + template_image.shape[1]), int(q[1]))
             cv2.circle(vis, tuple(p), 3, (0, 255, 0), -1)
             cv2.circle(vis, q2, 3, (0, 0, 255), -1)

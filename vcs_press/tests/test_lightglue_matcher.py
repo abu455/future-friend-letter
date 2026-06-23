@@ -54,7 +54,9 @@ def test_lightglue_backend_path_with_fake_package(monkeypatch):
             return {key: rbd(value) for key, value in data.items()}
         return data[0] if hasattr(data, "shape") and data.shape[0] == 1 else data
 
-    monkeypatch.setitem(importlib.import_module("sys").modules, "lightglue", types.SimpleNamespace(SuperPoint=FakeSuperPoint, LightGlue=FakeLightGlue))
+    monkeypatch.setitem(
+        importlib.import_module("sys").modules, "lightglue", types.SimpleNamespace(SuperPoint=FakeSuperPoint, LightGlue=FakeLightGlue)
+    )
     monkeypatch.setitem(importlib.import_module("sys").modules, "lightglue.utils", types.SimpleNamespace(rbd=rbd))
 
     matcher = SuperPointLightGlueMatcher(config=LightGlueConfig(device="cpu", use_fallback=False))

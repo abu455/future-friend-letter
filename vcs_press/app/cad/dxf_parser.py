@@ -37,7 +37,7 @@ class DXFParser:
         all_points = [p for contour in contours for p in contour] + holes + keypoints
         bbox = None
         if all_points:
-            xs, ys = zip(*all_points)
+            xs, ys = zip(*all_points, strict=False)
             bbox = (min(xs), min(ys), max(xs), max(ys))
         regions = [CutRegion(f"part_{i+1:03d}", _center(contour), contour) for i, contour in enumerate(contours)]
         return Job(
@@ -52,5 +52,5 @@ class DXFParser:
 
 
 def _center(points: list[tuple[float, float]]) -> tuple[float, float]:
-    xs, ys = zip(*points)
+    xs, ys = zip(*points, strict=False)
     return (float(sum(xs) / len(xs)), float(sum(ys) / len(ys)))

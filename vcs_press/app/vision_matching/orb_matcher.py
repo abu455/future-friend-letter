@@ -33,7 +33,9 @@ class ORBMatcher(FeatureMatcher):
         inliers = mask.reshape(-1).astype(bool) if mask is not None else np.ones(len(src), dtype=bool)
         if affine is None:
             affine = np.eye(2, 3, dtype=np.float64)
-        residual = float(np.mean(np.linalg.norm(apply_transform(src[inliers], affine) - dst[inliers], axis=1))) if np.any(inliers) else 999.0
+        residual = (
+            float(np.mean(np.linalg.norm(apply_transform(src[inliers], affine) - dst[inliers], axis=1))) if np.any(inliers) else 999.0
+        )
         confidence = float(max(0.0, min(1.0, np.mean(inliers) * (1.0 / (1.0 + residual / 10.0)))))
         vis = cv2.drawMatches(template_image, kp1, current_image, kp2, [matches[i] for i in np.where(inliers)[0][:50]], None)
         return MatchResult(

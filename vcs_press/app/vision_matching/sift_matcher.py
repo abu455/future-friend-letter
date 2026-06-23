@@ -34,7 +34,11 @@ class SIFTMatcher(FeatureMatcher):
         homography, mask = cv2.findHomography(src, dst, cv2.RANSAC, 3.0)
         affine, _ = cv2.estimateAffinePartial2D(src, dst, method=cv2.RANSAC, ransacReprojThreshold=3.0)
         inliers = mask.reshape(-1).astype(bool) if mask is not None else np.ones(len(src), dtype=bool)
-        residual = float(np.mean(np.linalg.norm(apply_transform(src[inliers], affine) - dst[inliers], axis=1))) if affine is not None and np.any(inliers) else 999.0
+        residual = (
+            float(np.mean(np.linalg.norm(apply_transform(src[inliers], affine) - dst[inliers], axis=1)))
+            if affine is not None and np.any(inliers)
+            else 999.0
+        )
         return MatchResult(
             [tuple(map(float, p)) for p in src],
             [tuple(map(float, p)) for p in dst],

@@ -43,10 +43,26 @@ Install the real LightGlue backend only on machines that need it:
 
 Open `http://127.0.0.1:8000/` for the minimal HMI.
 
+## Industrial safety principles
+
+The vision system is advisory only. It may output `allow_punch`, `x_offset_mm`, `y_offset_mm`, `theta_offset_deg`, `feed_offset_mm`, confidence, and alarm information. It must never expose or call an API that directly commands the punch head to descend. Final punch motion belongs to the PLC or Safety PLC after all machine safety conditions are satisfied.
+
+Fail-closed rules:
+
+- Startup default is `allow_punch=false`.
+- Any exception, timeout, lost communication, camera fault, light fault, model failure, low confidence, high residual, excessive compensation, excessive deformation, missing calibration, missing job, safety door fault, light curtain fault, low air pressure, PLC fault, or emergency stop forces `allow_punch=false`.
+- `ServoService.send_to_plc()` writes `allow_punch=false` before sending a new payload, so a previous true value cannot survive a rejected cycle.
+- `ALARM` recovery requires explicit `POST /system/reset_alarm`.
+- `EMERGENCY_STOP` recovery requires `POST /system/ack_emergency_stop` with PLC and operator acknowledgement flags.
+
+Alarm events include `alarm_code`, `alarm_message`, `severity`, `timestamp`, and `recommended_action`. Severity values are `INFO`, `WARNING`, `CRITICAL`, and `EMERGENCY`.
+
 ## API quick flow
 
 - `GET /health`
 - `POST /system/init`
+- `POST /system/reset_alarm`
+- `POST /system/ack_emergency_stop`
 - `POST /calibration/start`
 - `POST /job/load`
 - `POST /vision/register`
@@ -68,6 +84,28 @@ Use LightGlue through the API after installing the optional backend:
 
 The simulated camera generates four reference holes for self-calibration and a shifted material image for registration. MockDeepMatcher emits dense correspondences; registration computes the global offset; TPS estimates residual local deformation; ServoService checks safety thresholds and writes only recommendations to SimulatedPLC.
 
+## CI and pre-commit
+
+Install development hooks:
+
+`pip install -r requirements.txt`
+
+`pre-commit install`
+
+Run the same checks as CI:
+
+`python scripts/check_unicode_safety.py`
+
+`ruff check .`
+
+`black --check .`
+
+`isort --check-only .`
+
+`python -m pytest -q`
+
+The Unicode safety check rejects hidden bidirectional controls and zero-width characters in `.py`, `.yaml`, `.md`, and `.txt` files. This prevents misleading source display, unsafe copy/paste artifacts, and Trojan-source style code review bypasses.
+
 ## Real camera integration
 
 Implement a subclass of `CameraBase` for Basler, Hikvision, Daheng, or MindVision SDKs. Map exposure, gain, trigger mode, hardware trigger arm, timestamp, frame timeout, and exception handling into the common `Frame` result. Keep `SimulatedCamera` enabled for offline commissioning and CI tests.
@@ -83,6 +121,14 @@ Install and validate `snap7`, then replace `SiemensS7PLCStub` methods with DB bl
 ## Safety notes
 
 Punching is forbidden when emergency stop, safety door, PLC fault, low air pressure, camera or light fault, missing calibration, CAD not loaded, low confidence, low inlier ratio, high residual, excessive compensation, excessive deformation, or repeated NG occurs. Final punch motion must stay under PLC safety control.
+
+## Simulated safety test flow
+
+Use pytest to validate fail-closed behavior without hardware:
+
+- `tests/test_industrial_safety.py` covers emergency stop, safety door, light curtain, air pressure, PLC disconnect, heartbeat loss, camera/light faults, missing calibration/job, low matching quality, compensation limits, deformation limits, and consecutive NG.
+- `tests/test_timeout_safety.py` covers camera acquisition, vision cycle, PLC ACK, light ready, and post-inspection timeouts.
+- `tests/test_state_machine_safety.py` verifies `ALARM` needs explicit reset and `EMERGENCY_STOP` needs PLC plus operator acknowledgement.
 
 ## Tests
 

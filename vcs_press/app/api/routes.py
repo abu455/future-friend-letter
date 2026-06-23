@@ -6,6 +6,7 @@ from fastapi import FastAPI, WebSocket
 from fastapi.responses import HTMLResponse
 from pydantic import BaseModel
 
+from app.api.websocket import StatusBroadcaster
 from app.cad.dxf_parser import DXFParser
 from app.cad.job_model import Job, demo_job
 from app.calibration.calibration_service import CalibrationService
@@ -17,14 +18,13 @@ from app.inspection.post_inspection import PostInspectionService
 from app.online_learning.online_compensator import OnlineCompensator
 from app.plc.simulated_plc import SimulatedPLC
 from app.registration.registration_service import RegistrationService
+from app.safety.alarm_codes import make_alarm
 from app.servo.servo_service import ServoService
 from app.state_machine.controller import StateMachineController
 from app.state_machine.states import MachineState
-from app.storage.repository import InMemoryRepository
 from app.storage.report_writer import ReportWriter
+from app.storage.repository import InMemoryRepository
 from app.vision_matching.matching_service import MatchingService
-
-from app.api.websocket import StatusBroadcaster
 
 
 class JobLoadRequest(BaseModel):
@@ -34,6 +34,11 @@ class JobLoadRequest(BaseModel):
 
 class VisionRegisterRequest(BaseModel):
     matcher: str | None = None
+
+
+class EmergencyAckRequest(BaseModel):
+    plc_confirmed: bool = False
+    operator_confirmed: bool = False
 
 
 class AppContext:
@@ -89,7 +94,10 @@ def create_app() -> FastAPI:
         <button onclick="fetch('/inspection/run',{method:'POST'}).then(load)">Post Inspection</button>
         <pre id="status"></pre>
         <script>
-        async function load(){document.getElementById('status').textContent=JSON.stringify(await (await fetch('/system/status')).json(), null, 2)}
+        async function load(){
+          const response = await fetch('/system/status');
+          document.getElementById('status').textContent = JSON.stringify(await response.json(), null, 2);
+        }
         load(); setInterval(load, 2000)
         </script></body></html>
         """
@@ -106,6 +114,18 @@ def create_app() -> FastAPI:
     def system_init() -> dict:
         if ctx.state_machine.state == MachineState.IDLE:
             ctx.state_machine.transition(MachineState.INIT, "system init requested")
+        return ctx.status()
+
+    @app.post("/system/reset_alarm")
+    def reset_alarm() -> dict:
+        ctx.state_machine.reset_alarm()
+        ctx.plc.write_allow_punch(False)
+        return ctx.status()
+
+    @app.post("/system/ack_emergency_stop")
+    def ack_emergency_stop(request: EmergencyAckRequest) -> dict:
+        ctx.state_machine.acknowledge_emergency_stop(request.plc_confirmed, request.operator_confirmed)
+        ctx.plc.write_allow_punch(False)
         return ctx.status()
 
     @app.post("/calibration/start")
@@ -158,8 +178,15 @@ def create_app() -> FastAPI:
     def servo_compute() -> dict:
         if ctx.registration.latest_result is None or ctx.deformation.latest_field is None:
             vision_register()
-        result = ctx.servo.compute(ctx.registration.latest_result, ctx.deformation.latest_field, calibrated=ctx.calibrated, cad_loaded=ctx.job is not None)
-        _goto(ctx, MachineState.COMPENSATION_READY if result["allow_punch"] else MachineState.ALARM, result.get("alarm_message", "compensation computed"))
+        result = ctx.servo.compute(
+            ctx.registration.latest_result, ctx.deformation.latest_field, calibrated=ctx.calibrated, cad_loaded=ctx.job is not None
+        )
+        if result["allow_punch"]:
+            _goto(ctx, MachineState.COMPENSATION_READY, "compensation ready")
+        else:
+            ctx.state_machine.enter_alarm(
+                make_alarm(result.get("alarm_code", "VISION_REJECT"), result.get("alarm_message", "vision rejected punch"))
+            )
         return result
 
     @app.post("/servo/send_to_plc")

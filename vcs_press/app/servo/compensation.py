@@ -15,6 +15,9 @@ class CompensationResult:
     reject_reason: str = ""
     alarm_code: str = "OK"
     alarm_message: str = ""
+    severity: str = "INFO"
+    recommended_action: str = ""
+    timestamp: str = ""
 
     def to_dict(self) -> dict:
         return self.__dict__

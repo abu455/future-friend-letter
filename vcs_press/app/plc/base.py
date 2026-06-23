@@ -7,7 +7,9 @@ from dataclasses import dataclass, field
 @dataclass
 class SafetySignals:
     emergency_stop: bool = False
+    safety_door_closed: bool = True
     safety_door_open: bool = False
+    light_curtain_ok: bool = True
     air_pressure_ok: bool = True
     punch_top_dead_center: bool = True
     punch_bottom_dead_center: bool = False
@@ -24,6 +26,7 @@ class MachinePosition:
 @dataclass
 class PLCStatus:
     connected: bool = True
+    plc_alive: bool = True
     state_code: int = 0
     position: MachinePosition = field(default_factory=MachinePosition)
     safety: SafetySignals = field(default_factory=SafetySignals)

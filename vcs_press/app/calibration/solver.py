@@ -49,10 +49,7 @@ class CalibrationSolver:
             raise ValueError(f"unsupported calibration mode: {mode}")
         if matrix is None:
             raise ValueError("calibration transform solve failed")
-        if mode != "homography":
-            matrix3 = np.vstack([matrix, [0.0, 0.0, 1.0]])
-        else:
-            matrix3 = matrix
+        matrix3 = np.vstack([matrix, [0.0, 0.0, 1.0]]) if mode != "homography" else matrix
         projected = apply_transform(src, matrix3)
         errors = np.linalg.norm(projected - dst, axis=1)
         inverse = np.linalg.inv(matrix3)
