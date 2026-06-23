@@ -7,6 +7,6 @@ def test_hole_detector_finds_reference_centers():
     image = synthetic_hole_image(points)
     result = HoleDetector().detect(image, expected_count=4)
     assert len(result.centers) == 4
-    for detected, expected in zip(result.centers, points):
+    for detected, expected in zip(result.centers, points, strict=False):
         assert abs(detected[0] - expected[0]) < 1.0
         assert abs(detected[1] - expected[1]) < 1.0

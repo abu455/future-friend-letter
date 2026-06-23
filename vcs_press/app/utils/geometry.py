@@ -1,7 +1,7 @@
 from __future__ import annotations
 
 import math
-from typing import Iterable
+from collections.abc import Iterable
 
 import cv2
 import numpy as np

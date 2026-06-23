@@ -15,3 +15,8 @@ PyYAML
 loguru
 pytest
 httpx
+ruff
+black
+isort
+mypy
+pre-commit

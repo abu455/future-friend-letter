@@ -17,7 +17,7 @@ def write_image(path: str | Path, image: np.ndarray) -> str:
     out = Path(path)
     out.parent.mkdir(parents=True, exist_ok=True)
     if not cv2.imwrite(str(out), image):
-        raise IOError(f"unable to write image: {out}")
+        raise OSError(f"unable to write image: {out}")
     return str(out)
 
 

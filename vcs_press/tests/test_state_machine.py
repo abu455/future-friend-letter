@@ -1,3 +1,5 @@
+import pytest
+
 from app.state_machine.controller import StateMachineController
 from app.state_machine.states import MachineState
 
@@ -26,9 +28,5 @@ def test_state_machine_nominal_flow():
 
 def test_state_machine_rejects_invalid_transition():
     sm = StateMachineController()
-    try:
+    with pytest.raises(ValueError):
         sm.transition(MachineState.PUNCH_ALLOWED, "invalid")
-    except ValueError:
-        assert True
-    else:
-        assert False, "invalid transition should raise"

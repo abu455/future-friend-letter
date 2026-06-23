@@ -51,8 +51,8 @@ class SuperPointLightGlueMatcher(FeatureMatcher):
             torch = importlib.import_module("torch")
             lightglue = importlib.import_module("lightglue")
             utils = importlib.import_module("lightglue.utils")
-            SuperPoint = getattr(lightglue, "SuperPoint")
-            LightGlue = getattr(lightglue, "LightGlue")
+            SuperPoint = lightglue.SuperPoint
+            LightGlue = lightglue.LightGlue
             self._rbd = getattr(utils, "rbd", _remove_batch_dimension)
             requested_device = self.config.device
             self.device = ("cuda" if torch.cuda.is_available() else "cpu") if requested_device in (None, "auto") else requested_device
@@ -75,7 +75,9 @@ class SuperPointLightGlueMatcher(FeatureMatcher):
         feats0, feats1, matches01 = [self._rbd(x) for x in (feats0, feats1, matches01)]
         matches = matches01.get("matches")
         if matches is None or int(matches.shape[0]) < 4:
-            return MatchResult([], [], 0.0, 0.0, None, None, 999.0, metadata={"matcher": self.name, "reason": "insufficient_lightglue_matches"})
+            return MatchResult(
+                [], [], 0.0, 0.0, None, None, 999.0, metadata={"matcher": self.name, "reason": "insufficient_lightglue_matches"}
+            )
         keypoints0 = feats0["keypoints"][matches[:, 0]].detach().cpu().numpy().astype(np.float32)
         keypoints1 = feats1["keypoints"][matches[:, 1]].detach().cpu().numpy().astype(np.float32)
         scores = matches01.get("scores")
@@ -103,13 +105,12 @@ class SuperPointLightGlueMatcher(FeatureMatcher):
     def _image_to_tensor(self, image: np.ndarray):
         rgb = cv2.cvtColor(image, cv2.COLOR_BGR2RGB) if image.ndim == 3 else image
         tensor = self._torch.from_numpy(rgb).float() / 255.0
-        if tensor.ndim == 2:
-            tensor = tensor.unsqueeze(0)
-        else:
-            tensor = tensor.permute(2, 0, 1)
+        tensor = tensor.unsqueeze(0) if tensor.ndim == 2 else tensor.permute(2, 0, 1)
         return tensor.to(self.device)
 
-    def _fallback(self, template_image: np.ndarray, current_image: np.ndarray, roi: tuple[int, int, int, int] | None, reason: str) -> MatchResult:
+    def _fallback(
+        self, template_image: np.ndarray, current_image: np.ndarray, roi: tuple[int, int, int, int] | None, reason: str
+    ) -> MatchResult:
         if not self.config.use_fallback:
             return MatchResult([], [], 0.0, 0.0, None, None, 999.0, metadata={"matcher": self.name, "reason": reason})
         result = self.fallback.match(template_image, current_image, roi)
@@ -147,10 +148,12 @@ def _mean_residual(src: np.ndarray, dst: np.ndarray, affine: np.ndarray, inliers
     return float(np.mean(np.linalg.norm(projected - dst[inliers], axis=1)))
 
 
-def _draw_matches(template_image: np.ndarray, current_image: np.ndarray, src: np.ndarray, dst: np.ndarray, inliers: np.ndarray) -> np.ndarray:
+def _draw_matches(
+    template_image: np.ndarray, current_image: np.ndarray, src: np.ndarray, dst: np.ndarray, inliers: np.ndarray
+) -> np.ndarray:
     canvas = np.hstack([template_image, current_image])
     width = template_image.shape[1]
-    for p, q, ok in zip(src.astype(int), dst.astype(int), inliers):
+    for p, q, ok in zip(src.astype(int), dst.astype(int), inliers, strict=False):
         color = (0, 220, 0) if ok else (0, 0, 220)
         q2 = (int(q[0] + width), int(q[1]))
         cv2.circle(canvas, tuple(p), 3, color, -1)

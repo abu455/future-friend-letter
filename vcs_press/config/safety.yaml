@@ -4,3 +4,9 @@ safety:
   require_cad_loaded: true
   reject_on_light_fault: true
   reject_on_camera_offline: true
+  timeouts:
+    camera_acquire_timeout_ms: 1000
+    vision_process_timeout_ms: 500
+    plc_ack_timeout_ms: 300
+    light_ready_timeout_ms: 200
+    post_inspection_timeout_ms: 1000
