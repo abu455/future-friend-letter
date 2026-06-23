@@ -17,7 +17,7 @@ Industrial camera and light control feed calibration, CAD parsing, preprocessing
 - `plc/`: simulated PLC plus Modbus, OPC UA, and Siemens S7 stubs.
 - `calibration/`: hole detection and Similarity/Affine/Homography transform solving.
 - `cad/`: DXF parsing, CAD rendering, and normalized job data.
-- `vision_matching/`: ORB, SIFT, MockDeep, LightGlue/OmniGlue/RoMa stubs, RANSAC outputs.
+- `vision_matching/`: ORB, SIFT, MockDeep, optional SuperPoint+LightGlue, OmniGlue/RoMa extension points, RANSAC outputs.
 - `registration/`: global `dx/dy/theta/scale/shear` computation.
 - `deformation/`: TPS-based residual local deformation field and per-region offsets.
 - `servo/` and `safety/`: compensation limiting and safety interlock decisions.
@@ -32,6 +32,10 @@ Use Python 3.10+.
 `pip install -r requirements.txt`
 
 GPU is optional. The project runs in simulated mode without model weights.
+
+Install the real LightGlue backend only on machines that need it:
+
+`pip install -r requirements-lightglue.txt`
 
 ## Start
 
@@ -56,6 +60,10 @@ Example:
 
 `curl -X POST http://127.0.0.1:8000/calibration/start`
 
+Use LightGlue through the API after installing the optional backend:
+
+`curl -X POST http://127.0.0.1:8000/vision/register -H "Content-Type: application/json" -d '{"matcher":"lightglue"}'`
+
 ## Simulation flow
 
 The simulated camera generates four reference holes for self-calibration and a shifted material image for registration. MockDeepMatcher emits dense correspondences; registration computes the global offset; TPS estimates residual local deformation; ServoService checks safety thresholds and writes only recommendations to SimulatedPLC.
@@ -70,7 +78,7 @@ Install and validate `snap7`, then replace `SiemensS7PLCStub` methods with DB bl
 
 ## LightGlue, OmniGlue, and RoMa integration
 
-Replace the stubs in `lightglue_stub.py` and `roma_stub.py` with model loading, preprocessing, tensor inference, and coordinate scaling. Preserve the `FeatureMatcher` interface and keep ORB/SIFT/edge fallback active for low GPU availability or missing weights.
+`SuperPointLightGlueMatcher` now loads `SuperPoint` and `LightGlue` from the upstream `lightglue` package when installed. Select it with matcher name `lightglue` or `superpoint_lightglue`; it automatically chooses CUDA when available, runs RANSAC, returns homography/affine/residual/confidence, and falls back to ORB if the backend is missing or inference fails. Replace `OmniGlueMatcher` and `RoMaMatcher` with site-approved model loaders while preserving the `FeatureMatcher` interface and fallback behavior.
 
 ## Safety notes
 

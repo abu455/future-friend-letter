@@ -7,6 +7,7 @@ from app.camera.simulated_camera import SimulatedCamera
 from app.storage.report_writer import ReportWriter
 from app.utils.image_io import write_image
 from app.vision_matching.base import FeatureMatcher, MatchResult
+from app.vision_matching.lightglue_stub import OmniGlueMatcher, SuperPointLightGlueMatcher
 from app.vision_matching.mock_deep_matcher import MockDeepMatcher
 from app.vision_matching.orb_matcher import ORBMatcher
 from app.vision_matching.sift_matcher import SIFTMatcher
@@ -36,6 +37,10 @@ class MatchingService:
         if result.confidence < 0.5 or result.inlier_ratio < 0.3:
             edge_result = self._edge_fallback(template, current)
             if edge_result.confidence > result.confidence:
+                edge_result.metadata["previous_matcher_metadata"] = result.metadata
+                if "requested_matcher" in result.metadata:
+                    edge_result.metadata["requested_matcher"] = result.metadata["requested_matcher"]
+                edge_result.metadata["fallback_chain"] = [result.metadata.get("matcher", "unknown"), "edge_fallback"]
                 result = edge_result
         self.latest_result = result
         if result.visualization_image is not None:
@@ -51,6 +56,10 @@ class MatchingService:
             return self.fallback
         if name == "sift":
             return SIFTMatcher()
+        if name in ("lightglue", "superpoint_lightglue"):
+            return SuperPointLightGlueMatcher()
+        if name == "omniglue":
+            return OmniGlueMatcher()
         return self.matcher
 
     def _edge_fallback(self, template: np.ndarray, current: np.ndarray) -> MatchResult:

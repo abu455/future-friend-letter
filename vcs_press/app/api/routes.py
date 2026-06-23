@@ -32,6 +32,10 @@ class JobLoadRequest(BaseModel):
     job_id: str = "demo_job"
 
 
+class VisionRegisterRequest(BaseModel):
+    matcher: str | None = None
+
+
 class AppContext:
     def __init__(self):
         self.camera = SimulatedCamera(CameraConfig(width=640, height=480))
@@ -138,12 +142,12 @@ def create_app() -> FastAPI:
         return {"timestamp": frame.timestamp, "shape": list(frame.image.shape), "metadata": frame.metadata}
 
     @app.post("/vision/register")
-    def vision_register() -> dict:
+    def vision_register(request: VisionRegisterRequest | None = None) -> dict:
         if ctx.state_machine.state == MachineState.CALIBRATION_OK:
             _goto(ctx, MachineState.WAIT_MATERIAL, "material ready")
         _goto(ctx, MachineState.ACQUIRE_IMAGE, "acquire material")
         _goto(ctx, MachineState.MATCHING, "feature matching")
-        match = ctx.matching.register()
+        match = ctx.matching.register(request.matcher if request else None)
         _goto(ctx, MachineState.REGISTRATION, "geometric registration")
         registration = ctx.registration.compute(match)
         _goto(ctx, MachineState.DEFORMATION_ESTIMATION, "soft material deformation")
