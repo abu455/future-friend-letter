@@ -573,37 +573,37 @@
         }
 
         #pdfCanvas.flip-forward {
-            animation: flipForward 0.52s cubic-bezier(0.22, 1, 0.36, 1);
+            animation: flipForward 0.68s cubic-bezier(0.22, 1, 0.36, 1);
         }
 
         #pdfCanvas.flip-back {
             transform-origin: right center;
-            animation: flipBack 0.52s cubic-bezier(0.22, 1, 0.36, 1);
+            animation: flipBack 0.68s cubic-bezier(0.22, 1, 0.36, 1);
         }
 
         @keyframes flipForward {
             from {
-                opacity: 0.25;
-                transform: rotateY(-54deg) translateX(22px);
-                filter: brightness(0.9);
+                opacity: 0.16;
+                transform: rotateY(-78deg) translateX(42px) scale(0.96);
+                filter: brightness(0.84) drop-shadow(-26px 14px 18px rgba(63, 40, 20, 0.28));
             }
             to {
                 opacity: 1;
                 transform: rotateY(0) translateX(0);
-                filter: brightness(1);
+                filter: brightness(1) drop-shadow(0 0 0 rgba(63, 40, 20, 0));
             }
         }
 
         @keyframes flipBack {
             from {
-                opacity: 0.25;
-                transform: rotateY(54deg) translateX(-22px);
-                filter: brightness(0.9);
+                opacity: 0.16;
+                transform: rotateY(78deg) translateX(-42px) scale(0.96);
+                filter: brightness(0.84) drop-shadow(26px 14px 18px rgba(63, 40, 20, 0.28));
             }
             to {
                 opacity: 1;
                 transform: rotateY(0) translateX(0);
-                filter: brightness(1);
+                filter: brightness(1) drop-shadow(0 0 0 rgba(63, 40, 20, 0));
             }
         }
 
@@ -896,6 +896,7 @@
             currentPage: 1,
             pageCount: 1,
             renderTask: null,
+            renderId: 0,
             indexes: new Map(),
             pdfCache: new Map(),
             indexedCount: 0
@@ -1129,6 +1130,8 @@
 
         async function renderPage(pageNumber, direction = "next") {
             if (!state.currentPdf) return;
+            const renderId = state.renderId + 1;
+            state.renderId = renderId;
             const nextPage = Math.min(Math.max(pageNumber, 1), state.pageCount);
             state.currentPage = nextPage;
             showLoading(true);
@@ -1146,29 +1149,43 @@
             const scale = Math.min(availableWidth / rawViewport.width, availableHeight / rawViewport.height, 1.55);
             const viewport = page.getViewport({ scale });
             const outputScale = window.devicePixelRatio || 1;
+            const tempCanvas = document.createElement("canvas");
+            const tempContext = tempCanvas.getContext("2d");
             const canvas = el.pdfCanvas;
             const context = canvas.getContext("2d");
 
-            canvas.width = Math.floor(viewport.width * outputScale);
-            canvas.height = Math.floor(viewport.height * outputScale);
-            canvas.style.width = `${Math.floor(viewport.width)}px`;
-            canvas.style.height = `${Math.floor(viewport.height)}px`;
+            tempCanvas.width = Math.floor(viewport.width * outputScale);
+            tempCanvas.height = Math.floor(viewport.height * outputScale);
 
-            state.renderTask = page.render({
-                canvasContext: context,
+            const task = page.render({
+                canvasContext: tempContext,
                 viewport,
                 transform: outputScale !== 1 ? [outputScale, 0, 0, outputScale, 0, 0] : null
             });
+            state.renderTask = task;
 
             try {
-                await state.renderTask.promise;
+                await task.promise;
+                if (renderId !== state.renderId) return;
+                canvas.width = tempCanvas.width;
+                canvas.height = tempCanvas.height;
+                canvas.style.width = `${Math.floor(viewport.width)}px`;
+                canvas.style.height = `${Math.floor(viewport.height)}px`;
+                context.setTransform(1, 0, 0, 1, 0, 0);
+                context.clearRect(0, 0, canvas.width, canvas.height);
+                context.drawImage(tempCanvas, 0, 0);
             } catch (error) {
                 if (error?.name !== "RenderingCancelledException") throw error;
             } finally {
-                state.renderTask = null;
-                showLoading(false);
+                if (state.renderTask === task) {
+                    state.renderTask = null;
+                }
+                if (renderId === state.renderId) {
+                    showLoading(false);
+                }
             }
 
+            if (renderId !== state.renderId) return;
             canvas.classList.remove("flip-forward", "flip-back");
             void canvas.offsetWidth;
             canvas.classList.add(direction === "prev" ? "flip-back" : "flip-forward");
