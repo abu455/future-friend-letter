@@ -623,6 +623,25 @@
             display: block;
         }
 
+        .reader-error {
+            position: absolute;
+            z-index: 3;
+            display: none;
+            width: min(440px, calc(100% - 52px));
+            padding: 16px 18px;
+            border: 1px solid rgba(128, 91, 55, 0.18);
+            border-radius: 18px;
+            color: var(--accent-strong);
+            background: rgba(255, 250, 241, 0.94);
+            box-shadow: 0 16px 30px rgba(55, 35, 18, 0.16);
+            line-height: 1.65;
+            text-align: center;
+        }
+
+        .reader-error.is-visible {
+            display: block;
+        }
+
         .page-indicator {
             color: var(--muted);
             font-weight: 700;
@@ -820,6 +839,7 @@
                         <div class="page-shadow" aria-hidden="true"></div>
                         <canvas id="pdfCanvas" aria-label="PDF 页面"></canvas>
                         <div id="loading" class="loading">正在加载页面...</div>
+                        <div id="readerError" class="reader-error" role="alert"></div>
                     </div>
                 </div>
 
@@ -903,6 +923,7 @@
             renderId: 0,
             indexes: new Map(),
             pdfCache: new Map(),
+            pdfUrls: new Map(),
             indexedCount: 0
         };
 
@@ -920,6 +941,7 @@
             rawPdfLink: document.getElementById("rawPdfLink"),
             pdfCanvas: document.getElementById("pdfCanvas"),
             loading: document.getElementById("loading"),
+            readerError: document.getElementById("readerError"),
             prevPage: document.getElementById("prevPage"),
             nextPage: document.getElementById("nextPage"),
             pageIndicator: document.getElementById("pageIndicator"),
@@ -976,6 +998,55 @@
             showToast.timer = window.setTimeout(() => el.toast.classList.remove("is-visible"), 2400);
         }
 
+        function uniqueUrls(urls) {
+            const seen = new Set();
+            return urls.filter(url => {
+                if (!url || seen.has(url)) return false;
+                seen.add(url);
+                return true;
+            });
+        }
+
+        function getPdfUrlCandidates(path) {
+            const source = String(path || "").trim();
+            if (!source) return [];
+            if (/^(?:https?:|data:|blob:)/i.test(source)) return [source];
+
+            const cleanPath = source.replace(/^\.?\//, "").replace(/^\/+/, "");
+            const routePath = window.location.pathname;
+            const routeBase = routePath.endsWith("/") || /\.[^/]+$/.test(routePath)
+                ? ""
+                : `${window.location.origin}${routePath}/`;
+            return uniqueUrls([
+                new URL(source, document.baseURI).href,
+                routeBase ? new URL(cleanPath, routeBase).href : "",
+                new URL(`/${cleanPath}`, window.location.origin).href
+            ]);
+        }
+
+        function getKnownPdfUrl(file) {
+            return state.pdfUrls.get(file.id) || getPdfUrlCandidates(file.path)[0] || file.path || "#";
+        }
+
+        function createPdfLoadMessage(file) {
+            const attempted = getPdfUrlCandidates(file.path)
+                .map(url => {
+                    try {
+                        return new URL(url).pathname;
+                    } catch {
+                        return url;
+                    }
+                })
+                .join("、");
+            const detail = attempted ? `已尝试：${attempted}` : "没有可用的 PDF 路径";
+            return `无法打开《${file.title}》PDF。${detail}。请确认文件已发布到 assets/pdfs 目录。`;
+        }
+
+        function setReaderError(message) {
+            el.readerError.textContent = message || "";
+            el.readerError.classList.toggle("is-visible", Boolean(message));
+        }
+
         function renderShelf() {
             el.shelf.innerHTML = FILES.map(file => `
                 <article class="book" data-id="${file.id}">
@@ -1004,7 +1075,24 @@
                 throw new Error("PDF 引擎未加载，请检查网络后刷新页面。");
             }
             if (!state.pdfCache.has(file.id)) {
-                state.pdfCache.set(file.id, pdfjsLib.getDocument(file.path).promise);
+                const request = (async () => {
+                    let lastError = null;
+                    for (const url of getPdfUrlCandidates(file.path)) {
+                        try {
+                            const pdf = await pdfjsLib.getDocument({ url }).promise;
+                            state.pdfUrls.set(file.id, url);
+                            return pdf;
+                        } catch (error) {
+                            lastError = error;
+                            console.warn(`PDF load failed: ${url}`, error);
+                        }
+                    }
+                    throw new Error(createPdfLoadMessage(file), { cause: lastError });
+                })().catch(error => {
+                    state.pdfCache.delete(file.id);
+                    throw error;
+                });
+                state.pdfCache.set(file.id, request);
             }
             return state.pdfCache.get(file.id);
         }
@@ -1097,22 +1185,27 @@
             el.readerTitle.textContent = file.title;
             el.readerSubtitle.textContent = `${file.subtitle} · ${file.author}`;
             el.readerSummary.textContent = file.summary;
-            el.rawPdfLink.href = file.path;
+            el.rawPdfLink.href = getKnownPdfUrl(file);
             el.readerSearch.value = "";
             el.readerResults.innerHTML = `<button class="reader-result" type="button">输入关键词后，可跳到匹配页面。</button>`;
+            setReaderError("");
             el.reader.classList.add("is-open");
             document.body.style.overflow = "hidden";
-            showLoading(true);
+            showLoading(true, "正在加载文件...");
 
             try {
                 const pdf = await getPdf(file);
                 state.currentPdf = pdf;
                 state.pageCount = pdf.numPages;
+                el.rawPdfLink.href = getKnownPdfUrl(file);
                 await renderPage(pageNumber, "next");
                 updatePageControls();
             } catch (error) {
                 console.error(error);
-                showToast(error.message || "文件加载失败。");
+                const message = error.message || createPdfLoadMessage(file);
+                setReaderError(message);
+                el.readerResults.innerHTML = `<button class="reader-result" type="button">${escapeHtml(message)}</button>`;
+                showToast(message);
                 showLoading(false);
             }
         }
@@ -1128,7 +1221,8 @@
             }
         }
 
-        function showLoading(visible) {
+        function showLoading(visible, message = "正在加载页面...") {
+            if (visible) el.loading.textContent = message;
             el.loading.classList.toggle("is-visible", visible);
         }
 
