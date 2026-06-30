@@ -4,7 +4,14 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>简约书架文件管理器</title>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
+    <script src="assets/vendor/pdfjs/pdf.min.js"></script>
+    <script>
+        window.__pdfWorkerSrc = "assets/vendor/pdfjs/pdf.worker.min.js";
+        if (!window.pdfjsLib) {
+            window.__pdfWorkerSrc = "https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js";
+            document.write('<scr' + 'ipt src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"><\/scr' + 'ipt>');
+        }
+    </script>
     <style>
         :root {
             --bg: #f6f1e8;
@@ -952,7 +959,7 @@
 
         const hasPdfEngine = Boolean(window.pdfjsLib);
         if (hasPdfEngine) {
-            pdfjsLib.GlobalWorkerOptions.workerSrc = "https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js";
+            pdfjsLib.GlobalWorkerOptions.workerSrc = window.__pdfWorkerSrc || "assets/vendor/pdfjs/pdf.worker.min.js";
         }
 
         function normalize(value) {
