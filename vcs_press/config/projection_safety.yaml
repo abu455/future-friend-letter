@@ -1,0 +1,10 @@
+projection_safety:
+  require_projector_ready: true
+  require_projector_calibration_ok: true
+  require_projection_alignment_ok: true
+  forbid_punch_on_projection_failure: true
+  forbid_punch_on_projector_disconnect: true
+  forbid_punch_on_job_pattern_mismatch: true
+  max_projection_iterations: 5
+  max_reflection_score: 0.60
+  max_local_projection_deformation_mm: 1.00

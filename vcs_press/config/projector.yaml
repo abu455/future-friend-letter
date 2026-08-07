@@ -1,0 +1,22 @@
+projector:
+  mode: simulated
+  name: "VCS-Projector-Prototype"
+  resolution:
+    width: 1920
+    height: 1080
+  brightness: 0.8
+  refresh_rate_hz: 60
+  connection_timeout_ms: 1000
+  update_timeout_ms: 500
+  heartbeat_timeout_ms: 1000
+  default_background: "black"
+  safe_alarm_background: "dark_red"
+
+projector_sync:
+  mode: clean
+  turn_off_before_capture: true
+  delay_after_projector_off_ms: 50
+  delay_after_projector_on_ms: 100
+  strobe_enabled: false
+  strobe_on_ms: 30
+  strobe_off_ms: 30

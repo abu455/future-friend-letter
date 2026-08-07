@@ -6,3 +6,13 @@ data/reports/*
 !data/reports/.gitkeep
 data/logs/*
 !data/logs/.gitkeep
+data/projection/calibration/*
+!data/projection/calibration/.gitkeep
+data/projection/patterns/*
+!data/projection/patterns/.gitkeep
+data/projection/previews/*
+!data/projection/previews/.gitkeep
+data/projection/debug_overlays/*
+!data/projection/debug_overlays/.gitkeep
+data/projection/reports/*
+!data/projection/reports/.gitkeep
