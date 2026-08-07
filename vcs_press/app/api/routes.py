@@ -17,6 +17,7 @@ from app.illumination.simulated_light import SimulatedLightController
 from app.inspection.post_inspection import PostInspectionService
 from app.online_learning.online_compensator import OnlineCompensator
 from app.plc.simulated_plc import SimulatedPLC
+from app.projector.projector_service import ProjectorService
 from app.registration.registration_service import RegistrationService
 from app.safety.alarm_codes import make_alarm
 from app.servo.servo_service import ServoService
@@ -41,6 +42,10 @@ class EmergencyAckRequest(BaseModel):
     operator_confirmed: bool = False
 
 
+class ProjectionModeRequest(BaseModel):
+    mode: str
+
+
 class AppContext:
     def __init__(self):
         self.camera = SimulatedCamera(CameraConfig(width=640, height=480))
@@ -55,6 +60,7 @@ class AppContext:
         self.registration = RegistrationService(px_to_mm=0.1)
         self.deformation = DeformationService(px_to_mm=0.1)
         self.servo = ServoService(self.plc)
+        self.projector = ProjectorService()
         self.inspection = PostInspectionService()
         self.online = OnlineCompensator()
         self.job: Job | None = demo_job()
@@ -73,6 +79,8 @@ class AppContext:
             "latest_registration": self.registration.latest_result,
             "latest_compensation": self.servo.latest_result,
             "latest_inspection": self.inspection.latest_report,
+            "projector": self.projector.status(),
+            "latest_projection": self.projector.latest_feedback,
         }
 
 
@@ -90,6 +98,10 @@ def create_app() -> FastAPI:
         <h1>VCS-Press HMI</h1>
         <button onclick="fetch('/calibration/start',{method:'POST'}).then(load)">Self Calibration</button>
         <button onclick="fetch('/vision/register',{method:'POST'}).then(load)">Register</button>
+        <button onclick="fetch('/projector/connect',{method:'POST'}).then(load)">Connect Projector</button>
+        <button onclick="fetch('/projection/calibration/start',{method:'POST'}).then(load)">Projector Calibration</button>
+        <button onclick="fetch('/projection/render',{method:'POST'}).then(load)">Projection Preview</button>
+        <button onclick="fetch('/projection/feedback_loop',{method:'POST'}).then(load)">Projection Feedback</button>
         <button onclick="fetch('/servo/compute',{method:'POST'}).then(load)">Compute Servo</button>
         <button onclick="fetch('/inspection/run',{method:'POST'}).then(load)">Post Inspection</button>
         <pre id="status"></pre>
@@ -174,12 +186,138 @@ def create_app() -> FastAPI:
         deformation = ctx.deformation.estimate(match, ctx.job)
         return {"match": match, "registration": registration, "deformation": deformation}
 
+    @app.get("/projector/status")
+    def projector_status() -> dict:
+        return {"success": True, "projector_status": ctx.projector.status()}
+
+    @app.post("/projector/connect")
+    def projector_connect() -> dict:
+        _goto(ctx, MachineState.PROJECTOR_INIT, "projector init")
+        status = ctx.projector.connect()
+        _goto(ctx, MachineState.PROJECTOR_READY, "projector ready")
+        return {"success": True, "projector_status": status}
+
+    @app.post("/projector/disconnect")
+    def projector_disconnect() -> dict:
+        return {"success": True, "projector_status": ctx.projector.disconnect(), "allow_punch": False}
+
+    @app.post("/projector/on")
+    def projector_on() -> dict:
+        return {"success": True, "projector_status": ctx.projector.turn_on()}
+
+    @app.post("/projector/off")
+    def projector_off() -> dict:
+        return {"success": True, "projector_status": ctx.projector.turn_off(), "allow_punch": False}
+
+    @app.post("/projector/clear")
+    def projector_clear() -> dict:
+        return {"success": True, "projector_status": ctx.projector.clear(), "allow_punch": False}
+
+    @app.post("/projector/show_pattern")
+    def projector_show_pattern() -> dict:
+        result = ctx.projector.show_latest_pattern()
+        return {"success": True, **result, "allow_punch": False}
+
+    @app.post("/projection/calibration/start")
+    def projection_calibration_start() -> dict:
+        if not ctx.projector.projector.is_connected():
+            projector_connect()
+        _goto(ctx, MachineState.PROJECTOR_CALIBRATION, "projector calibration")
+        report = ctx.projector.calibrate()
+        _goto(ctx, MachineState.PROJECTOR_CALIBRATION_OK, "projector calibration ok")
+        return {"success": True, "projector_status": ctx.projector.status(), "projection_alignment_quality": "CALIBRATED", **report}
+
+    @app.get("/projection/calibration/status")
+    def projection_calibration_status() -> dict:
+        return {
+            "success": True,
+            "projector_status": ctx.projector.status(),
+            "camera_projector": ctx.projector.camera_projector_report,
+            "machine_projector": ctx.projector.machine_projector_report,
+        }
+
+    @app.post("/projection/render")
+    def projection_render() -> dict:
+        _goto(ctx, MachineState.PROJECTION_RENDER, "projection render")
+        pattern = ctx.projector.render(ctx.job)
+        shown = ctx.projector.show_latest_pattern()
+        _goto(ctx, MachineState.PROJECTION_PREVIEW, "projection preview")
+        return {
+            "success": True,
+            "projector_status": ctx.projector.status(),
+            "allow_projection": True,
+            "allow_punch": False,
+            **shown,
+            "pattern_id": pattern["pattern_id"],
+        }
+
+    @app.post("/projection/preview")
+    def projection_preview() -> dict:
+        return projection_render()
+
+    @app.post("/projection/update_warp")
+    def projection_update_warp() -> dict:
+        return projection_feedback_loop()
+
+    @app.post("/projection/feedback_loop")
+    def projection_feedback_loop() -> dict:
+        if ctx.registration.latest_result is None or ctx.deformation.latest_field is None:
+            vision_register()
+        _goto(ctx, MachineState.PROJECTION_FEEDBACK, "projection feedback")
+        report = ctx.projector.feedback_loop(ctx.job, ctx.registration.latest_result, ctx.deformation.latest_field)
+        _goto(
+            ctx,
+            MachineState.PROJECTION_OK if report["allow_projection"] else MachineState.PROJECTION_FAILED,
+            report.get("alarm_message", "projection feedback"),
+        )
+        return {
+            "success": report["allow_projection"],
+            "projector_status": ctx.projector.status(),
+            "projection_alignment_quality": report["projection_alignment_quality"],
+            "projection_error_mm": report["projection_mean_error_mm"],
+            "projection_confidence": report["projection_confidence"],
+            "allow_projection": report["allow_projection"],
+            "allow_punch": report["allow_punch"],
+            "alarm_code": report["alarm_code"],
+            "alarm_message": report["alarm_message"],
+            "recommended_action": report["recommended_action"],
+            "debug_image_path": report["debug_image_path"],
+            "report_path": report["report_path"],
+        }
+
+    @app.get("/projection/report/latest")
+    def projection_report_latest() -> dict:
+        return {"success": ctx.projector.latest_feedback is not None, "report": ctx.projector.latest_feedback}
+
+    @app.post("/projection/mode")
+    def projection_mode(request: ProjectionModeRequest) -> dict:
+        return {"success": True, "projector_status": ctx.projector.set_mode(request.mode), "allow_punch": False}
+
+    @app.post("/projection/safety/check")
+    def projection_safety_check() -> dict:
+        decision = ctx.servo.safety_checker.evaluate(
+            ctx.plc.read_status(),
+            registration=ctx.registration.latest_result or {"confidence": 1.0, "inlier_ratio": 1.0, "residual_error_mm": 0.0},
+            compensation=ctx.servo.latest_result or {"x_offset_mm": 0, "y_offset_mm": 0, "theta_offset_deg": 0, "feed_offset_mm": 0},
+            deformation=ctx.deformation.latest_field,
+            calibrated=ctx.calibrated,
+            cad_loaded=ctx.job is not None,
+            projector_status=ctx.projector.status(),
+            projection=ctx.projector.latest_feedback,
+        )
+        return {"success": decision.allow_punch, "allow_punch": decision.allow_punch, **decision.to_dict()}
+
     @app.post("/servo/compute")
     def servo_compute() -> dict:
         if ctx.registration.latest_result is None or ctx.deformation.latest_field is None:
             vision_register()
         result = ctx.servo.compute(
-            ctx.registration.latest_result, ctx.deformation.latest_field, calibrated=ctx.calibrated, cad_loaded=ctx.job is not None
+            ctx.registration.latest_result,
+            ctx.deformation.latest_field,
+            calibrated=ctx.calibrated,
+            cad_loaded=ctx.job is not None,
+            projector_status=ctx.projector.status() if ctx.projector.latest_feedback else None,
+            projection=ctx.projector.latest_feedback,
         )
         if result["allow_punch"]:
             _goto(ctx, MachineState.COMPENSATION_READY, "compensation ready")

@@ -1,0 +1,12 @@
+projection_mapping:
+  transform_mode: homography
+  enable_mesh_warp: true
+  grid_size:
+    x: 20
+    y: 20
+  max_feedback_iterations: 5
+  convergence_threshold_mm: 0.10
+  max_projection_mean_error_mm: 0.20
+  max_projection_max_error_mm: 0.50
+  min_projection_confidence: 0.75
+  min_marker_detection_rate: 0.70

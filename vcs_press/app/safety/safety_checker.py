@@ -46,6 +46,11 @@ class SafetyChecker:
         residual_error_threshold_mm: float = 0.20,
         max_local_deformation_mm: float = 1.0,
         max_consecutive_ng: int = 3,
+        max_projection_mean_error_mm: float = 0.20,
+        max_projection_max_error_mm: float = 0.50,
+        min_projection_confidence: float = 0.75,
+        min_marker_detection_rate: float = 0.70,
+        max_projection_reflection_score: float = 0.60,
     ):
         self.max_x_mm = max_x_mm
         self.max_y_mm = max_y_mm
@@ -56,6 +61,11 @@ class SafetyChecker:
         self.residual_error_threshold_mm = residual_error_threshold_mm
         self.max_local_deformation_mm = max_local_deformation_mm
         self.max_consecutive_ng = max_consecutive_ng
+        self.max_projection_mean_error_mm = max_projection_mean_error_mm
+        self.max_projection_max_error_mm = max_projection_max_error_mm
+        self.min_projection_confidence = min_projection_confidence
+        self.min_marker_detection_rate = min_marker_detection_rate
+        self.max_projection_reflection_score = max_projection_reflection_score
 
     def evaluate(
         self,
@@ -77,6 +87,8 @@ class SafetyChecker:
         camera_acquire_timeout: bool = False,
         light_ready_timeout: bool = False,
         post_inspection_timeout: bool = False,
+        projection: dict | None = None,
+        projector_status: dict | None = None,
     ) -> SafetyDecision:
         try:
             calibration_passed = calibrated if calibration_ok is None else calibration_ok
@@ -109,6 +121,50 @@ class SafetyChecker:
                 max_deformation = float(deformation.get("max_deformation_mm", 0.0))
                 deformation_failed = (not deformation.get("allow_punch", True)) or max_deformation > self.max_local_deformation_mm
                 checks.append((deformation_failed, AlarmCodes.DEFORMATION_LIMIT, deformation.get("reject_reason") or None))
+            if projector_status or projection:
+                status = projector_status or {}
+                proj = projection or {}
+                checks.extend(
+                    [
+                        (status.get("projector_connected") is False, AlarmCodes.PROJECTOR_DISCONNECTED, None),
+                        (status.get("projector_alive") is False, AlarmCodes.PROJECTOR_ALIVE_LOST, None),
+                        (status.get("projector_ready") is False, AlarmCodes.PROJECTOR_NOT_READY, None),
+                        (proj.get("projector_calibration_ok") is False, AlarmCodes.PROJECTOR_CALIBRATION_REQUIRED, None),
+                        (proj.get("projection_alignment_quality") == "FAILED", AlarmCodes.PROJECTION_ALIGNMENT_FAILED, None),
+                        (
+                            proj.get("projection_confidence", 1.0) < self.min_projection_confidence,
+                            AlarmCodes.PROJECTION_LOW_CONFIDENCE,
+                            None,
+                        ),
+                        (
+                            proj.get("projection_mean_error_mm", 0.0) > self.max_projection_mean_error_mm,
+                            AlarmCodes.PROJECTION_MEAN_ERROR_HIGH,
+                            None,
+                        ),
+                        (
+                            proj.get("projection_max_error_mm", 0.0) > self.max_projection_max_error_mm,
+                            AlarmCodes.PROJECTION_MAX_ERROR_HIGH,
+                            None,
+                        ),
+                        (
+                            proj.get("marker_detection_rate", 1.0) < self.min_marker_detection_rate,
+                            AlarmCodes.PROJECTION_MARKERS_INSUFFICIENT,
+                            None,
+                        ),
+                        (proj.get("projector_image_out_of_bounds") is True, AlarmCodes.PROJECTION_IMAGE_OUT_OF_BOUNDS, None),
+                        (proj.get("projected_cut_path_outside_material") is True, AlarmCodes.PROJECTION_CUT_PATH_OUTSIDE_MATERIAL, None),
+                        (proj.get("projection_iterations_exceeded") is True, AlarmCodes.PROJECTION_ITERATIONS_EXCEEDED, None),
+                        (proj.get("projector_update_timeout") is True, AlarmCodes.PROJECTOR_UPDATE_TIMEOUT, None),
+                        (proj.get("projector_brightness_abnormal") is True, AlarmCodes.PROJECTOR_BRIGHTNESS_ABNORMAL, None),
+                        (
+                            proj.get("reflection_score", 0.0) > self.max_projection_reflection_score,
+                            AlarmCodes.PROJECTION_REFLECTION_TOO_HIGH,
+                            None,
+                        ),
+                        (proj.get("projector_camera_sync_failed") is True, AlarmCodes.PROJECTOR_CAMERA_SYNC_FAILED, None),
+                        (proj.get("job_pattern_mismatch") is True, AlarmCodes.PROJECTION_JOB_MISMATCH, None),
+                    ]
+                )
             if (
                 abs(float(compensation.get("x_offset_mm", 0.0))) > self.max_x_mm
                 or abs(float(compensation.get("y_offset_mm", 0.0))) > self.max_y_mm

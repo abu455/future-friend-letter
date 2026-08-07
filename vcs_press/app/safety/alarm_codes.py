@@ -67,6 +67,24 @@ class AlarmCodes:
     MODEL_MATCH_FAILED = "MODEL_MATCH_FAILED"
     VISION_EXCEPTION = "VISION_EXCEPTION"
     MANUAL_RESET_REQUIRED = "MANUAL_RESET_REQUIRED"
+    PROJECTOR_DISCONNECTED = "PROJECTOR_DISCONNECTED"
+    PROJECTOR_ALIVE_LOST = "PROJECTOR_ALIVE_LOST"
+    PROJECTOR_NOT_READY = "PROJECTOR_NOT_READY"
+    PROJECTOR_CALIBRATION_REQUIRED = "PROJECTOR_CALIBRATION_REQUIRED"
+    PROJECTION_ALIGNMENT_FAILED = "PROJECTION_ALIGNMENT_FAILED"
+    PROJECTION_LOW_CONFIDENCE = "PROJECTION_LOW_CONFIDENCE"
+    PROJECTION_MEAN_ERROR_HIGH = "PROJECTION_MEAN_ERROR_HIGH"
+    PROJECTION_MAX_ERROR_HIGH = "PROJECTION_MAX_ERROR_HIGH"
+    PROJECTION_MARKERS_INSUFFICIENT = "PROJECTION_MARKERS_INSUFFICIENT"
+    PROJECTION_IMAGE_OUT_OF_BOUNDS = "PROJECTION_IMAGE_OUT_OF_BOUNDS"
+    PROJECTION_CUT_PATH_OUTSIDE_MATERIAL = "PROJECTION_CUT_PATH_OUTSIDE_MATERIAL"
+    PROJECTION_ITERATIONS_EXCEEDED = "PROJECTION_ITERATIONS_EXCEEDED"
+    PROJECTOR_UPDATE_TIMEOUT = "PROJECTOR_UPDATE_TIMEOUT"
+    PROJECTOR_BRIGHTNESS_ABNORMAL = "PROJECTOR_BRIGHTNESS_ABNORMAL"
+    PROJECTION_REFLECTION_TOO_HIGH = "PROJECTION_REFLECTION_TOO_HIGH"
+    PROJECTOR_CAMERA_SYNC_FAILED = "PROJECTOR_CAMERA_SYNC_FAILED"
+    PROJECTION_JOB_MISMATCH = "PROJECTION_JOB_MISMATCH"
+    PROJECTION_LOCAL_DEFORMATION_TOO_LARGE = "PROJECTION_LOCAL_DEFORMATION_TOO_LARGE"
 
 
 ALARM_DEFINITIONS: dict[str, AlarmDefinition] = {
@@ -226,6 +244,114 @@ ALARM_DEFINITIONS: dict[str, AlarmDefinition] = {
         "manual reset is required",
         AlarmSeverity.INFO,
         "Use reset_alarm only after root cause is confirmed cleared.",
+    ),
+    AlarmCodes.PROJECTOR_DISCONNECTED: AlarmDefinition(
+        AlarmCodes.PROJECTOR_DISCONNECTED,
+        "projector is disconnected",
+        AlarmSeverity.CRITICAL,
+        "Reconnect projector and verify heartbeat before enabling projection.",
+    ),
+    AlarmCodes.PROJECTOR_ALIVE_LOST: AlarmDefinition(
+        AlarmCodes.PROJECTOR_ALIVE_LOST,
+        "projector heartbeat is lost",
+        AlarmSeverity.CRITICAL,
+        "Keep allow_punch false. Check projector power, cable, and display process.",
+    ),
+    AlarmCodes.PROJECTOR_NOT_READY: AlarmDefinition(
+        AlarmCodes.PROJECTOR_NOT_READY,
+        "projector is not ready",
+        AlarmSeverity.CRITICAL,
+        "Initialize projector and verify brightness, resolution, and current pattern.",
+    ),
+    AlarmCodes.PROJECTOR_CALIBRATION_REQUIRED: AlarmDefinition(
+        AlarmCodes.PROJECTOR_CALIBRATION_REQUIRED,
+        "projector calibration is not ok",
+        AlarmSeverity.CRITICAL,
+        "Run camera-projector and machine-projector calibration before punching.",
+    ),
+    AlarmCodes.PROJECTION_ALIGNMENT_FAILED: AlarmDefinition(
+        AlarmCodes.PROJECTION_ALIGNMENT_FAILED,
+        "projection alignment quality failed",
+        AlarmSeverity.CRITICAL,
+        "Reject punch and rerun projection feedback alignment.",
+    ),
+    AlarmCodes.PROJECTION_LOW_CONFIDENCE: AlarmDefinition(
+        AlarmCodes.PROJECTION_LOW_CONFIDENCE,
+        "projection confidence is too low",
+        AlarmSeverity.CRITICAL,
+        "Check projected markers, lighting, material reflection, and calibration.",
+    ),
+    AlarmCodes.PROJECTION_MEAN_ERROR_HIGH: AlarmDefinition(
+        AlarmCodes.PROJECTION_MEAN_ERROR_HIGH,
+        "projection mean error exceeds threshold",
+        AlarmSeverity.CRITICAL,
+        "Reject punch and continue feedback alignment or recalibrate projector.",
+    ),
+    AlarmCodes.PROJECTION_MAX_ERROR_HIGH: AlarmDefinition(
+        AlarmCodes.PROJECTION_MAX_ERROR_HIGH,
+        "projection max error exceeds threshold",
+        AlarmSeverity.CRITICAL,
+        "Reject punch and inspect local deformation or projector calibration.",
+    ),
+    AlarmCodes.PROJECTION_MARKERS_INSUFFICIENT: AlarmDefinition(
+        AlarmCodes.PROJECTION_MARKERS_INSUFFICIENT,
+        "projected marker detection rate is too low",
+        AlarmSeverity.CRITICAL,
+        "Improve projection visibility and remove occlusions before punching.",
+    ),
+    AlarmCodes.PROJECTION_IMAGE_OUT_OF_BOUNDS: AlarmDefinition(
+        AlarmCodes.PROJECTION_IMAGE_OUT_OF_BOUNDS,
+        "projector image is out of bounds",
+        AlarmSeverity.CRITICAL,
+        "Check machine-to-projector transform and CAD placement.",
+    ),
+    AlarmCodes.PROJECTION_CUT_PATH_OUTSIDE_MATERIAL: AlarmDefinition(
+        AlarmCodes.PROJECTION_CUT_PATH_OUTSIDE_MATERIAL,
+        "projected cut path is outside material",
+        AlarmSeverity.CRITICAL,
+        "Reload material or adjust nesting before punching.",
+    ),
+    AlarmCodes.PROJECTION_ITERATIONS_EXCEEDED: AlarmDefinition(
+        AlarmCodes.PROJECTION_ITERATIONS_EXCEEDED,
+        "projection feedback exceeded max iterations",
+        AlarmSeverity.CRITICAL,
+        "Reject punch and inspect material deformation, marker visibility, and projector calibration.",
+    ),
+    AlarmCodes.PROJECTOR_UPDATE_TIMEOUT: AlarmDefinition(
+        AlarmCodes.PROJECTOR_UPDATE_TIMEOUT,
+        "projector update timed out",
+        AlarmSeverity.CRITICAL,
+        "Reject punch and inspect projector display pipeline latency.",
+    ),
+    AlarmCodes.PROJECTOR_BRIGHTNESS_ABNORMAL: AlarmDefinition(
+        AlarmCodes.PROJECTOR_BRIGHTNESS_ABNORMAL,
+        "projector brightness is abnormal",
+        AlarmSeverity.CRITICAL,
+        "Adjust brightness and verify projected marker visibility.",
+    ),
+    AlarmCodes.PROJECTION_REFLECTION_TOO_HIGH: AlarmDefinition(
+        AlarmCodes.PROJECTION_REFLECTION_TOO_HIGH,
+        "projection reflection score is too high",
+        AlarmSeverity.CRITICAL,
+        "Switch to clean/strobe mode or adjust lighting and polarization.",
+    ),
+    AlarmCodes.PROJECTOR_CAMERA_SYNC_FAILED: AlarmDefinition(
+        AlarmCodes.PROJECTOR_CAMERA_SYNC_FAILED,
+        "projector and camera synchronization failed",
+        AlarmSeverity.CRITICAL,
+        "Check clean/visible/strobe timing before continuing.",
+    ),
+    AlarmCodes.PROJECTION_JOB_MISMATCH: AlarmDefinition(
+        AlarmCodes.PROJECTION_JOB_MISMATCH,
+        "projection pattern does not match current job",
+        AlarmSeverity.CRITICAL,
+        "Regenerate projection pattern for the current job and CAD hash.",
+    ),
+    AlarmCodes.PROJECTION_LOCAL_DEFORMATION_TOO_LARGE: AlarmDefinition(
+        AlarmCodes.PROJECTION_LOCAL_DEFORMATION_TOO_LARGE,
+        "local projection deformation is too large",
+        AlarmSeverity.CRITICAL,
+        "Flatten material or reload material before punching.",
     ),
 }
 
