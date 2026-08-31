@@ -86,6 +86,9 @@ async function main() {
 
   for (const signal of DEMO_SIGNALS) {
     const { companyName: _companyName, x: _x, y: _y, ...data } = signal;
+    void _companyName;
+    void _x;
+    void _y;
     await prisma.marketSignal.upsert({
       where: { id: signal.id },
       update: { ...data, publishedAt: new Date(data.publishedAt) },
@@ -112,6 +115,10 @@ async function main() {
       owner: _owner,
       ...data
     } = opportunity;
+    void _companyName;
+    void _primaryContactName;
+    void _stageHistory;
+    void _owner;
     await prisma.opportunity.upsert({
       where: { id: opportunity.id },
       update: {
@@ -145,6 +152,8 @@ async function main() {
   for (const task of DEMO_TASKS) {
     const { opportunityName: _opportunityName, assignee: _assignee, ...data } =
       task;
+    void _opportunityName;
+    void _assignee;
     await prisma.followUpTask.upsert({
       where: { id: task.id },
       update: {

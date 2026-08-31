@@ -73,10 +73,13 @@ export function OpportunityAgent({
   const [taskCreated, setTaskCreated] = useState(false);
 
   useEffect(() => {
-    setAnalysis(undefined);
-    setMessage(undefined);
-    setObjectionResult(undefined);
-    setTaskCreated(false);
+    const timer = window.setTimeout(() => {
+      setAnalysis(undefined);
+      setMessage(undefined);
+      setObjectionResult(undefined);
+      setTaskCreated(false);
+    }, 0);
+    return () => window.clearTimeout(timer);
   }, [opportunity?.id]);
 
   async function runAgent() {

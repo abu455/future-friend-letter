@@ -2,7 +2,6 @@
 
 import { AnimatePresence, motion } from "framer-motion";
 import {
-  Activity,
   AlertCircle,
   ArrowRight,
   Bell,
@@ -25,17 +24,14 @@ import {
   List,
   Loader2,
   Menu,
-  MessageSquareText,
   MoreHorizontal,
   Network,
   PanelLeftClose,
-  Pause,
   Play,
   Plus,
   Radar,
   RefreshCw,
   Search,
-  Send,
   Settings2,
   ShieldCheck,
   Signal,
@@ -43,15 +39,13 @@ import {
   Sparkles,
   Target,
   Trash2,
-  TrendingUp,
   UserRoundSearch,
   Users,
   WandSparkles,
   WifiOff,
-  X,
   Zap,
 } from "lucide-react";
-import { useCallback, useEffect, useMemo, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { toast } from "sonner";
 import { MarketTrend } from "@/components/market-trend";
 import { OpportunityAgent } from "@/components/opportunity-agent";
@@ -59,7 +53,6 @@ import { RadarVisual } from "@/components/radar-visual";
 import { Avatar, AvatarFallback } from "@/components/ui/avatar";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
-import { Card } from "@/components/ui/card";
 import { Checkbox } from "@/components/ui/checkbox";
 import {
   Dialog,
@@ -87,7 +80,6 @@ import {
 } from "@/components/ui/sheet";
 import { Skeleton } from "@/components/ui/skeleton";
 import { Switch } from "@/components/ui/switch";
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Textarea } from "@/components/ui/textarea";
 import { apiRequest, idempotencyKey } from "@/lib/client-api";
 import {
@@ -193,7 +185,8 @@ export function RadarApp() {
   }, []);
 
   useEffect(() => {
-    void loadData();
+    const timer = window.setTimeout(() => void loadData(), 0);
+    return () => window.clearTimeout(timer);
   }, [loadData]);
 
   function navigate(next: ViewId) {
@@ -932,12 +925,14 @@ function ScannerView({
     }
   }
 
+  const jobId = job?.id;
+  const jobStatus = job?.status;
   useEffect(() => {
-    if (!job || job.status !== "RUNNING") return;
+    if (!jobId || jobStatus !== "RUNNING") return;
     const timer = window.setInterval(async () => {
       try {
         const response = await apiRequest<ScanJob | null>(
-          `/api/radar/status?jobId=${job.id}`,
+          `/api/radar/status?jobId=${jobId}`,
         );
         if (!response.data) return;
         setJob(response.data);
@@ -951,7 +946,7 @@ function ScannerView({
       }
     }, 650);
     return () => window.clearInterval(timer);
-  }, [job?.id, job?.status, onComplete]);
+  }, [jobId, jobStatus, onComplete]);
 
   function updateCriteria(key: keyof ScanCriteria, value: string) {
     if (!criteria) return;
@@ -1281,7 +1276,10 @@ function SignalsView({
             />
           </div>
           <div className="flex gap-2 overflow-x-auto hide-scrollbar">
-            <Select value={level} onValueChange={setLevel}>
+            <Select
+              value={level}
+              onValueChange={(value) => value && setLevel(value)}
+            >
               <SelectTrigger className="h-11 w-[128px] border-white/[0.08] bg-[#061426]/55">
                 <Filter />
                 <SelectValue />
@@ -1293,7 +1291,10 @@ function SignalsView({
                 <SelectItem value="LOW">一般信号</SelectItem>
               </SelectContent>
             </Select>
-            <Select value={sort} onValueChange={setSort}>
+            <Select
+              value={sort}
+              onValueChange={(value) => value && setSort(value)}
+            >
               <SelectTrigger className="h-11 w-[128px] border-white/[0.08] bg-[#061426]/55">
                 <SlidersHorizontal />
                 <SelectValue />
@@ -1706,7 +1707,9 @@ function PeopleView({
             <Field label="加入到销售机会">
               <Select
                 value={selectedOpportunityId}
-                onValueChange={setSelectedOpportunityId}
+                onValueChange={(value) =>
+                  value && setSelectedOpportunityId(value)
+                }
               >
                 <SelectTrigger className="h-11 w-full border-white/10 bg-[#061426]/60">
                   <SelectValue placeholder="选择机会" />
@@ -2688,14 +2691,16 @@ function SignalDetail({
   if (!signal) return null;
 
   async function convert() {
+    const currentSignal = signal;
+    if (!currentSignal) return;
     setConverting(true);
     try {
       const response = await apiRequest<Opportunity>(
-        `/api/signals/${signal.id}/opportunity`,
+        `/api/signals/${currentSignal.id}/opportunity`,
         {
           method: "POST",
           body: JSON.stringify({
-            idempotencyKey: idempotencyKey(`detail-${signal.id}`),
+            idempotencyKey: idempotencyKey(`detail-${currentSignal.id}`),
           }),
         },
       );
@@ -2777,15 +2782,14 @@ function SignalDetail({
             >
               <UserRoundSearch /> 查找决策人
             </Button>
-            <Button
-              variant="outline"
-              className="h-11 border-white/10"
-              asChild
+            <a
+              href={signal.sourceUrl}
+              target="_blank"
+              rel="noreferrer"
+              className="inline-flex h-11 items-center justify-center gap-2 rounded-lg border border-white/10 bg-white/[0.03] px-3 text-sm font-medium transition hover:bg-white/[0.08] active:translate-y-px"
             >
-              <a href={signal.sourceUrl} target="_blank" rel="noreferrer">
-                <ExternalLink /> 查看演示原文
-              </a>
-            </Button>
+              <ExternalLink className="size-4" /> 查看演示原文
+            </a>
           </div>
         </div>
       </SheetContent>
@@ -2860,7 +2864,10 @@ function MiniSelect({
   label: string;
 }) {
   return (
-    <Select value={value} onValueChange={onChange}>
+    <Select
+      value={value}
+      onValueChange={(nextValue) => nextValue && onChange(nextValue)}
+    >
       <SelectTrigger
         aria-label={label}
         className="h-9 w-[112px] border-white/[0.08] bg-[#061426]/55 text-[10px]"

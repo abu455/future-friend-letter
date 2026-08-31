@@ -9,10 +9,10 @@ import {
 import {
   OPPORTUNITY_STAGES,
   type AgentAnalysis,
+  type Company,
   type Contact,
   type FollowUpTask,
   type Opportunity,
-  type OpportunityStage,
   type ScanCriteria,
   type ScanJob,
 } from "@/lib/domain";
@@ -381,6 +381,14 @@ export function createAgentAnalysis(opportunityId: string): AgentAnalysis {
   const contacts = demoStore.contacts.filter((item) =>
     opportunity.contactIds.includes(item.id),
   );
+  return buildAgentAnalysis(opportunity, company, contacts);
+}
+
+export function buildAgentAnalysis(
+  opportunity: Opportunity,
+  company: Company | undefined,
+  contacts: Contact[],
+): AgentAnalysis {
   const stakeholderCoverage = Math.min(90, 20 + contacts.length * 28);
   const probability = Math.min(
     88,
@@ -505,6 +513,14 @@ export function generateMessage(
     (item) => item.id === opportunityId,
   );
   if (!opportunity) throw new Error("OPPORTUNITY_NOT_FOUND");
+  return buildMessage(opportunity, type, language);
+}
+
+export function buildMessage(
+  opportunity: Opportunity,
+  type: string,
+  language: string,
+) {
   const contact =
     opportunity.primaryContactName ?? "Production Team";
   const english = language === "en" || type.includes("英文");
