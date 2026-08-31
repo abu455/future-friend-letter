@@ -46,7 +46,7 @@ x-api-key: ...
 }
 ```
 
-Apollo 文档中的 `person_titles[]` 等 query 参数，在 JSON 请求体中表现为同名数组字段 `person_titles`。服务端适配器负责序列化，不要在浏览器直接拼接密钥。
+浏览器向本应用提交上述 JSON 后，服务端适配器会把数组序列化为 Apollo 官方 Query Params：例如 `person_titles[]=Production%20Director&person_titles[]=Plant%20Manager`。标量使用 `page=1` 形式。不要在浏览器直接拼接 Apollo URL 或密钥。
 
 ## 联系方式规则
 

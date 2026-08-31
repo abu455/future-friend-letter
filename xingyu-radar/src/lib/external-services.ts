@@ -72,19 +72,26 @@ export async function searchApollo(input: ApolloSearchInput) {
 
   let response: Response;
   try {
-    response = await fetch(
+    const url = new URL(
       "https://api.apollo.io/api/v1/mixed_people/api_search",
-      {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          "Cache-Control": "no-cache",
-          "x-api-key": apiKey,
-        },
-        body: JSON.stringify(input),
-        signal: AbortSignal.timeout(15_000),
-      },
     );
+    Object.entries(input).forEach(([key, value]) => {
+      if (Array.isArray(value)) {
+        value.forEach((item) => url.searchParams.append(`${key}[]`, item));
+      } else if (value !== undefined) {
+        url.searchParams.set(key, String(value));
+      }
+    });
+    response = await fetch(url, {
+      method: "POST",
+      headers: {
+        Accept: "application/json",
+        "Content-Type": "application/json",
+        "Cache-Control": "no-cache",
+        "x-api-key": apiKey,
+      },
+      signal: AbortSignal.timeout(15_000),
+    });
   } catch (error) {
     throw new ExternalServiceError(
       "APOLLO_NETWORK_ERROR",
