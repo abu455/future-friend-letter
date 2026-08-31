@@ -207,8 +207,10 @@ export async function searchLocalDemoPeople(input: ApolloSearchInput) {
 
   const filtered = contacts.filter((c) => {
     if (q) {
-      const blob = `${c.fullName} ${c.title} ${c.company.name} ${c.company.industry}`.toLowerCase();
-      if (!blob.includes(q) && !c.company.industry.includes(input.q_keywords ?? "")) {
+      const blob = `${c.fullName} ${c.title} ${c.company.name} ${c.company.nameEn ?? ""} ${c.company.industry} ${c.location ?? ""} ${c.company.region}`.toLowerCase();
+      const tokens = q.split(/[\s,，]+/).filter((t) => t.length > 1);
+      const hit = tokens.some((t) => blob.includes(t));
+      if (!hit && !c.company.industry.includes(input.q_keywords ?? "")) {
         return false;
       }
     }
@@ -229,7 +231,8 @@ export async function searchLocalDemoPeople(input: ApolloSearchInput) {
     return true;
   });
 
-  const people: ApolloPerson[] = filtered.slice(0, input.per_page ?? 10).map((c) => ({
+  const pool = filtered.length ? filtered : contacts;
+  const people: ApolloPerson[] = pool.slice(0, input.per_page ?? 10).map((c) => ({
     id: c.id,
     name: c.fullName,
     title: c.title,
@@ -248,7 +251,7 @@ export async function searchLocalDemoPeople(input: ApolloSearchInput) {
   return {
     source: "demo" as const,
     people,
-    total: filtered.length,
+    total: pool.length,
   };
 }
 
