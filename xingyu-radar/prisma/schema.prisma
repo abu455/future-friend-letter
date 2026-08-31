@@ -1,0 +1,368 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Get a free hosted Postgres database in seconds: `npx create-db`
+
+generator client {
+  provider = "prisma-client"
+  output   = "../src/generated/prisma"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+enum OpportunityStage {
+  NEW
+  QUALIFY
+  TO_CONTACT
+  CONTACTED
+  NEED_CONFIRMED
+  SOLUTION
+  NEGOTIATION
+  SIGNING
+  WON
+  LOST
+}
+
+enum SignalLevel {
+  HIGH
+  MEDIUM
+  LOW
+}
+
+enum TaskStatus {
+  PENDING
+  COMPLETED
+  SNOOZED
+}
+
+enum RunStatus {
+  QUEUED
+  RUNNING
+  COMPLETED
+  FAILED
+}
+
+model User {
+  id          String         @id @default(cuid())
+  email       String         @unique
+  name        String
+  workspaceId String
+  workspace   Workspace      @relation(fields: [workspaceId], references: [id], onDelete: Cascade)
+  ownedDeals  Opportunity[]  @relation("OpportunityOwner")
+  tasks       FollowUpTask[] @relation("TaskAssignee")
+  activities  Activity[]
+  createdAt   DateTime       @default(now())
+  updatedAt   DateTime       @updatedAt
+}
+
+model Workspace {
+  id            String            @id @default(cuid())
+  name          String
+  demoMode      Boolean           @default(true)
+  users         User[]
+  dataSources   DataSource[]
+  signals       MarketSignal[]
+  companies     Company[]
+  contacts      Contact[]
+  opportunities Opportunity[]
+  tasks         FollowUpTask[]
+  agentRuns     AgentRun[]
+  templates     MessageTemplate[]
+  scanJobs      ScanJob[]
+  sourceRecords SourceRecord[]
+  createdAt     DateTime          @default(now())
+  updatedAt     DateTime          @updatedAt
+}
+
+model DataSource {
+  id            String         @id @default(cuid())
+  workspaceId   String
+  workspace     Workspace      @relation(fields: [workspaceId], references: [id], onDelete: Cascade)
+  name          String
+  type          String
+  status        String         @default("paused")
+  configured    Boolean        @default(false)
+  enabled       Boolean        @default(false)
+  lastScannedAt DateTime?
+  discovered    Int            @default(0)
+  errorCode     String?
+  errorMessage  String?
+  usageCurrent  Int            @default(0)
+  usageLimit    Int?
+  signals       MarketSignal[]
+  sourceRecords SourceRecord[]
+  createdAt     DateTime       @default(now())
+  updatedAt     DateTime       @updatedAt
+
+  @@index([workspaceId, type])
+}
+
+model MarketSignal {
+  id             String         @id @default(cuid())
+  workspaceId    String
+  workspace      Workspace      @relation(fields: [workspaceId], references: [id], onDelete: Cascade)
+  dataSourceId   String?
+  dataSource     DataSource?    @relation(fields: [dataSourceId], references: [id], onDelete: SetNull)
+  companyId      String?
+  company        Company?       @relation(fields: [companyId], references: [id], onDelete: SetNull)
+  title          String
+  sourceName     String
+  sourceUrl      String?
+  industry       String
+  region         String
+  summary        String
+  keywords       String[]
+  intensity      Int
+  urgency        Int
+  confidence     Int
+  score          Int
+  level          SignalLevel
+  recommendation String
+  publishedAt    DateTime
+  ignored        Boolean        @default(false)
+  isDemo         Boolean        @default(false)
+  opportunities  Opportunity[]
+  sourceRecords  SourceRecord[]
+  createdAt      DateTime       @default(now())
+  updatedAt      DateTime       @updatedAt
+
+  @@index([workspaceId, level, score])
+  @@index([industry, region])
+}
+
+model Company {
+  id            String         @id @default(cuid())
+  workspaceId   String
+  workspace     Workspace      @relation(fields: [workspaceId], references: [id], onDelete: Cascade)
+  name          String
+  domain        String?
+  industry      String
+  region        String
+  employeeRange String?
+  description   String?
+  technologies  String[]
+  isDemo        Boolean        @default(false)
+  contacts      Contact[]
+  signals       MarketSignal[]
+  opportunities Opportunity[]
+  createdAt     DateTime       @default(now())
+  updatedAt     DateTime       @updatedAt
+
+  @@unique([workspaceId, name])
+  @@index([workspaceId, industry, region])
+}
+
+model Contact {
+  id              String               @id @default(cuid())
+  workspaceId     String
+  workspace       Workspace            @relation(fields: [workspaceId], references: [id], onDelete: Cascade)
+  companyId       String
+  company         Company              @relation(fields: [companyId], references: [id], onDelete: Cascade)
+  name            String
+  title           String
+  seniority       String?
+  location        String?
+  linkedinUrl     String?
+  email           String?
+  phone           String?
+  needsEnrichment Boolean              @default(true)
+  source          String               @default("manual")
+  isDemo          Boolean              @default(false)
+  primaryDeals    Opportunity[]        @relation("PrimaryContact")
+  opportunities   OpportunityContact[]
+  createdAt       DateTime             @default(now())
+  updatedAt       DateTime             @updatedAt
+
+  @@index([workspaceId, companyId])
+}
+
+model Opportunity {
+  id                String                    @id @default(cuid())
+  workspaceId       String
+  workspace         Workspace                 @relation(fields: [workspaceId], references: [id], onDelete: Cascade)
+  companyId         String
+  company           Company                   @relation(fields: [companyId], references: [id], onDelete: Cascade)
+  primaryContactId  String?
+  primaryContact    Contact?                  @relation("PrimaryContact", fields: [primaryContactId], references: [id], onDelete: SetNull)
+  sourceSignalId    String?
+  sourceSignal      MarketSignal?             @relation(fields: [sourceSignalId], references: [id], onDelete: SetNull)
+  ownerId           String?
+  owner             User?                     @relation("OpportunityOwner", fields: [ownerId], references: [id], onDelete: SetNull)
+  name              String
+  source            String
+  industry          String
+  score             Int
+  estimatedAmount   Decimal                   @db.Decimal(14, 2)
+  currency          String                    @default("CNY")
+  probability       Int
+  stage             OpportunityStage          @default(NEW)
+  nextAction        String?
+  expectedCloseDate DateTime?
+  lastActivityAt    DateTime?
+  riskTags          String[]
+  lossReason        String?
+  isDemo            Boolean                   @default(false)
+  idempotencyKey    String?                   @unique
+  contacts          OpportunityContact[]
+  stageHistory      OpportunityStageHistory[]
+  activities        Activity[]
+  tasks             FollowUpTask[]
+  agentRuns         AgentRun[]
+  createdAt         DateTime                  @default(now())
+  updatedAt         DateTime                  @updatedAt
+
+  @@index([workspaceId, stage, score])
+}
+
+model OpportunityContact {
+  opportunityId String
+  contactId     String
+  role          String?
+  opportunity   Opportunity @relation(fields: [opportunityId], references: [id], onDelete: Cascade)
+  contact       Contact     @relation(fields: [contactId], references: [id], onDelete: Cascade)
+  createdAt     DateTime    @default(now())
+
+  @@id([opportunityId, contactId])
+}
+
+model OpportunityStageHistory {
+  id            String            @id @default(cuid())
+  opportunityId String
+  opportunity   Opportunity       @relation(fields: [opportunityId], references: [id], onDelete: Cascade)
+  fromStage     OpportunityStage?
+  toStage       OpportunityStage
+  note          String?
+  createdAt     DateTime          @default(now())
+
+  @@index([opportunityId, createdAt])
+}
+
+model Activity {
+  id            String      @id @default(cuid())
+  opportunityId String
+  opportunity   Opportunity @relation(fields: [opportunityId], references: [id], onDelete: Cascade)
+  userId        String?
+  user          User?       @relation(fields: [userId], references: [id], onDelete: SetNull)
+  type          String
+  title         String
+  detail        String?
+  metadata      Json?
+  createdAt     DateTime    @default(now())
+
+  @@index([opportunityId, createdAt])
+}
+
+model FollowUpTask {
+  id             String       @id @default(cuid())
+  workspaceId    String
+  workspace      Workspace    @relation(fields: [workspaceId], references: [id], onDelete: Cascade)
+  opportunityId  String?
+  opportunity    Opportunity? @relation(fields: [opportunityId], references: [id], onDelete: Cascade)
+  assigneeId     String?
+  assignee       User?        @relation("TaskAssignee", fields: [assigneeId], references: [id], onDelete: SetNull)
+  title          String
+  description    String?
+  dueAt          DateTime
+  status         TaskStatus   @default(PENDING)
+  priority       String       @default("medium")
+  idempotencyKey String?      @unique
+  completedAt    DateTime?
+  createdAt      DateTime     @default(now())
+  updatedAt      DateTime     @updatedAt
+
+  @@index([workspaceId, status, dueAt])
+}
+
+model AgentRun {
+  id             String         @id @default(cuid())
+  workspaceId    String
+  workspace      Workspace      @relation(fields: [workspaceId], references: [id], onDelete: Cascade)
+  opportunityId  String?
+  opportunity    Opportunity?   @relation(fields: [opportunityId], references: [id], onDelete: Cascade)
+  type           String
+  status         RunStatus      @default(QUEUED)
+  model          String?
+  input          Json
+  output         Json?
+  confidence     Int?
+  errorCode      String?
+  errorMessage   String?
+  idempotencyKey String?        @unique
+  messages       AgentMessage[]
+  startedAt      DateTime?
+  completedAt    DateTime?
+  createdAt      DateTime       @default(now())
+  updatedAt      DateTime       @updatedAt
+
+  @@index([workspaceId, type, createdAt])
+}
+
+model AgentMessage {
+  id        String   @id @default(cuid())
+  runId     String
+  run       AgentRun @relation(fields: [runId], references: [id], onDelete: Cascade)
+  role      String
+  content   String
+  metadata  Json?
+  createdAt DateTime @default(now())
+
+  @@index([runId, createdAt])
+}
+
+model MessageTemplate {
+  id          String    @id @default(cuid())
+  workspaceId String
+  workspace   Workspace @relation(fields: [workspaceId], references: [id], onDelete: Cascade)
+  name        String
+  channel     String
+  language    String
+  subject     String?
+  content     String
+  variables   String[]
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @updatedAt
+
+  @@index([workspaceId, channel, language])
+}
+
+model ScanJob {
+  id             String    @id @default(cuid())
+  workspaceId    String
+  workspace      Workspace @relation(fields: [workspaceId], references: [id], onDelete: Cascade)
+  query          String
+  criteria       Json
+  status         RunStatus @default(QUEUED)
+  progress       Int       @default(0)
+  currentStep    Int       @default(0)
+  resultCount    Int       @default(0)
+  errorCode      String?
+  errorMessage   String?
+  idempotencyKey String    @unique
+  startedAt      DateTime?
+  completedAt    DateTime?
+  createdAt      DateTime  @default(now())
+  updatedAt      DateTime  @updatedAt
+
+  @@index([workspaceId, status, createdAt])
+}
+
+model SourceRecord {
+  id             String        @id @default(cuid())
+  workspaceId    String
+  workspace      Workspace     @relation(fields: [workspaceId], references: [id], onDelete: Cascade)
+  dataSourceId   String
+  dataSource     DataSource    @relation(fields: [dataSourceId], references: [id], onDelete: Cascade)
+  marketSignalId String?
+  marketSignal   MarketSignal? @relation(fields: [marketSignalId], references: [id], onDelete: SetNull)
+  externalId     String
+  sourceUrl      String?
+  rawContent     Json
+  contentHash    String
+  fetchedAt      DateTime      @default(now())
+  createdAt      DateTime      @default(now())
+
+  @@unique([dataSourceId, externalId])
+  @@index([workspaceId, fetchedAt])
+}
