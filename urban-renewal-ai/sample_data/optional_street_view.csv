@@ -1,0 +1,501 @@
+unit_id,case_name,green_view_index
+SHWB_001,Shanghai West Bund,0.7237438276169794
+SHWB_002,Shanghai West Bund,0.8997790506835013
+SHWB_003,Shanghai West Bund,0.9909671516012776
+SHWB_004,Shanghai West Bund,0.6880061004108141
+SHWB_005,Shanghai West Bund,0.8184596368176662
+SHWB_006,Shanghai West Bund,0.7329517772748959
+SHWB_007,Shanghai West Bund,0.7538667760660972
+SHWB_008,Shanghai West Bund,0.9458480073013883
+SHWB_009,Shanghai West Bund,1.0
+SHWB_010,Shanghai West Bund,1.0
+SHWB_011,Shanghai West Bund,0.7874843981447011
+SHWB_012,Shanghai West Bund,0.8267572724574352
+SHWB_013,Shanghai West Bund,0.9313650380343862
+SHWB_014,Shanghai West Bund,0.7332094243133999
+SHWB_015,Shanghai West Bund,0.8282554587821563
+SHWB_016,Shanghai West Bund,1.0
+SHWB_017,Shanghai West Bund,0.9499383117634836
+SHWB_018,Shanghai West Bund,0.9789683847410697
+SHWB_019,Shanghai West Bund,0.828586098816158
+SHWB_020,Shanghai West Bund,0.8106190334602624
+SHWB_021,Shanghai West Bund,0.893255061906314
+SHWB_022,Shanghai West Bund,0.8751596737727927
+SHWB_023,Shanghai West Bund,1.0
+SHWB_024,Shanghai West Bund,0.8845319653142252
+SHWB_025,Shanghai West Bund,0.8757615831860969
+SHWB_026,Shanghai West Bund,1.0
+SHWB_027,Shanghai West Bund,1.0
+SHWB_028,Shanghai West Bund,0.8020621532108997
+SHWB_029,Shanghai West Bund,1.0
+SHWB_030,Shanghai West Bund,0.8795123244977031
+SHWB_031,Shanghai West Bund,0.9159744521211372
+SHWB_032,Shanghai West Bund,0.6285877208705607
+SHWB_033,Shanghai West Bund,0.6210475759875793
+SHWB_034,Shanghai West Bund,0.9798506670622942
+SHWB_035,Shanghai West Bund,0.7389752918470034
+SHWB_036,Shanghai West Bund,0.46986287953580236
+SHWB_037,Shanghai West Bund,0.6682758494094803
+SHWB_038,Shanghai West Bund,1.0
+SHWB_039,Shanghai West Bund,0.8368604512285842
+SHWB_040,Shanghai West Bund,0.9203065705455449
+SHWB_041,Shanghai West Bund,0.8059920877972928
+SHWB_042,Shanghai West Bund,0.8425286291338279
+SHWB_043,Shanghai West Bund,1.0
+SHWB_044,Shanghai West Bund,1.0
+SHWB_045,Shanghai West Bund,1.0
+SHWB_046,Shanghai West Bund,0.9690732061348551
+SHWB_047,Shanghai West Bund,0.8889588632491431
+SHWB_048,Shanghai West Bund,0.6271636550446126
+SHWB_049,Shanghai West Bund,0.7499493500755151
+SHWB_050,Shanghai West Bund,1.0
+SHWB_051,Shanghai West Bund,0.739130503290242
+SHWB_052,Shanghai West Bund,0.7315798984775072
+SHWB_053,Shanghai West Bund,0.8532925022647975
+SHWB_054,Shanghai West Bund,0.9749032637786104
+SHWB_055,Shanghai West Bund,0.7344674081980067
+SHWB_056,Shanghai West Bund,0.8115571229241081
+SHWB_057,Shanghai West Bund,0.8395753276840345
+SHWB_058,Shanghai West Bund,1.0
+SHWB_059,Shanghai West Bund,0.970242025714944
+SHWB_060,Shanghai West Bund,0.6774022210061832
+SHWB_061,Shanghai West Bund,0.7468844674237564
+SHWB_062,Shanghai West Bund,0.7675137127000441
+SHWB_063,Shanghai West Bund,0.9548028454231893
+SHWB_064,Shanghai West Bund,0.8718422403198917
+SHWB_065,Shanghai West Bund,0.8504297394871639
+SHWB_066,Shanghai West Bund,1.0
+SHWB_067,Shanghai West Bund,1.0
+SHWB_068,Shanghai West Bund,1.0
+SHWB_069,Shanghai West Bund,1.0
+SHWB_070,Shanghai West Bund,0.7164521491210395
+SHWB_071,Shanghai West Bund,0.7965504172567393
+SHWB_072,Shanghai West Bund,1.0
+SHWB_073,Shanghai West Bund,1.0
+SHWB_074,Shanghai West Bund,0.8525994186757682
+SHWB_075,Shanghai West Bund,1.0
+SHWB_076,Shanghai West Bund,0.7957081982654186
+SHWB_077,Shanghai West Bund,1.0
+SHWB_078,Shanghai West Bund,0.8252213161242677
+SHWB_079,Shanghai West Bund,0.9857453548915786
+SHWB_080,Shanghai West Bund,0.6809461569781139
+SHWB_081,Shanghai West Bund,0.9421418162330994
+SHWB_082,Shanghai West Bund,0.9802757823072893
+SHWB_083,Shanghai West Bund,0.878472368472865
+SHWB_084,Shanghai West Bund,0.708534500340422
+SHWB_085,Shanghai West Bund,0.7879169565493287
+SHWB_086,Shanghai West Bund,0.7768101590154577
+SHWB_087,Shanghai West Bund,1.0
+SHWB_088,Shanghai West Bund,0.6547713408053324
+SHWB_089,Shanghai West Bund,1.0
+SHWB_090,Shanghai West Bund,0.5879795297311894
+SHWB_091,Shanghai West Bund,0.9400687043869023
+SHWB_092,Shanghai West Bund,0.5674384866966312
+SHWB_093,Shanghai West Bund,0.9804088307443707
+SHWB_094,Shanghai West Bund,0.7532664185708813
+SHWB_095,Shanghai West Bund,0.890360686916786
+SHWB_096,Shanghai West Bund,0.7443787193471536
+SHWB_097,Shanghai West Bund,0.8608675365389867
+SHWB_098,Shanghai West Bund,1.0
+SHWB_099,Shanghai West Bund,0.8483436006236053
+SHWB_100,Shanghai West Bund,0.7509486200040958
+SHWB_101,Shanghai West Bund,1.0
+SHWB_102,Shanghai West Bund,0.9444657027746801
+SHWB_103,Shanghai West Bund,0.894121624658445
+SHWB_104,Shanghai West Bund,0.9384856948468785
+SHWB_105,Shanghai West Bund,0.4905622431681199
+SHWB_106,Shanghai West Bund,0.8228166357627664
+SHWB_107,Shanghai West Bund,0.7918384633746045
+SHWB_108,Shanghai West Bund,0.9223102872149812
+SHWB_109,Shanghai West Bund,0.474791023835611
+SHWB_110,Shanghai West Bund,1.0
+SHWB_111,Shanghai West Bund,0.5335059252833367
+SHWB_112,Shanghai West Bund,0.9726310294306999
+SHWB_113,Shanghai West Bund,1.0
+SHWB_114,Shanghai West Bund,1.0
+SHWB_115,Shanghai West Bund,1.0
+SHWB_116,Shanghai West Bund,0.6462860113995743
+SHWB_117,Shanghai West Bund,0.9026434298246918
+SHWB_118,Shanghai West Bund,0.8642074295614384
+SHWB_119,Shanghai West Bund,1.0
+SHWB_120,Shanghai West Bund,0.709677511955904
+SHWB_121,Shanghai West Bund,1.0
+SHWB_122,Shanghai West Bund,0.7272407638969369
+SHWB_123,Shanghai West Bund,0.7478577483453668
+SHWB_124,Shanghai West Bund,0.8609840318162394
+SHWB_125,Shanghai West Bund,0.8309560417178425
+SHWB_126,Shanghai West Bund,0.806448468870009
+SHWB_127,Shanghai West Bund,0.8573087289868246
+SHWB_128,Shanghai West Bund,0.9618646726437077
+SHWB_129,Shanghai West Bund,0.9331241113891635
+SHWB_130,Shanghai West Bund,1.0
+SHWB_131,Shanghai West Bund,0.6548390200135089
+SHWB_132,Shanghai West Bund,0.861749220534305
+SHWB_133,Shanghai West Bund,0.9540034851027556
+SHWB_134,Shanghai West Bund,0.6616375452273205
+SHWB_135,Shanghai West Bund,0.5191136248391687
+SHWB_136,Shanghai West Bund,0.7126519292670263
+SHWB_137,Shanghai West Bund,0.8286245878474661
+SHWB_138,Shanghai West Bund,1.0
+SHWB_139,Shanghai West Bund,0.8425698581669722
+SHWB_140,Shanghai West Bund,0.8849156880913817
+SHWB_141,Shanghai West Bund,0.9287198725432835
+SHWB_142,Shanghai West Bund,0.7728782807976625
+SHWB_143,Shanghai West Bund,0.5616279980179065
+SHWB_144,Shanghai West Bund,0.9855702462649021
+SHWB_145,Shanghai West Bund,0.9433322225717656
+SHWB_146,Shanghai West Bund,0.6605070343227496
+SHWB_147,Shanghai West Bund,0.7067801948674581
+SHWB_148,Shanghai West Bund,0.7647286014770834
+SHWB_149,Shanghai West Bund,0.8443395550354043
+SHWB_150,Shanghai West Bund,1.0
+SHWB_151,Shanghai West Bund,0.7515589772909057
+SHWB_152,Shanghai West Bund,0.9323418870354678
+SHWB_153,Shanghai West Bund,1.0
+SHWB_154,Shanghai West Bund,0.8397729866658309
+SHWB_155,Shanghai West Bund,0.8835057196318823
+SHWB_156,Shanghai West Bund,0.8980434594315274
+SHWB_157,Shanghai West Bund,0.7769501916156003
+SHWB_158,Shanghai West Bund,0.5140011562781542
+SHWB_159,Shanghai West Bund,0.8124069167788293
+SHWB_160,Shanghai West Bund,1.0
+SHWB_161,Shanghai West Bund,0.9181430022975238
+SHWB_162,Shanghai West Bund,0.7414922985444736
+SHWB_163,Shanghai West Bund,0.7233475897582581
+SHWB_164,Shanghai West Bund,1.0
+SHWB_165,Shanghai West Bund,0.9015110386306906
+SHWB_166,Shanghai West Bund,0.9880149820958476
+SHWB_167,Shanghai West Bund,1.0
+SHWB_168,Shanghai West Bund,0.8269013949081044
+SHWB_169,Shanghai West Bund,0.8248429277895848
+SHWB_170,Shanghai West Bund,1.0
+SHWB_171,Shanghai West Bund,1.0
+SHWB_172,Shanghai West Bund,1.0
+SHWB_173,Shanghai West Bund,0.9006944120304325
+SHWB_174,Shanghai West Bund,0.7993998462769139
+SHWB_175,Shanghai West Bund,0.9036846589370595
+SHWB_176,Shanghai West Bund,0.8134763334609691
+SHWB_177,Shanghai West Bund,0.9075909154158397
+SHWB_178,Shanghai West Bund,1.0
+SHWB_179,Shanghai West Bund,1.0
+SHWB_180,Shanghai West Bund,0.713630368260439
+SHWB_181,Shanghai West Bund,1.0
+SHWB_182,Shanghai West Bund,0.8220306100221865
+SHWB_183,Shanghai West Bund,0.9790351105133033
+SHWB_184,Shanghai West Bund,0.4519178232857509
+SHWB_185,Shanghai West Bund,0.9369010353279685
+SHWB_186,Shanghai West Bund,0.8140562856519878
+SHWB_187,Shanghai West Bund,0.6891440326346413
+SHWB_188,Shanghai West Bund,0.6378339123260005
+SHWB_189,Shanghai West Bund,0.8837112504009732
+SHWB_190,Shanghai West Bund,0.6443367080559596
+SHWB_191,Shanghai West Bund,0.819891849659112
+SHWB_192,Shanghai West Bund,0.8353280910450103
+SHWB_193,Shanghai West Bund,0.7808530934635471
+SHWB_194,Shanghai West Bund,0.4867979265552588
+SHWB_195,Shanghai West Bund,0.6618732303012557
+SHWB_196,Shanghai West Bund,0.8290984503408481
+SHWB_197,Shanghai West Bund,0.9161623218717035
+SHWB_198,Shanghai West Bund,0.6894665413407811
+SHWB_199,Shanghai West Bund,0.8176053800277517
+SHWB_200,Shanghai West Bund,1.0
+SHWB_201,Shanghai West Bund,0.9900523324765124
+SHWB_202,Shanghai West Bund,0.5830251159531253
+SHWB_203,Shanghai West Bund,1.0
+SHWB_204,Shanghai West Bund,0.9640687377032964
+SHWB_205,Shanghai West Bund,1.0
+SHWB_206,Shanghai West Bund,1.0
+SHWB_207,Shanghai West Bund,0.747177413889839
+SHWB_208,Shanghai West Bund,0.9308741905687822
+SHWB_209,Shanghai West Bund,0.6753793060550226
+SHWB_210,Shanghai West Bund,0.8351207611406426
+SHWB_211,Shanghai West Bund,1.0
+SHWB_212,Shanghai West Bund,0.7962236687855333
+SHWB_213,Shanghai West Bund,0.8204758519150845
+SHWB_214,Shanghai West Bund,0.9727176087360341
+SHWB_215,Shanghai West Bund,0.8653408068132514
+SHWB_216,Shanghai West Bund,1.0
+SHWB_217,Shanghai West Bund,0.9584549772054763
+SHWB_218,Shanghai West Bund,0.8895099242908775
+SHWB_219,Shanghai West Bund,0.6126461221144652
+SHWB_220,Shanghai West Bund,0.6230985541771702
+SHWB_221,Shanghai West Bund,0.7504571905478136
+SHWB_222,Shanghai West Bund,0.8744925991558308
+SHWB_223,Shanghai West Bund,1.0
+SHWB_224,Shanghai West Bund,0.85726521033663
+SHWB_225,Shanghai West Bund,0.9305062739735632
+SHWB_226,Shanghai West Bund,1.0
+SHWB_227,Shanghai West Bund,0.5284638649574824
+SHWB_228,Shanghai West Bund,1.0
+SHWB_229,Shanghai West Bund,0.9729162212636883
+SHWB_230,Shanghai West Bund,0.7705148503874245
+SHWB_231,Shanghai West Bund,0.967236967572925
+SHWB_232,Shanghai West Bund,0.7563317472553489
+SHWB_233,Shanghai West Bund,0.7337387000129475
+SHWB_234,Shanghai West Bund,0.6241153185692867
+SHWB_235,Shanghai West Bund,0.9469518163701353
+SHWB_236,Shanghai West Bund,0.9215227315462861
+SHWB_237,Shanghai West Bund,0.986284204358725
+SHWB_238,Shanghai West Bund,1.0
+SHWB_239,Shanghai West Bund,1.0
+SHWB_240,Shanghai West Bund,0.835478977734235
+SHWB_241,Shanghai West Bund,0.9790281705730739
+SHWB_242,Shanghai West Bund,1.0
+SHWB_243,Shanghai West Bund,0.7509449423290514
+SHWB_244,Shanghai West Bund,0.690379689391803
+SHWB_245,Shanghai West Bund,1.0
+SHWB_246,Shanghai West Bund,0.870763608662917
+SHWB_247,Shanghai West Bund,1.0
+SHWB_248,Shanghai West Bund,0.8183656836814931
+SHWB_249,Shanghai West Bund,0.6964666016575277
+SHWB_250,Shanghai West Bund,0.9979137297767158
+SHWB_251,Shanghai West Bund,1.0
+SHWB_252,Shanghai West Bund,0.7523765193132345
+SHWB_253,Shanghai West Bund,0.9646652438347741
+SHWB_254,Shanghai West Bund,0.8381828180012494
+SHWB_255,Shanghai West Bund,0.8481533867770126
+SHWB_256,Shanghai West Bund,0.909509636441608
+SHWB_257,Shanghai West Bund,1.0
+SHWB_258,Shanghai West Bund,0.7040656257293262
+SHWB_259,Shanghai West Bund,0.9527794434555235
+SHWB_260,Shanghai West Bund,0.9625008679093123
+SHWB_261,Shanghai West Bund,0.9279258492763066
+SHWB_262,Shanghai West Bund,1.0
+SHWB_263,Shanghai West Bund,0.7521469248134265
+SHWB_264,Shanghai West Bund,0.7769029781100566
+SHWB_265,Shanghai West Bund,0.8494289034041941
+SHWB_266,Shanghai West Bund,0.9398375517842051
+SHWB_267,Shanghai West Bund,0.8684759183725752
+SHWB_268,Shanghai West Bund,0.8172463314512421
+SHWB_269,Shanghai West Bund,0.6758722683714726
+SHWB_270,Shanghai West Bund,0.6413211315849491
+SHWB_271,Shanghai West Bund,0.4468801121011879
+SHWB_272,Shanghai West Bund,1.0
+SHWB_273,Shanghai West Bund,0.6406591502301648
+SHWB_274,Shanghai West Bund,0.8833924163804424
+SHWB_275,Shanghai West Bund,0.7477154307972596
+SHWB_276,Shanghai West Bund,0.5670426649114297
+SHWB_277,Shanghai West Bund,0.6170761410960923
+SHWB_278,Shanghai West Bund,0.8905145539227698
+SHWB_279,Shanghai West Bund,1.0
+SHWB_280,Shanghai West Bund,0.6295388374233785
+SHWB_281,Shanghai West Bund,1.0
+SHWB_282,Shanghai West Bund,1.0
+SHWB_283,Shanghai West Bund,0.7373196242185264
+SHWB_284,Shanghai West Bund,0.6964073892179806
+SHWB_285,Shanghai West Bund,0.8829536118379387
+SHWB_286,Shanghai West Bund,0.8589205878210805
+SHWB_287,Shanghai West Bund,1.0
+SHWB_288,Shanghai West Bund,0.7437063304543786
+SHWB_289,Shanghai West Bund,0.5075835085569871
+SHWB_290,Shanghai West Bund,0.885741704116909
+SHWB_291,Shanghai West Bund,1.0
+SHWB_292,Shanghai West Bund,0.9890672684815462
+SHWB_293,Shanghai West Bund,0.6176142852298251
+SHWB_294,Shanghai West Bund,0.9016073196062883
+SHWB_295,Shanghai West Bund,0.9287158303279643
+SHWB_296,Shanghai West Bund,0.8749028749896097
+SHWB_297,Shanghai West Bund,0.935046196281091
+SHWB_298,Shanghai West Bund,1.0
+SHWB_299,Shanghai West Bund,0.7165648628012607
+SHWB_300,Shanghai West Bund,0.6592251400562572
+QZSTM_001,Quzhou Shuitingmen Historical District,0.8297849378000497
+QZSTM_002,Quzhou Shuitingmen Historical District,0.7481322222725945
+QZSTM_003,Quzhou Shuitingmen Historical District,0.745422253238156
+QZSTM_004,Quzhou Shuitingmen Historical District,0.8892574724389986
+QZSTM_005,Quzhou Shuitingmen Historical District,0.7127740009839173
+QZSTM_006,Quzhou Shuitingmen Historical District,0.7746220220435354
+QZSTM_007,Quzhou Shuitingmen Historical District,0.800598029788224
+QZSTM_008,Quzhou Shuitingmen Historical District,0.8516596555626307
+QZSTM_009,Quzhou Shuitingmen Historical District,0.9860049887131287
+QZSTM_010,Quzhou Shuitingmen Historical District,0.7468623733966829
+QZSTM_011,Quzhou Shuitingmen Historical District,0.7851931029253867
+QZSTM_012,Quzhou Shuitingmen Historical District,1.0
+QZSTM_013,Quzhou Shuitingmen Historical District,0.4941630252700523
+QZSTM_014,Quzhou Shuitingmen Historical District,0.6556306035384373
+QZSTM_015,Quzhou Shuitingmen Historical District,0.646607232161599
+QZSTM_016,Quzhou Shuitingmen Historical District,0.9998472253991362
+QZSTM_017,Quzhou Shuitingmen Historical District,0.719136896241708
+QZSTM_018,Quzhou Shuitingmen Historical District,0.8827396448300618
+QZSTM_019,Quzhou Shuitingmen Historical District,0.7729144257026677
+QZSTM_020,Quzhou Shuitingmen Historical District,0.8898614887719806
+QZSTM_021,Quzhou Shuitingmen Historical District,0.6912632526757516
+QZSTM_022,Quzhou Shuitingmen Historical District,0.4935731811218713
+QZSTM_023,Quzhou Shuitingmen Historical District,0.770024136638645
+QZSTM_024,Quzhou Shuitingmen Historical District,0.9151641669420221
+QZSTM_025,Quzhou Shuitingmen Historical District,0.9200420042571624
+QZSTM_026,Quzhou Shuitingmen Historical District,0.7784856229080682
+QZSTM_027,Quzhou Shuitingmen Historical District,0.5169804277677799
+QZSTM_028,Quzhou Shuitingmen Historical District,0.630038177543564
+QZSTM_029,Quzhou Shuitingmen Historical District,0.5823890068756746
+QZSTM_030,Quzhou Shuitingmen Historical District,0.9181239119511022
+QZSTM_031,Quzhou Shuitingmen Historical District,0.5915031376186941
+QZSTM_032,Quzhou Shuitingmen Historical District,0.7662547624810955
+QZSTM_033,Quzhou Shuitingmen Historical District,0.63892911679995
+QZSTM_034,Quzhou Shuitingmen Historical District,0.7920627043077586
+QZSTM_035,Quzhou Shuitingmen Historical District,0.7094890134327393
+QZSTM_036,Quzhou Shuitingmen Historical District,0.9119418686492888
+QZSTM_037,Quzhou Shuitingmen Historical District,0.8060346985800337
+QZSTM_038,Quzhou Shuitingmen Historical District,0.7483370868729867
+QZSTM_039,Quzhou Shuitingmen Historical District,0.7278763562297992
+QZSTM_040,Quzhou Shuitingmen Historical District,0.8011360604134521
+QZSTM_041,Quzhou Shuitingmen Historical District,0.4408928803395713
+QZSTM_042,Quzhou Shuitingmen Historical District,0.8147842394057938
+QZSTM_043,Quzhou Shuitingmen Historical District,0.6297881138617907
+QZSTM_044,Quzhou Shuitingmen Historical District,0.5055378921373295
+QZSTM_045,Quzhou Shuitingmen Historical District,0.9451291013663037
+QZSTM_046,Quzhou Shuitingmen Historical District,0.8658912813964255
+QZSTM_047,Quzhou Shuitingmen Historical District,0.682884126774172
+QZSTM_048,Quzhou Shuitingmen Historical District,0.6328189795629531
+QZSTM_049,Quzhou Shuitingmen Historical District,0.928674516315463
+QZSTM_050,Quzhou Shuitingmen Historical District,0.7453118132230185
+QZSTM_051,Quzhou Shuitingmen Historical District,0.5532211274900927
+QZSTM_052,Quzhou Shuitingmen Historical District,0.6478118037311129
+QZSTM_053,Quzhou Shuitingmen Historical District,1.0
+QZSTM_054,Quzhou Shuitingmen Historical District,0.950322798506202
+QZSTM_055,Quzhou Shuitingmen Historical District,0.7295658895140624
+QZSTM_056,Quzhou Shuitingmen Historical District,0.6514154330355313
+QZSTM_057,Quzhou Shuitingmen Historical District,0.9914005622152909
+QZSTM_058,Quzhou Shuitingmen Historical District,0.43402543302744345
+QZSTM_059,Quzhou Shuitingmen Historical District,0.6084717901674787
+QZSTM_060,Quzhou Shuitingmen Historical District,0.8485094006511734
+QZSTM_061,Quzhou Shuitingmen Historical District,0.6532102310322746
+QZSTM_062,Quzhou Shuitingmen Historical District,0.8102326189953897
+QZSTM_063,Quzhou Shuitingmen Historical District,0.7018968207451425
+QZSTM_064,Quzhou Shuitingmen Historical District,0.786098412209967
+QZSTM_065,Quzhou Shuitingmen Historical District,0.7242346806607611
+QZSTM_066,Quzhou Shuitingmen Historical District,0.7779423661978224
+QZSTM_067,Quzhou Shuitingmen Historical District,0.6267890693501406
+QZSTM_068,Quzhou Shuitingmen Historical District,0.8190218009243163
+QZSTM_069,Quzhou Shuitingmen Historical District,0.8326343825983579
+QZSTM_070,Quzhou Shuitingmen Historical District,0.8127925042618724
+QZSTM_071,Quzhou Shuitingmen Historical District,0.7420397129801873
+QZSTM_072,Quzhou Shuitingmen Historical District,0.8067590939649923
+QZSTM_073,Quzhou Shuitingmen Historical District,0.7304731781088285
+QZSTM_074,Quzhou Shuitingmen Historical District,0.5354567263907581
+QZSTM_075,Quzhou Shuitingmen Historical District,0.7434912876450153
+QZSTM_076,Quzhou Shuitingmen Historical District,0.5899389277077556
+QZSTM_077,Quzhou Shuitingmen Historical District,0.7484509316353918
+QZSTM_078,Quzhou Shuitingmen Historical District,0.957525519142832
+QZSTM_079,Quzhou Shuitingmen Historical District,0.7644394530256732
+QZSTM_080,Quzhou Shuitingmen Historical District,0.990006042529276
+QZSTM_081,Quzhou Shuitingmen Historical District,0.90625908059577
+QZSTM_082,Quzhou Shuitingmen Historical District,0.88226534093087
+QZSTM_083,Quzhou Shuitingmen Historical District,0.5594388793706179
+QZSTM_084,Quzhou Shuitingmen Historical District,0.8050229187163943
+QZSTM_085,Quzhou Shuitingmen Historical District,0.8951086380381347
+QZSTM_086,Quzhou Shuitingmen Historical District,0.6416045655979375
+QZSTM_087,Quzhou Shuitingmen Historical District,0.8882820908582019
+QZSTM_088,Quzhou Shuitingmen Historical District,0.8639697398029387
+QZSTM_089,Quzhou Shuitingmen Historical District,0.8361085655917323
+QZSTM_090,Quzhou Shuitingmen Historical District,0.8293399029883431
+QZSTM_091,Quzhou Shuitingmen Historical District,0.6631908146654945
+QZSTM_092,Quzhou Shuitingmen Historical District,0.9519622494833927
+QZSTM_093,Quzhou Shuitingmen Historical District,0.7995736486475967
+QZSTM_094,Quzhou Shuitingmen Historical District,0.7995101406867072
+QZSTM_095,Quzhou Shuitingmen Historical District,0.5878765804170102
+QZSTM_096,Quzhou Shuitingmen Historical District,0.6733261601959625
+QZSTM_097,Quzhou Shuitingmen Historical District,0.7340483860168435
+QZSTM_098,Quzhou Shuitingmen Historical District,0.6135040408992052
+QZSTM_099,Quzhou Shuitingmen Historical District,0.8928297648082583
+QZSTM_100,Quzhou Shuitingmen Historical District,0.8853768450397116
+QZSTM_101,Quzhou Shuitingmen Historical District,0.90132864787716
+QZSTM_102,Quzhou Shuitingmen Historical District,0.7347158259930495
+QZSTM_103,Quzhou Shuitingmen Historical District,0.9260653465537946
+QZSTM_104,Quzhou Shuitingmen Historical District,0.7965631142396231
+QZSTM_105,Quzhou Shuitingmen Historical District,0.8494814746585277
+QZSTM_106,Quzhou Shuitingmen Historical District,0.8233566785678945
+QZSTM_107,Quzhou Shuitingmen Historical District,0.7803587434555326
+QZSTM_108,Quzhou Shuitingmen Historical District,0.737569518020765
+QZSTM_109,Quzhou Shuitingmen Historical District,0.7661463262736881
+QZSTM_110,Quzhou Shuitingmen Historical District,0.7810822758724332
+QZSTM_111,Quzhou Shuitingmen Historical District,0.8391909542538911
+QZSTM_112,Quzhou Shuitingmen Historical District,1.0
+QZSTM_113,Quzhou Shuitingmen Historical District,0.8159313608849296
+QZSTM_114,Quzhou Shuitingmen Historical District,0.716122457386935
+QZSTM_115,Quzhou Shuitingmen Historical District,0.8057411650593519
+QZSTM_116,Quzhou Shuitingmen Historical District,0.8293576340093516
+QZSTM_117,Quzhou Shuitingmen Historical District,0.7775309963738961
+QZSTM_118,Quzhou Shuitingmen Historical District,0.9157324112432468
+QZSTM_119,Quzhou Shuitingmen Historical District,0.6541249436637097
+QZSTM_120,Quzhou Shuitingmen Historical District,0.9146647221071984
+QZSTM_121,Quzhou Shuitingmen Historical District,0.870728005820145
+QZSTM_122,Quzhou Shuitingmen Historical District,0.7886348016972737
+QZSTM_123,Quzhou Shuitingmen Historical District,0.6691444024486976
+QZSTM_124,Quzhou Shuitingmen Historical District,0.7465236459434853
+QZSTM_125,Quzhou Shuitingmen Historical District,0.7852934918175083
+QZSTM_126,Quzhou Shuitingmen Historical District,0.6856125064050462
+QZSTM_127,Quzhou Shuitingmen Historical District,0.8804702993727418
+QZSTM_128,Quzhou Shuitingmen Historical District,0.9531295940677422
+QZSTM_129,Quzhou Shuitingmen Historical District,0.636765030646172
+QZSTM_130,Quzhou Shuitingmen Historical District,0.6624658539130531
+QZSTM_131,Quzhou Shuitingmen Historical District,0.6308881039444623
+QZSTM_132,Quzhou Shuitingmen Historical District,0.9380990594706227
+QZSTM_133,Quzhou Shuitingmen Historical District,0.9023257862069632
+QZSTM_134,Quzhou Shuitingmen Historical District,0.9417833859817982
+QZSTM_135,Quzhou Shuitingmen Historical District,0.9148688140590757
+QZSTM_136,Quzhou Shuitingmen Historical District,1.0
+QZSTM_137,Quzhou Shuitingmen Historical District,0.7500597530381674
+QZSTM_138,Quzhou Shuitingmen Historical District,0.9618576691094628
+QZSTM_139,Quzhou Shuitingmen Historical District,0.6229048641425334
+QZSTM_140,Quzhou Shuitingmen Historical District,0.675636988894848
+QZSTM_141,Quzhou Shuitingmen Historical District,0.7781513643095833
+QZSTM_142,Quzhou Shuitingmen Historical District,0.780842780979442
+QZSTM_143,Quzhou Shuitingmen Historical District,0.8922274865227195
+QZSTM_144,Quzhou Shuitingmen Historical District,0.8109907414777836
+QZSTM_145,Quzhou Shuitingmen Historical District,0.5591484881663316
+QZSTM_146,Quzhou Shuitingmen Historical District,0.5120888784295715
+QZSTM_147,Quzhou Shuitingmen Historical District,0.6466160416302116
+QZSTM_148,Quzhou Shuitingmen Historical District,0.511732736779306
+QZSTM_149,Quzhou Shuitingmen Historical District,0.6429943420826129
+QZSTM_150,Quzhou Shuitingmen Historical District,0.8194744640791806
+QZSTM_151,Quzhou Shuitingmen Historical District,0.7967637307495022
+QZSTM_152,Quzhou Shuitingmen Historical District,0.8085347912550754
+QZSTM_153,Quzhou Shuitingmen Historical District,0.5264213731713414
+QZSTM_154,Quzhou Shuitingmen Historical District,0.5611449705808566
+QZSTM_155,Quzhou Shuitingmen Historical District,0.46560680355183703
+QZSTM_156,Quzhou Shuitingmen Historical District,0.8042074904331568
+QZSTM_157,Quzhou Shuitingmen Historical District,0.6024273157321517
+QZSTM_158,Quzhou Shuitingmen Historical District,0.945764257652191
+QZSTM_159,Quzhou Shuitingmen Historical District,0.7645429820640389
+QZSTM_160,Quzhou Shuitingmen Historical District,0.6452590869900758
+QZSTM_161,Quzhou Shuitingmen Historical District,0.7796319014685623
+QZSTM_162,Quzhou Shuitingmen Historical District,0.7011180903580826
+QZSTM_163,Quzhou Shuitingmen Historical District,0.6417262014237559
+QZSTM_164,Quzhou Shuitingmen Historical District,0.525677518961319
+QZSTM_165,Quzhou Shuitingmen Historical District,0.8622354059635691
+QZSTM_166,Quzhou Shuitingmen Historical District,0.8330065779660683
+QZSTM_167,Quzhou Shuitingmen Historical District,0.5340594369845157
+QZSTM_168,Quzhou Shuitingmen Historical District,0.7025286352705576
+QZSTM_169,Quzhou Shuitingmen Historical District,0.5758306522681176
+QZSTM_170,Quzhou Shuitingmen Historical District,0.622823954050658
+QZSTM_171,Quzhou Shuitingmen Historical District,0.6646969525749713
+QZSTM_172,Quzhou Shuitingmen Historical District,0.872115247667659
+QZSTM_173,Quzhou Shuitingmen Historical District,0.8144531292470102
+QZSTM_174,Quzhou Shuitingmen Historical District,0.7097536571413845
+QZSTM_175,Quzhou Shuitingmen Historical District,0.9563458738702687
+QZSTM_176,Quzhou Shuitingmen Historical District,0.46732107856838495
+QZSTM_177,Quzhou Shuitingmen Historical District,0.5586329581607657
+QZSTM_178,Quzhou Shuitingmen Historical District,0.8986972685310871
+QZSTM_179,Quzhou Shuitingmen Historical District,0.6007776765164513
+QZSTM_180,Quzhou Shuitingmen Historical District,0.7451936818348074
+QZSTM_181,Quzhou Shuitingmen Historical District,0.6564801693074657
+QZSTM_182,Quzhou Shuitingmen Historical District,0.9201028718173476
+QZSTM_183,Quzhou Shuitingmen Historical District,0.700195942042344
+QZSTM_184,Quzhou Shuitingmen Historical District,0.8258297922677367
+QZSTM_185,Quzhou Shuitingmen Historical District,0.8602000958594012
+QZSTM_186,Quzhou Shuitingmen Historical District,0.7015762168939694
+QZSTM_187,Quzhou Shuitingmen Historical District,0.7162780451266962
+QZSTM_188,Quzhou Shuitingmen Historical District,0.7275930312577276
+QZSTM_189,Quzhou Shuitingmen Historical District,0.695915861407074
+QZSTM_190,Quzhou Shuitingmen Historical District,0.9005176185606443
+QZSTM_191,Quzhou Shuitingmen Historical District,0.6571960393961143
+QZSTM_192,Quzhou Shuitingmen Historical District,0.7475554155922537
+QZSTM_193,Quzhou Shuitingmen Historical District,0.9114325001431304
+QZSTM_194,Quzhou Shuitingmen Historical District,0.6368370982591
+QZSTM_195,Quzhou Shuitingmen Historical District,0.7422150401997414
+QZSTM_196,Quzhou Shuitingmen Historical District,0.5984316466783399
+QZSTM_197,Quzhou Shuitingmen Historical District,0.8270903053106522
+QZSTM_198,Quzhou Shuitingmen Historical District,0.5228854144153937
+QZSTM_199,Quzhou Shuitingmen Historical District,0.4489149799848434
+QZSTM_200,Quzhou Shuitingmen Historical District,0.6654350772629808
