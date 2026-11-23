@@ -1,0 +1,14 @@
+services:
+  postgres:
+    image: postgres:16-alpine
+    environment:
+      POSTGRES_USER: starfield
+      POSTGRES_PASSWORD: starfield
+      POSTGRES_DB: starfield
+    ports:
+      - "5432:5432"
+    volumes:
+      - starfield_pg:/var/lib/postgresql/data
+
+volumes:
+  starfield_pg:
